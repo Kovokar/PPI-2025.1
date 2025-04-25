@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagem Interativa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .imagem {
+            /* width: 100%; */
+            cursor: pointer;
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="imagem" src="assets/intro.png" alt="Imagem" class="imagem">
+    </div>
+
+    <script>
+        document.getElementById('imagem').addEventListener('click', function() {
+            const img = this;
+
+            // Verifica se a imagem está com 100% de largura
+            if (img.style.width === '100%') {
+                img.style.width = '10%';
+            } else {
+                img.style.width = '100%';
+            }
+        });
+    </script>
+</body>
+</html>
