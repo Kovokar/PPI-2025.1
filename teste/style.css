@@ -13,11 +13,15 @@
 }
 
 body {
-
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #f4f4f4; /* Cor de fundo de fallback */
     color: #333;
+}
+
+.intro {
+    display: flex;
+    justify-content: center
 }
 
 
@@ -27,7 +31,51 @@ header {
     font-size: 1.8rem;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     align-items: center;
+
+    & img {
+        width: 80%;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 main {
@@ -41,28 +89,7 @@ footer {
     bottom: 0;
     width: 100%;
 }
-a {
-    color: #6200ee;
-    text-decoration: none;
-}
 
 
 
-.title {
-    padding: 1rem 5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
-    
-    & h1 {
-        display: flex;
-        justify-content: center;
-    }
-
-    & p {
-        font-size: 20px;
-        padding: 0 20rem;
-    }
-}
