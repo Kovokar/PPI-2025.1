@@ -5,83 +5,105 @@
     --fundo: #fff9ec;
     --botao: #d9a066;
     --hover: #c97a36;
-}
-
-* {
+  }
+  
+  * {
     background: url('assets/back-desk.png') no-repeat center center fixed;
     background-size: cover;
-}
-
-body {
+  }
+  
+  body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #f4f4f4; /* Cor de fundo de fallback */
     color: #333;
-}
-
-/* Header */
-header {
+  }
+  
+  /* Header */
+  header {
     text-align: center;
     padding: 2rem;
     padding-bottom: 0;
     font-size: 1.8rem;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     align-items: center;
-
-    & img {
-        width: 80%;
-    }
-}
-
-
-/* Intro  refere-se a mensagem de introdução "bem vindo ..."*/
-.intro {
+  }
+  
+  header img {
+    width: 80%;
+  }
+  
+  /* Intro */
+  .intro {
     text-align: center;
-
-    & .intro-msg {
-        width: 40%;
-        cursor: pointer;
-        transition: width 0.5s ease-in-out;
-    }
-}
-
-/* Card */
-.card {
+  }
+  
+  .intro .intro-msg {
+    width: 40%;
+    cursor: pointer;
+    transition: width 0.5s ease-in-out;
+  }
+  
+  /* Card */
+  .card {
     background-color: #fff;
     border-radius: 10px;
-    max-width: 400px;
+    max-width: 1400px; /* Aumentado de 400px para 800px */
     margin: auto;
-
-    & .image-row {
-        display: flex;
-        justify-content: center;
-        gap: 3rem;
-
-        & img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            transition: transform 0.3s;
-            background: none;
-        }
-        & img:hover {
-            transform: scale(1.2);
-        }
-    }
-}
-
-/* Main */
-main {
+  }
+  
+  .image-row {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 20px; /* Adicionado padding para dar mais espaço */
+  }
+  
+  /* Imagens com texto sobreposto */
+  .image-card {
+    position: relative;
+    background: none;
+  }
+  
+  .image-card img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.3s;
+    background: none;
+  }
+  
+  .image-card:hover img {
+    transform: scale(1.1); /* Reduzido um pouco para não sobrepor demais */
+  }
+  
+  .text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px; /* Texto maior */
+    font-weight: bold;
+    text-shadow: 2px 2px 4px black; /* Sombra mais forte */
+    pointer-events: none;
+    text-align: center;
+    background: none;
+  }
+  
+  /* Main */
+  main {
     /* padding: 20px; */
     height: 8000px;
-}
-
-/* Footer */
-footer {
+  }
+  
+  /* Footer */
+  footer {
     background-color: #eee;
     text-align: center;
     padding: 10px;
     position: fixed;
     bottom: 0;
     width: 100%;
-}
+  }
