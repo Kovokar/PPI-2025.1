@@ -24,7 +24,7 @@ body {
 }
 
 .imagem {
-    width: 60%;
+    width: 40%;
     cursor: pointer;
     transition: width 0.5s ease-in-out;
 }
@@ -33,6 +33,7 @@ body {
 header {
     text-align: center;
     padding: 2rem;
+    padding-bottom: 0;
     font-size: 1.8rem;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     align-items: center;
@@ -42,7 +43,36 @@ header {
     }
 }
 
+.card {
+    background: none;
+    background-color: #fff;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: auto;
+}
 
+.card-header {
+    margin-bottom: 20px;
+}
+
+.image-row {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    
+}
+
+.image-row img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    background: none
+}
+
+.image-row img:hover {
+    transform: scale(1.2);
+}
 
 
 
@@ -84,7 +114,8 @@ header {
 
 
 main {
-    padding: 20px;
+    /* padding: 20px; */
+    height: 8000px;
 }
 footer {
     background-color: #eee;
