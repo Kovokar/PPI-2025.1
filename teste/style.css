@@ -19,17 +19,7 @@ body {
     color: #333;
 }
 
-.intro {
-    text-align: center
-}
-
-.imagem {
-    width: 40%;
-    cursor: pointer;
-    transition: width 0.5s ease-in-out;
-}
-
-
+/* Header */
 header {
     text-align: center;
     padding: 2rem;
@@ -43,80 +33,50 @@ header {
     }
 }
 
+
+/* Intro  refere-se a mensagem de introdução "bem vindo ..."*/
+.intro {
+    text-align: center;
+
+    & .intro-msg {
+        width: 40%;
+        cursor: pointer;
+        transition: width 0.5s ease-in-out;
+    }
+}
+
+/* Card */
 .card {
-    background: none;
     background-color: #fff;
     border-radius: 10px;
     max-width: 400px;
     margin: auto;
+
+    & .image-row {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+
+        & img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            background: none;
+        }
+        & img:hover {
+            transform: scale(1.2);
+        }
+    }
 }
 
-.card-header {
-    margin-bottom: 20px;
-}
-
-.image-row {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    
-}
-
-.image-row img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    transition: transform 0.3s;
-    background: none
-}
-
-.image-row img:hover {
-    transform: scale(1.2);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Main */
 main {
     /* padding: 20px; */
     height: 8000px;
 }
+
+/* Footer */
 footer {
     background-color: #eee;
     text-align: center;
@@ -125,7 +85,3 @@ footer {
     bottom: 0;
     width: 100%;
 }
-
-
-
-
