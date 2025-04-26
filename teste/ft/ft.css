@@ -112,13 +112,13 @@ footer {
 }
 
 .circle1 {
-  background: url('../assets/eu.png') no-repeat center center;
+  background: url('../assets/git.png') no-repeat center center;
   background-size: cover;
   top: -60px;
   transition-delay: 0.05s;
 }
 .circle2 {
-  background: url('../assets/eu.png') no-repeat center center;
+  background: url('../assets/ink.png') no-repeat center center;
   background-size: cover;
   top: -120px;
   transition-delay: 0.1s;
