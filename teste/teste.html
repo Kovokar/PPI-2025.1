@@ -1,16 +1,40 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Minha Página</title>
-  <link rel="stylesheet" href="./ft/ft.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Footer fixo no fim</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
-
-  <h1 style="margin-bottom: 300px;">Conteúdo da Página</h1>
-
-  <!-- O footer será carregado dinamicamente aqui -->
-  <script src="./ft/ft.js"></script>
-
+  <div class="content">
+    <h1>Conteúdo da página</h1>
+    <p>Aqui vai o conteúdo principal.</p>
+  </div>
+  <footer class="footer">
+    © 2025 Meu site
+  </footer>
 </body>
 </html>

@@ -1,64 +1,131 @@
+:root {
+  --bg-ft: #333;
+  --marrom-madeira: #a15632;
+  --gradient-meio: #F7C26D;
+}
+
+@font-face {
+  font-family: 'stdw1';
+  src: url('../fonts/stardew-valley-cufonfonts/CAPS.ttf');
+}
+
+@font-face {
+  font-family: 'stdw2';
+  src: url('../fonts/stardew-valley-cufonfonts/regular.ttf');
+}
+
 footer {
-    position: relative;
-    height: 100px;
-    background: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .circle-container {
-    position: relative;
-    width: 60px;
-    height: 60px;
-  }
-  
-  .main-circle {
-    width: 60px;
-    height: 60px;
-    background: #ff6b6b;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background 0.3s;
-    z-index: 2;
-  }
-  
-  .main-circle:hover {
-    background: #ff3b3b;
-  }
-  
-  .sub-circle {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background: #4ecdc4;
-    border-radius: 50%;
-    opacity: 0;
-    transform: translateY(0);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    pointer-events: none;
-    left: 10px;
-  }
-  
-  .circle1 {
-    top: -60px;
-    transition-delay: 0.05s;
-  }
-  .circle2 {
-    top: -120px;
-    transition-delay: 0.1s;
-  }
-  .circle3 {
-    top: -180px;
-    transition-delay: 0.15s;
-  }
-  
-  .circle-container:hover .sub-circle {
-    opacity: 1;
-    transform: translateY(-10px);
-    pointer-events: auto;
-  }
-  
+  position: relative;
+  height: 100px;
+  background: url('../assets/scroll.png') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  justify-content: space-between; /* ou center, dependendo do layout */
+  align-items: center;
+  padding: 0 20px; /* opcional, espaçamento lateral */
+}
+
+.ifpi {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  background: none;
+}
+
+.ifpi img {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.ifpi span {
+  color: var(--marrom-madeira);
+  font-weight: bold;
+  background: none;
+  display: flex;
+  padding: 0.7rem;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 30px;
+  font-family: stdw1;
+  margin-top: 7px;
+}
+
+.circle {
+  background: none;
+  display: flex;
+  justify-content: center; /* ou space-between, dependendo do layout */
+  gap: 40px; /* espaço entre os circle-container */
+}
+
+.circle img {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.circle-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: none;
+}
+
+.main-circle {
+  width: 60px;
+  height: 60px;
+  background: #ff6b6b;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s;
+  z-index: 2;
+}
+
+.main-circle:hover {
+  background: #ff3b3b;
+}
+
+.sub-circle {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+  left: 10px;
+}
+
+/* ✅ NOVO: mantém sub-circles visíveis ao passar o mouse sobre eles também */
+.circle-container:hover .sub-circle,
+.sub-circle:hover {
+  opacity: 1;
+  transform: translateY(-10px);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.circle1 {
+  background: url('../assets/eu.png') no-repeat center center;
+  background-size: cover;
+  top: -60px;
+  transition-delay: 0.05s;
+}
+.circle2 {
+  background: url('../assets/eu.png') no-repeat center center;
+  background-size: cover;
+  top: -120px;
+  transition-delay: 0.1s;
+}
+.circle3 {
+  background: url('../assets/eu.png') no-repeat center center;
+  background-size: cover;
+  top: -180px;
+  transition-delay: 0.15s;
+}
