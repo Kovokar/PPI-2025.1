@@ -90,7 +90,18 @@
     pointer-events: none;
     text-align: center;
     background: none;
+    
+    & p {
+        transition: transform 0.3s;
+        background: none;
+        cursor: pointer;
+    }
   }
+
+  .image-card:hover .text-overlay p {
+    transform: scale(1.1);
+  }
+
   
   /* Main */
   main {
