@@ -111,6 +111,21 @@ footer {
   cursor: pointer;
 }
 
+.circle-container.ativo .sub-circle {
+  opacity: 1;
+  transform: translateY(-10px);
+  pointer-events: auto;
+  transition-delay: 0s !important; /* ignora delay para aparecer tudo junto */
+}
+
+.circle-container.ativo .main-circle {
+  background: #ff3b3b; /* opcional: muda cor ao ativar */
+}
+
+
+
+
+
 .circle1 {
   background: url('../assets/git.png') no-repeat center center;
   background-size: cover;
@@ -122,10 +137,4 @@ footer {
   background-size: cover;
   top: -120px;
   transition-delay: 0.1s;
-}
-.circle3 {
-  background: url('../assets/eu.png') no-repeat center center;
-  background-size: cover;
-  top: -180px;
-  transition-delay: 0.15s;
 }
