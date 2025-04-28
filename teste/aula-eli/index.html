@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>📒 Diário da Turma - Estilo Stardew Valley</title>
+    <link rel="stylesheet" href="stardew.css">
+    <link rel="shortcut icon" href="imagens/stardew-favicon.png" type="image/x-icon">
+</head>
+<body>
+    <header id="topo" class="header-fixo">
+        <h1>🌻 Blog da Turma 🌻</h1>
+        
+        <nav class="secoes-header">
+            <ul>
+                <li><a href="#box-model">Box Model</a></li>
+                <li><a href="#campos-modernos">Campos Modernos</a></li>
+                <li><a href="#buscas">Formulários</a></li>
+                <li><a href="#tabelas">Tabelas</a></li>
+                <li><a href="#listas">Listas</a></li>
+                <li><a href="#ifpi">IFPI</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="leiaute-flex">
+        <main>
+            <article id="box-model">
+                <h2>Box model</h2>
+                <p class="preenchimento">Preenchimento</p>
+                <p class="bordas1">Bordas 1 </p>
+                <p class="bordas2">Bordas 2 </p>
+                <p class="bordas3">Bordas 3 </p>
+                <p class="margens">Margem interna e externa</p>
+                <p class="comprimento">Comprimento</p>
+                <p class="data-autor direita">08/04/2025 - por Ely Miranda<a href="#topo"> ↑ </a></p>
+                
+                <div class="explicacao">
+                    <h4>Explicação: Box Model</h4>
+                    <p>O box model é um conceito fundamental do CSS. Ele descreve como o espaço de um elemento na página é calculado, incluindo o conteúdo, o preenchimento (padding), a borda (border) e a margem (margin). Cada um desses componentes afeta o layout e o comportamento visual de um elemento.</p>
+                </div>
+            </article>
+
+            <article id="campos-modernos">
+                <h2>Campos Modernos</h2>
+                <p>Campos de entrada modernos permitem uma melhor interação com os usuários, oferecendo elementos como placeholders, tipos de dados e validação automática.</p>
+                
+                <form>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="seu.email@exemplo.com" required>
+                    </div>
+                    
+                    <div>
+                        <label for="data">Data:</label>
+                        <input type="date" id="data" name="data" required>
+                    </div>
+                    
+                    <div>
+                        <label for="cor">Escolha uma cor:</label>
+                        <input type="color" id="cor" name="cor">
+                    </div>
+                    
+                    <div>
+                        <label for="idade">Idade:</label>
+                        <input type="number" id="idade" name="idade" min="0" max="120" placeholder="Sua idade">
+                    </div>
+                    
+                    <div>
+                        <label for="satisfacao">Nível de Satisfação:</label>
+                        <input type="range" id="satisfacao" name="satisfacao" min="0" max="10">
+                    </div>
+                    
+                    <div>
+                        <input type="submit" value="Enviar Formulário">
+                    </div>
+                </form>
+                
+                <div class="explicacao">
+                    <h4>Explicação: Campos Modernos</h4>
+                    <p>Campos de formulário modernos incluem novos tipos de entrada como "date", "email", "number" e outros, que melhoram a experiência do usuário ao preencher formulários, além de permitir validação sem a necessidade de JavaScript extra.</p>
+                </div>
+            </article>
+
+            <article id="buscas">
+                <h2>Formulários de Busca</h2>
+                <p>Um formulário de busca pode ser essencial em muitos sites para permitir que os usuários encontrem o conteúdo de maneira mais eficiente.</p>
+                
+                <form class="busca">
+                    <div>
+                        <label for="termo-busca">Buscar no site:</label>
+                        <input type="search" id="termo-busca" name="q" placeholder="Digite sua busca..." required>
+                    </div>
+                    
+                    <div>
+                        <label for="categoria-busca">Categoria:</label>
+                        <select id="categoria-busca" name="categoria">
+                            <option value="">Todas as categorias</option>
+                            <option value="artigos">Artigos</option>
+                            <option value="tutoriais">Tutoriais</option>
+                            <option value="noticias">Notícias</option>
+                        </select>
+
+                    </div>
+                    
+                    <div>
+                        <input type="submit" value="Buscar">
+                    </div>
+                </form>
+                
+                <div class="explicacao">
+                    <h4>Explicação: Formulários de Busca</h4>
+                    <p>Os formulários de busca utilizam o método <code>GET</code> para enviar as consultas ao servidor, permitindo que o usuário pesquise por palavras-chave ou filtros específicos para encontrar o que precisa.</p>
+                </div>
+            </article>
+
+            <article id="tabelas">
+                <h2>Tabelas</h2>
+                <p>Tabelas são usadas para organizar dados em linhas e colunas, tornando-os mais fáceis de ler e comparar.</p>
+                
+                <table class="tabela1">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Professor</th>
+                            <th>Carga Horária</th>
+                            <th>Nota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Programação Web</td>
+                            <td>Ely Miranda</td>
+                            <td>80h</td>
+                            <td>9.5</td>
+                        </tr>
+                        <tr>
+                            <td>Banco de Dados</td>
+                            <td>João Silva</td>
+                            <td>60h</td>
+                            <td>8.7</td>
+                        </tr>
+                        <tr class="total">
+                            <td colspan="2">Total</td>
+                            <td>140h</td>
+                            <td>9.1</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="explicacao">
+                    <h4>Explicação: Tabelas</h4>
+                    <p>As tabelas em HTML são criadas com as tags <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code> e <code>&lt;td&gt;</code>, sendo muito úteis para mostrar dados estruturados. Elas também podem ser estilizadas para melhorar a legibilidade.</p>
+                </div>
+            </article>
+
+            <article id="listas">
+                <h2>Listas</h2>
+                <p>Listas ordenadas e não ordenadas são essenciais para organizar informações e torná-las mais legíveis.</p>
+                
+                <div class="lista-tipos">
+                    <h3>Lista Não Ordenada (ul)</h3>
+                    <ul>
+                        <li>Maçã</li>
+                        <li>Banana</li>
+                        <li>Laranja</li>
+                    </ul>
+
+                    <h3>Lista Ordenada (ol)</h3>
+                    <ol>
+                        <li>Primeiro passo</li>
+                        <li>Segundo passo</li>
+                        <li>Terceiro passo</li>
+                    </ol>
+
+                    <h3>Lista de Definição (dl)</h3>
+                    <dl>
+                        <dt>HTML</dt>
+                        <dd>Linguagem de marcação para criar páginas web</dd>
+                        <dt>CSS</dt>
+                        <dd>Linguagem de estilização para documentos web</dd>
+                    </dl>
+                </div>
+                
+                <div class="explicacao">
+                    <h4>Explicação: Listas</h4>
+                    <p>Existem três tipos principais de listas:
+                        <code>&lt;ul&gt;</code> (não ordenada), 
+                        <code>&lt;ol&gt;</code> (ordenada) e 
+                        <code>&lt;dl&gt;</code> (lista de definição). 
+                        Cada item da lista é representado pela tag <code>&lt;li&gt;</code>.</p>
+                </div>
+            </article>
+            <article id="ifpi">
+                <h2>Sobre o IFPI</h2>
+                <img src="imagens/ifpi-campus.jpg" alt="Campus do IFPI" class="imagem-ifpi">
+                
+                <p>O IFPI é uma instituição de ensino que busca formar profissionais altamente capacitados para o mercado de trabalho, oferecendo educação técnica, tecnológica e superior de qualidade.</p>
+                
+                <div class="informacoes-ifpi">
+                    <h3>Principais Características</h3>
+                    <ul>
+                        <li>Fundado em 1909</li>
+                        <li>Presente em diversos municípios do Piauí</li>
+                        <li>Oferece cursos técnicos, graduação e pós-graduação</li>
+                        <li>Foco em ensino, pesquisa e extensão</li>
+                    </ul>
+                </div>
+                
+                <div class="contato-ifpi">
+                    <h3>Contato</h3>
+                    <p>📍 Endereço: Rua Álvaro Mendes, 94 - Centro, Teresina - PI</p>
+                    <p>📞 Telefone: (86) 3131-4300</p>
+                    <p>✉️ Email: <a href="mailto:reitoria@ifpi.edu.br">reitoria@ifpi.edu.br</a></p>
+                </div>
+                
+                <div class="explicacao">
+                    <h4>Explicação: Sobre o IFPI</h4>
+                    <p>O IFPI (Instituto Federal do Piauí) é uma instituição pública de educação profissional e tecnológica, comprometida com o desenvolvimento educacional, científico e tecnológico no estado do Piauí.</p>
+                </div>
+            </article>
+        </main>
+
+        <aside>
+            <h3>🔗 Links úteis</h3>
+            <ul class="links-uteis">
+                <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" target="_blank">HTML no MDN</a></li>
+                <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS" target="_blank">CSS no MDN</a></li>
+                <li><a href="https://www.w3schools.com/html/" target="_blank">Tutorial HTML - W3Schools</a></li>
+                <li><a href="https://www.w3schools.com/css/" target="_blank">Tutorial CSS - W3Schools</a></li>
+                <li><a href="https://web.dev/" target="_blank">Boas práticas Web.dev</a></li>
+                <li><a href="https://css-tricks.com/snippets/css/" target="_blank">CSS Tricks (snippets)</a></li>
+                <li><a href="https://caniuse.com/" target="_blank">Can I use?</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer id="rodape">
+        <p>Direitos reservados &trade; <a href="mailto:ads@ifpi.edu.br">Turma de ADS</a></p>
+        <p>Campus Teresina Central</p>
+    </footer>
+</body>
+</html>

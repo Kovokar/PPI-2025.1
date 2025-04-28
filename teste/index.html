@@ -15,10 +15,19 @@
     <section class="intro">
       <img id="intro-msg" src="assets/intro.png" alt="Intro" class="intro-msg">
     </section>
+    
+    <!-- Popup para a imagem de intro -->
+    <div id="intro-popup" class="popup-overlay">
+      <div class="popup-content">
+        <span class="popup-close">&times;</span>
+        <img src="assets/intro.png" alt="Intro Popup">
+      </div>
+    </div>
+
     <section class="content">
       <div class="card">
         <div class="image-row">
-          <div class="image-card">
+          <div class="image-card" onclick="window.open('./aula-eli/index.html', '_blank')">
             <img src="assets/carta-stardew-valley.png" alt="Aula 1">
             <div class="text-overlay">
                 <p>🌱 Plantando com HTML</p>
@@ -45,6 +54,6 @@
       
     </div> -->
     <script src="./ft/ft.js"></script>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
