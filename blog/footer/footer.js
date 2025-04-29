@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadFooter() {
-  fetch('./ft/ft.html')
+  fetch('./footer/footer.html')
     .then(res => res.text())
     .then(html => {
       const footer = document.createElement('footer');
