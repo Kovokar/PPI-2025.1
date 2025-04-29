@@ -4,13 +4,13 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Press Start 2P', cursive;
-    background-color: #f6f1e7;
+    background: url('../assets/back-desk.png') center/cover no-repeat;
     color: #4e2d18;
 }
 
 header {
     background: url('imagens/stardew-header.jpg') center/cover no-repeat;
-    padding: 60px 20px;
+    padding: 20px 20px;
     text-align: center;
     color: #fffbe6;
     text-shadow: 1px 1px 2px #000;
@@ -51,10 +51,10 @@ nav a:hover {
 
 #leiaute-flex {
     display: flex;
-    margin-top: 200px;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    justify-content: center;
 }
 
 main {
@@ -463,16 +463,79 @@ form input[type="range"] {
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     #leiaute-flex {
         flex-direction: column;
-        margin-top: 250px;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    main {
+        width: 100%;
+        padding: 10px;
     }
 
     aside {
         margin-left: 0;
-        margin-top: 20px;
     }
+
+    .secoes-header ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .secoes-header li {
+        margin: 10px 0;
+    }
+
+    form div {
+        flex-direction: column;
+    }
+
+    form label, 
+    form input, 
+    form select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .lista-tipos {
+        display: flex;
+        flex-direction: column;
+    }
+
+    table {
+        width: 100%;
+        overflow-x: auto;
+        display: block;
+    }
+}
+
+/* Menu responsivo */
+.secoes-header {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.secoes-header ul {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    list-style: none;
+}
+
+.secoes-header li {
+    margin: 0 10px;
+}
+
+/* Removendo posição fixa */
+#topo {
+    position: static;
+    top: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
 }
 
 /* Estilos globais para links */
