@@ -61,6 +61,7 @@ main {
     flex: 3;
     padding: 20px;
     background-color: #fffdf7;
+    border-radius: 10px;
 }
 
 aside {
@@ -68,6 +69,7 @@ aside {
     background-color: #f1e1b0;
     padding: 20px;
     margin-left: 20px;
+    border-radius: 10px;
 }
 
 footer {
@@ -77,6 +79,7 @@ footer {
     padding: 10px;
     font-size: 0.8rem;
     border-top: 3px solid #decba4;
+    margin-top: 40px;
 }
 
 article {
