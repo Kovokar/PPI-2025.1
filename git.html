@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guia Git - Do Básico ao Avançado</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #111827;
+      --header-bg: #f3f4f6;
+      --section-border: #3b82f6;
+      --pre-bg: #e5e7eb;
+      --link-color: #1d4ed8;
+      --footer-color: #6b7280;
+    }
+
+    body.dark {
+      --bg-color: #111827;
+      --text-color: #f9fafb;
+      --header-bg: #1f2937;
+      --section-border: #3b82f6;
+      --pre-bg: #1f2937;
+      --link-color: #3b82f6;
+      --footer-color: #9ca3af;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      transition: all 0.3s ease-in-out;
+    }
+    header {
+      background-color: var(--header-bg);
+      color: var(--text-color);
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+    #toggle-theme {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: 1px solid var(--text-color);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      color: var(--text-color);
+      cursor: pointer;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    section {
+      margin-bottom: 2rem;
+      border-left: 4px solid var(--section-border);
+      padding-left: 1rem;
+    }
+    h1, h2, h3 {
+      color: var(--text-color);
+    }
+    pre {
+      background-color: var(--pre-bg);
+      color: var(--text-color);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+    }
+    code {
+      font-family: monospace;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+    nav ul li {
+      margin: 0.5rem 0;
+    }
+    nav ul li a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: var(--footer-color);
+    }
+  </style>
+</head>
+<body class="dark">
+  <header>
+    <h1>Guia de Git — Do Básico ao Avançado</h1>
+    <p>Aprenda Git de forma clara e progressiva</p>
+    <button id="toggle-theme">Alternar Tema</button>
+  </header>
+
+  <main>
+    <nav>
+      <h2>Índice</h2>
+      <ul>
+        <li><a href="#introducao">Introdução</a></li>
+        <li><a href="#configuracao">Configuração Inicial</a></li>
+        <li><a href="#fluxo">Fluxo Básico</a></li>
+        <li><a href="#branches">Branches</a></li>
+        <li><a href="#remotos">Trabalhando com Remotos</a></li>
+        <li><a href="#conflitos">Resolução de Conflitos</a></li>
+        <li><a href="#avancado">Comandos Avançados</a></li>
+        <li><a href="#praticas">Boas Práticas</a></li>
+        <li><a href="#recursos">Recursos Adicionais</a></li>
+      </ul>
+    </nav>
+
+    <section id="introducao">
+      <h2>Introdução ao Git</h2>
+      <p>Git é um sistema de controle de versão distribuído. Ele permite versionar código, colaborar em equipe e manter histórico de alterações.</p>
+    </section>
+
+    <section id="configuracao">
+      <h2>Configuração Inicial</h2>
+      <p>Configure seu nome e e-mail, usados para assinar os commits:</p>
+      <pre><code>git config --global user.name "Seu Nome"     # Define seu nome de usuário global
+git config --global user.email "email@exemplo.com"  # Define seu e-mail global
+
+# Visualiza todas as configurações feitas:
+git config --list</code></pre>
+    </section>
+
+    <section id="fluxo">
+      <h2>Fluxo Básico de Trabalho</h2>
+      <p>Etapas comuns ao usar o Git em projetos:</p>
+      <pre><code># Clona um repositório remoto
+$ git clone https://github.com/usuario/repo.git
+
+# Mostra o estado atual dos arquivos (modificados, não rastreados etc)
+$ git status
+
+# Adiciona todos os arquivos modificados ao stage (pronto para commit)
+$ git add .
+
+# Cria um commit com uma mensagem descritiva
+$ git commit -m "mensagem"
+
+# Envia as mudanças para o repositório remoto na branch main
+$ git push origin main</code></pre>
+    </section>
+
+    <section id="branches">
+      <h2>Branches (Ramificações)</h2>
+      <p>Uma <strong>branch</strong> é como uma linha do tempo paralela ao código principal, onde você pode desenvolver funcionalidades ou corrigir problemas sem afetar diretamente a base do projeto. Após os testes, essa branch pode ser mesclada (merge) com a principal.</p>
+      <p>Branches permitem trabalhar em novas funcionalidades sem afetar o código principal:</p>
+      <pre><code># Cria uma nova branch e já muda para ela
+$ git checkout -b nova-feature
+
+# Volta para a branch principal
+$ git checkout main
+
+# Mescla a nova-feature com a branch atual
+$ git merge nova-feature
+
+# Exclui uma branch local
+$ git branch -d nova-feature</code></pre>
+    </section>
+
+    <section id="remotos">
+      <h2>Trabalhando com Remotos</h2>
+      <p>Gerencie conexões com repositórios remotos como GitHub ou GitLab:</p>
+      <pre><code># Lista os repositórios remotos configurados
+$ git remote -v
+
+# Adiciona um novo remoto com nome "origin"
+$ git remote add origin https://github.com/usuario/repo.git
+
+# Baixa atualizações do remoto
+$ git fetch
+
+# Mescla as alterações do remoto com a branch atual
+$ git pull origin main
+
+# Envia as alterações locais para o remoto
+$ git push origin main</code></pre>
+    </section>
+
+    <section id="conflitos">
+      <h2>Resolução de Conflitos</h2>
+      <p>Conflitos surgem quando dois commits alteram a mesma linha de um arquivo. O Git marca essas áreas para revisão manual:</p>
+      <pre><code># Após resolver os conflitos manualmente:
+$ git add arquivo-resolvido.txt
+$ git commit   # Finaliza o merge</code></pre>
+    </section>
+
+    <section id="avancado">
+      <h2>Comandos Avançados</h2>
+      <p>Comandos úteis para cenários mais complexos:</p>
+      <pre><code># Salva temporariamente alterações não commitadas
+$ git stash
+
+# Restaura as alterações salvas com stash
+$ git stash pop
+
+# Reverte um commit específico, criando um novo commit
+$ git revert <hash>
+
+# Remove todos os commits após o hash (perigoso - perda de dados)
+$ git reset --hard <hash>
+
+# Reescreve o histórico dos últimos commits (interativo)
+$ git rebase -i HEAD~3
+
+# Visualiza o histórico em forma de gráfico
+$ git log --oneline --graph --all</code></pre>
+    </section>
+
+    <section id="praticas">
+      <h2>Boas Práticas</h2>
+      <ul>
+        <li>Faça commits pequenos e frequentes</li>
+        <li>Escreva mensagens claras e descritivas</li>
+        <li>Use branches para cada nova funcionalidade</li>
+        <li>Atualize sua branch com frequência</li>
+        <li>Use <code>rebase</code> com cuidado para manter um histórico limpo</li>
+      </ul>
+    </section>
+
+    <section id="recursos">
+      <h2>Recursos Adicionais</h2>
+      <ul>
+        <li><a href="https://git-scm.com/book/pt-br/v2" target="_blank">Livro Pro Git</a></li>
+        <li><a href="https://education.github.com/git-cheat-sheet-education.pdf" target="_blank">Git Cheat Sheet</a></li>
+        <li><a href="https://docs.github.com/pt" target="_blank">Documentação do GitHub</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Guia Git por OpenAI | Código aberto para todos os devs.
+  </footer>
+
+  <script>
+    const toggleButton = document.getElementById('toggle-theme');
+    toggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+  </script>
+</body>
+</html>
