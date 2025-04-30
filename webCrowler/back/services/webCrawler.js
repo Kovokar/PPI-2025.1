@@ -1,5 +1,7 @@
+// 📦 IMPORTAÇÕES E CONSTANTES
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { link } = require('fs');
 const path = require('path');
 
 const BASE_URL = 'http://127.0.0.1:5500/paginas/';
@@ -7,7 +9,7 @@ const BASE_URL = 'http://127.0.0.1:5500/paginas/';
 const globals = {
   visited: new Set(),
   resultados: [],
-  todosOsLinks: [] // 🔹 Array simples
+  todosOsLinks: []
 };
 
 async function fetchPageContent(page) {
@@ -20,8 +22,6 @@ async function fetchPageContent(page) {
     const pageId = path.basename(page, '.html');
     const texts = [];
     const links = [];
-    
-    // Captura todo o texto da página
     const textoCompleto = $('body').text().trim();
 
     $('a').each((_, el) => {
@@ -32,25 +32,24 @@ async function fetchPageContent(page) {
         texts.push(text);
         links.push(href);
 
-        if (!globals.todosOsLinks.includes(href)) {
-          globals.todosOsLinks.push(href);
-        }
+        globals.todosOsLinks.push(href);
+        
       }
     });
 
-    return { 
-      father: pageId, 
-      conteudo: texts, 
+    return {
+      father: pageId,
+      conteudo: texts,
       links,
-      textoCompleto // Texto completo da página
+      textoCompleto
     };
   } catch (error) {
     console.error(`Erro ao acessar a página "${page}":`, error.message);
-    return { 
-      father: '', 
-      conteudo: [], 
+    return {
+      father: '',
+      conteudo: [],
       links: [],
-      textoCompleto: '' 
+      textoCompleto: ''
     };
   }
 }
@@ -73,6 +72,48 @@ async function crawlRecursive(page) {
   }
 }
 
+function contarOcorrencias(texto, termo) {
+  const palavras = texto.toLowerCase().split(/\W+/);
+  const alvo = termo.toLowerCase();
+  return palavras.filter(p => p === alvo).length;
+}
+
+function buscarOcorrencias(termo) {
+  const ocorrencias = [];
+
+  for (const i of globals.resultados) {
+    const repeticoes = contarOcorrencias(i.textoCompleto, termo);
+    const links_repetidos = contarRepeticoes(`${i.father}.html`, i.links)
+    console.log(termo)
+    console.log('\n\n\n')
+    console.log(i.textoCompleto)
+    ocorrencias.push({
+      ocorrencias: repeticoes,
+      qtd_links: i.links.length,
+      site: `${i.father}.html`,
+      links: i.links,
+      links_repetidos: links_repetidos
+    });
+  }
+
+  return ocorrencias;
+}
+
+function contarRepeticoes(linkAlvo, listaLinks) {
+  let contador = 0;
+
+  listaLinks.forEach(link => {
+    if (link === linkAlvo) {
+      contador++;
+    }
+  });
+
+  return contador;
+}
+
+
+
+
 async function executarCrawler() {
   const paginasIniciais = [
     'duna.html',
@@ -82,64 +123,10 @@ async function executarCrawler() {
     'matrix.html'
   ];
 
-  // Percorre todas as páginas iniciais
   for (const pagina of paginasIniciais) {
     await crawlRecursive(pagina);
   }
 
-  // Mostra todos os links únicos encontrados
-  console.log('Todos os links únicos encontrados:', globals.todosOsLinks);
-
-  // Função auxiliar para contar ocorrências de um termo
-  function contarOcorrencias(texto, termo) {
-    let count = 0;
-    let pos = texto.toLowerCase().indexOf(termo);
-    
-    while (pos !== -1) {
-      count++;
-      pos = texto.toLowerCase().indexOf(termo, pos + 1);
-    }
-    
-    return count;
-  }
-
-  // Função para buscar e contar ocorrências
-  function buscarOcorrencias(termo) {
-    const termoLower = termo.toLowerCase();
-    let totalOcorrencias = 0;
-    const ocorrenciasPorPagina = [];
-
-    for (const pagina of globals.resultados) {
-      // Prepara textos para busca
-      const conteudoUnificado = pagina.conteudo.join(' ');
-      const textoCompleto = pagina.textoCompleto;
-      
-      // Conta ocorrências no texto dos links
-      const ocorrenciasLinks = contarOcorrencias(conteudoUnificado, termoLower);
-      
-      // Conta ocorrências no texto completo da página
-      const ocorrenciasTextoCompleto = contarOcorrencias(textoCompleto, termoLower);
-      
-      // Total de ocorrências nesta página
-      const totalPagina = ocorrenciasLinks + ocorrenciasTextoCompleto;
-      
-      if (totalPagina > 0) {
-        ocorrenciasPorPagina.push({
-          pagina: pagina.father,
-          quantidade: totalPagina
-        });
-        
-        totalOcorrencias += totalPagina;
-      }
-    }
-
-    return {
-      totalOcorrencias,
-      detalhamento: ocorrenciasPorPagina
-    };
-  }
-
-  // Retorna os dados e a função de busca
   return {
     resultados: globals.resultados,
     todosOsLinks: globals.todosOsLinks,

@@ -2,49 +2,53 @@ const { executarCrawler } = require('../services/webCrawler');
 
 let cacheCrawler = null;
 
+// 🚀 Inicia o rastreamento das páginas
 const iniciarCrawling = async (req, res) => {
   try {
     cacheCrawler = await executarCrawler();
-    
-    // Preparando o texto completo de todas as páginas para retornar
-    const textoCompletoPaginas = {};
-    
-    cacheCrawler.resultados.forEach(pagina => {
-      // Adiciona o texto completo de cada página ao objeto de resposta
-      textoCompletoPaginas[pagina.father] = pagina.textoCompleto;
-    });
-    
+
+    const textoCompletoPaginas = cacheCrawler.resultados.map(pagina => pagina);
+
     res.json({ 
       sucesso: true, 
       mensagem: 'Crawler executado com sucesso',
       textoCompleto: textoCompletoPaginas,
       totalPaginas: cacheCrawler.resultados.length
     });
+
   } catch (err) {
     console.error('Erro no controller:', err.message);
     res.status(500).json({ erro: 'Erro ao executar o crawler' });
   }
 };
 
-const buscarTermo = (req, res) => {
+// 🔍 Busca um termo nas páginas já rastreadas ou executa o crawler se necessário
+const buscarTermo = async (req, res) => {
   const termo = req.query.termo;
-
-  if (!cacheCrawler) {
-    return res.status(400).json({ erro: 'Crawler ainda não foi executado.' });
-  }
 
   if (!termo) {
     return res.status(400).json({ erro: 'Parâmetro "termo" é obrigatório.' });
   }
 
-  const resultado = cacheCrawler.buscarOcorrencias(termo);
-  res.json({ 
-    termo,
-    totalOcorrencias: resultado.totalOcorrencias,
-    ocorrenciasPorPagina: resultado.detalhamento
-  });
+  try {
+    if (!cacheCrawler) {
+      console.log('Crawler ainda não executado. Executando agora...');
+      cacheCrawler = await executarCrawler();
+    }
+
+    const resultado = cacheCrawler.buscarOcorrencias(termo);
+
+    res.json({ 
+      termo,
+      resultado
+    });
+  } catch (err) {
+    console.error('Erro ao buscar termo:', err.message);
+    res.status(500).json({ erro: 'Erro ao buscar o termo.' });
+  }
 };
 
+// 📤 Exporta os controladores
 module.exports = {
   iniciarCrawling,
   buscarTermo
