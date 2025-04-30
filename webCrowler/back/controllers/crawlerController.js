@@ -2,10 +2,17 @@ const { executarCrawler } = require('../services/webCrawler');
 
 const iniciarCrawling = async (req, res) => {
   try {
-    const { conteudo, links } = await executarCrawler();
-    console.log(conteudo, links); // Aqui está sua linha!
-    res.json({ sucesso: true ,conteudo: conteudo, links: links });
+    // const {father, conteudo, links } = await executarCrawler();
+    const resp = await executarCrawler()
+
+    // res.json({
+    //   father,
+    //   conteudo,
+    //   links
+    // });
+    res.json(resp)
   } catch (err) {
+    console.error('Erro no controiller:', err.message);
     res.status(500).json({ erro: 'Erro ao executar o crawler' });
   }
 };

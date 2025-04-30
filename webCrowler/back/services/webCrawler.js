@@ -1,39 +1,45 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
 
-async function crawlPage(url) {
+async function crawlPage(page) {
+  const url = `http://127.0.0.1:5500/páginas/${page}`
   try {
-    const response = await axios.get(url)
+    const response = await axios.get(encodeURI(url))
     const $ = cheerio.load(response.data)
 
+    const father = page.replace(".html", "")
     const conteudo = []
     const links = []
 
     $('a').each((_, element) => {
-      // const txt = $(element).text()
       const href = $(element).attr('href')
+      const txt = $(element).text().trim()
 
-      if (href)
-        // links.push(txt)
-        conteudo.push(element)
-        links.push(href)
-    })
+      if (href && !href.startsWith('#')) {
+        conteudo.push(txt);
+        links.push(href);
+      }
+    });
 
-    // console.log("links encontrados", links)
-    return { conteudo, links }
-
+    return { father, conteudo, links }
   } catch (err) {
-    console.error("Erro ao acessar a página", err.me)
+    console.error("Erro ao acessar a página:", err.message)
+    return {father: '', conteudo: [], links: [] }
   }
 }
 
+const executarCrawler = async () => {
+  const duna = 'duna.html';
+  const blade = 'blade_runner.html';
+  const interestelar = 'interestelar.html'
+  const mochilheiro = 'mochileiro.html'
+  const matrix = 'matrix'
 
-  const executarCrawler = async () => {
-    const blade_url = 'http://127.0.0.1:5500/páginas/blade_runner.html';
-  
-    const resultado = await crawlPage(blade_url);  
-    return resultado;
-  };
-  
-  module.exports = { executarCrawler };
-  
+  const result = await crawlPage(duna)
+  return result
+};
+
+
+ 
+
+module.exports = { executarCrawler }
