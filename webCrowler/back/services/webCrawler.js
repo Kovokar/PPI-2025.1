@@ -28,6 +28,35 @@ async function crawlPage(page) {
   }
 }
 
+const globals = {
+  links_found: [],
+  objetos: [],
+  visited: new Set() // <-- novo
+
+}
+
+async function teste2(page) {
+  const result = await crawlPage(page);
+  const resultStr = JSON.stringify(result);
+  const exists = globals.objetos.some(obj => JSON.stringify(obj) === resultStr);
+
+  if (!exists) {
+    globals.objetos.push(result);
+    if (result.links) {
+      
+      for (const link of result.links) {
+        if (!globals.visited.has(link)) {
+          globals.visited.add(link);
+          await teste2(link);
+        }
+      }
+    }
+  }
+
+  return globals;
+}
+
+
 const executarCrawler = async () => {
   const duna = 'duna.html';
   const blade = 'blade_runner.html';
@@ -35,8 +64,9 @@ const executarCrawler = async () => {
   const mochilheiro = 'mochileiro.html'
   const matrix = 'matrix'
 
-  const result = await crawlPage(duna)
-  return result
+  const result = await teste2(duna);
+
+  return result;
 };
 
 
