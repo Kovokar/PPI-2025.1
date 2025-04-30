@@ -9,7 +9,7 @@ Este projeto tem como objetivo hospedar páginas, realizar buscas em seu conteú
 ## Parte 1: Coleta e Armazenamento de Dados
 
 ### 1. Hospedagem
-- Hospedar 5 páginas HTML.
+- ~~Hospedar 5 páginas HTML.~~
 
 ### 2. Crawling (Rastreamento)
 1. Receber um **link inicial** de uma das páginas.
