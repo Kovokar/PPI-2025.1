@@ -18,3 +18,28 @@ const header = () => {
 };
 
 header();
+
+/*--------LUIZ--------*/
+document.addEventListener("DOMContentLoaded", function () {
+    const bloquinhos = document.querySelectorAll(".bloquinho-skills");
+  
+    bloquinhos.forEach(bloquinho => {
+      bloquinho.addEventListener("click", () => {
+        bloquinhos.forEach(outro => {
+          if (outro !== bloquinho) {
+            outro.classList.remove("expandido");
+          }
+        });
+  
+        bloquinho.classList.toggle("expandido");
+  
+        if (bloquinho.classList.contains("expandido")) {
+          bloquinho.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+        }
+      });
+    });
+  });
+/*-------------------*/
