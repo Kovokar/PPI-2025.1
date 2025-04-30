@@ -1,75 +1,72 @@
-const axios = require('axios')
-const cheerio = require('cheerio')
+const axios = require('axios');
+const cheerio = require('cheerio');
+const path = require('path');
 
-async function crawlPage(page) {
-  const url = `http://127.0.0.1:5500/páginas/${page}`
+const BASE_URL = 'http://127.0.0.1:5500/paginas/';
+
+async function fetchPageContent(page) {
+  const url = encodeURI(`${BASE_URL}${page}`);
+
   try {
-    const response = await axios.get(encodeURI(url))
-    const $ = cheerio.load(response.data)
+    const { data } = await axios.get(url);
+    const $ = cheerio.load(data);
 
-    const father = page.replace(".html", "")
-    const conteudo = []
-    const links = []
+    const pageId = path.basename(page, '.html');
+    const texts = [];
+    const links = [];
 
-    $('a').each((_, element) => {
-      const href = $(element).attr('href')
-      const txt = $(element).text().trim()
+    $('a').each((_, el) => {
+      const href = $(el).attr('href');
+      const text = $(el).text().trim();
 
       if (href && !href.startsWith('#')) {
-        conteudo.push(txt);
+        texts.push(text);
         links.push(href);
       }
     });
 
-    return { father, conteudo, links }
-  } catch (err) {
-    console.error("Erro ao acessar a página:", err.message)
-    return {father: '', conteudo: [], links: [] }
+    return { father: pageId, conteudo: texts, links };
+  } catch (error) {
+    console.error(`Erro ao acessar a página "${page}":`, error.message);
+    return { father: '', conteudo: [], links: [] };
   }
 }
 
 const globals = {
-  links_found: [],
-  objetos: [],
-  visited: new Set() // <-- novo
-
-}
-
-async function teste2(page) {
-  const result = await crawlPage(page);
-  const resultStr = JSON.stringify(result);
-  const exists = globals.objetos.some(obj => JSON.stringify(obj) === resultStr);
-
-  if (!exists) {
-    globals.objetos.push(result);
-    if (result.links) {
-      
-      for (const link of result.links) {
-        if (!globals.visited.has(link)) {
-          globals.visited.add(link);
-          await teste2(link);
-        }
-      }
-    }
-  }
-
-  return globals;
-}
-
-
-const executarCrawler = async () => {
-  const duna = 'duna.html';
-  const blade = 'blade_runner.html';
-  const interestelar = 'interestelar.html'
-  const mochilheiro = 'mochileiro.html'
-  const matrix = 'matrix'
-
-  const result = await teste2(duna);
-
-  return result;
+  visited: new Set(),
+  resultados: []
 };
 
+async function crawlRecursive(page) {
+  if (globals.visited.has(page)) return;
 
- 
+  globals.visited.add(page);
+  const result = await fetchPageContent(page);
 
-module.exports = { executarCrawler }
+  const resultKey = JSON.stringify(result);
+  const alreadyExists = globals.resultados.some(r => JSON.stringify(r) === resultKey);
+
+  if (!alreadyExists) {
+    globals.resultados.push(result);
+
+    for (const link of result.links) {
+      await crawlRecursive(link);
+    }
+  }
+}
+
+async function executarCrawler() {
+  const paginasIniciais = [
+    'duna.html',
+    'blade_runner.html',
+    'interestelar.html',
+    'mochileiro.html',
+    'matrix.html'
+  ];
+
+
+  await crawlRecursive(paginasIniciais[4]);
+  return globals.resultados;
+}
+
+module.exports = { executarCrawler };
