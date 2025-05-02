@@ -1,10 +1,11 @@
-/* :root{
-    --primary-color: #7b2cbf;
-    --secondary-color: #5a189a;
-    --text-color: #fff;
-    --background-color: #10002b;
-    --hover-color: #c77dff;
-} */
+:root {
+  /* --primary-color: #7b2cbf;
+  --secondary-color: #5a189a;
+  --text-color: #fff;
+  --background-color: #10002b;
+  --hover-color: #c77dff; */
+  --primary-color: #e0aaff;
+}
 
 html {
   height: 100%;
@@ -22,7 +23,7 @@ body {
   background-attachment: fixed; /* background-color: #000; */
   position: relative;
 }
-
+/* ----------- HEADER ------------------- */
 .header {
   display: flex;
   justify-content: space-between;
@@ -80,6 +81,19 @@ body {
   }
 }
 
+/* ------------------------------------- */
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.flex {
+  display: flex;
+  gap: 10px;
+}
+
+/* ------------ HOME ------------------- */
+
 .home {
   color: white;
 }
@@ -98,8 +112,25 @@ body {
   justify-content: center;
   align-items: flex-start;
   gap: 20px;
-  width: 60%;
+  width: 70%;
   left: 0px;
+}
+
+.home-role {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 5px 20px;
+  border-radius: 2rem;
+}
+
+.home-name {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.home-description {
+  font-size: 1.2rem;
+  max-width: 70%;
 }
 
 .home-image {
@@ -108,6 +139,43 @@ body {
   border-radius: 100%;
   background-color: #10002b;
 }
+
+.home-description {
+  text-align: left;
+}
+
+.home-visitors {
+  border: #7b2cbf 1px solid;
+  padding: 5px 10px;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.608);
+
+  &:hover {
+    border: 1px solid var(--primary-color);
+  }
+}
+
+.btn {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  min-width: 100px;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: black;
+}
+
+.btn-secondary {
+  background-color: black;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+/* -------------------------------------- */
 
 /*------------LUIZ----------------*/
 .skills {
@@ -344,3 +412,62 @@ body {
   transform: translate(-50%, -50%) scale(1.15);
 }
 /*---------------------------------*/
+
+
+.contact-section {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 40px;
+  background-color: #1c2633;
+}
+
+.contact-box {
+  background-color: #2b3444;
+  padding: 30px;
+  border-radius: 10px;
+  width: 350px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.contact-box h2,
+.contact-box h4 {
+  color: #ffffff;
+}
+
+.contact-box p,
+.contact-box a {
+  color: #5cf275;
+  text-decoration: none;
+  margin: 10px 0;
+  display: block;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.gmail-button {
+  display: inline-block;
+  background-color: #28a745;
+  padding: 12px 20px;
+  margin: 15px 0;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.alt-contact ul {
+  padding-left: 20px;
+  list-style: disc;
+  color: #ccc;
+}
+
+.footer {
+  color: #5cf275;
+  font-size: 14px;
+  /* background-color: #0f1624; */
+  padding: 30px 10px;
+}
