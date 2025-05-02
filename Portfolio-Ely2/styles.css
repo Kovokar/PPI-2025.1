@@ -412,3 +412,62 @@ body {
   transform: translate(-50%, -50%) scale(1.15);
 }
 /*---------------------------------*/
+
+
+.contact-section {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 40px;
+  background-color: #1c2633;
+}
+
+.contact-box {
+  background-color: #2b3444;
+  padding: 30px;
+  border-radius: 10px;
+  width: 350px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.contact-box h2,
+.contact-box h4 {
+  color: #ffffff;
+}
+
+.contact-box p,
+.contact-box a {
+  color: #5cf275;
+  text-decoration: none;
+  margin: 10px 0;
+  display: block;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.gmail-button {
+  display: inline-block;
+  background-color: #28a745;
+  padding: 12px 20px;
+  margin: 15px 0;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.alt-contact ul {
+  padding-left: 20px;
+  list-style: disc;
+  color: #ccc;
+}
+
+.footer {
+  color: #5cf275;
+  font-size: 14px;
+  /* background-color: #0f1624; */
+  padding: 30px 10px;
+}
