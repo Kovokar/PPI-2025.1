@@ -80,7 +80,6 @@ body {
     /* background-color: rgb(34 197 94 / 0.8); */
   }
 }
-
 /* ------------------------------------- */
 
 .text-primary {
@@ -179,30 +178,28 @@ body {
 
 /*------------LUIZ----------------*/
 .skills {
-  background-color: #001330bc;
-  border-radius: 50px;
   padding: 50px 0;
   text-align: center;
   height: 700px;
   position: relative;
-  box-shadow: inset 0 0 100px 20px rgba(0, 0, 0, 0.5);
+  background-color: #0000003b;
 }
 
 #titulo-skill {
   font-size: 2.5rem;
   color: #ffffff;
 }
-
 #titulo-skill .destaque {
-  color: #1a4c26;
+  color: #7b1e7b;
 }
-
 .linha-abaixo-titulo {
   width: 60px;
   height: 2px;
-  background-color: #1a4c26;
+  background-color: #7b1e7b;
   margin: 10px auto;
 }
+
+
 
 #bloco-de-skills {
   display: grid;
@@ -213,47 +210,51 @@ body {
   max-width: 1000px;
   width: 90%;
 }
-
 .bloquinho-skills {
   width: 100%;
-  height: 150px;
+  height: 130px;
   border-radius: 10px;
-  display: flex;
-  background-color: #235b33;
+  background-color: #7b147b;
   border: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  padding-left: 20px;
+  transition: all 0.3s ease;
 }
-
+.bloquinho-skills h4 {
+  color: white;
+  font-size: 1.03rem;
+  text-align: left;
+}
+.icone-wrapper {
+  width: 45px;
+  height: 45px;
+  background-color: transparent;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.icone-wrapper img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
 .bloquinho-skills:hover {
   cursor: pointer;
-  border-color: white;
+  border-color: rgba(199, 85, 233, 0.5);
+  box-shadow: 0 0 10px rgba(198, 85, 233, 0.4);
+  transform: scale(1.02);
+}
+.bloquinho-skills:hover .icone-wrapper {
+  background-color: rgb(198, 85, 233, 0.5);
 }
 
-.bloquinho-skills.expandido {
-  width: 80%;
-  height: 300px;
-  max-width: 400px;
-  background-color: #235b33;
-  transform: scale(1.15);
-  z-index: 10;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  transition: all 0.4s ease;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.15);
-}
 
-@media (max-width: 768px) {
-  #bloco-de-skills {
-    grid-template-columns: repeat(3, 1fr);
-    width: 100%;
-  }
-
-  .bloquinho-skills {
-    height: 80px;
-  }
-}
 
 #bloco-de-linguagens {
   display: flex;
@@ -266,153 +267,87 @@ body {
   margin: 30px auto;
   flex-wrap: wrap;
 }
-
 .bloquinho-linguagem {
-  width: 80px;
+  width: 90px;
   height: 80px;
   border-radius: 8px;
-  display: flex;
-  background-color: #4caf50;
+  background-color: #852383;
   border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-direction: column;
 }
-
+.bloquinho-linguagem img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
 .bloquinho-linguagem:hover {
   cursor: pointer;
-  border-color: white;
+  border-color: rgb(198, 85, 233, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(198, 85, 233, 0.4);
 }
 
-.bloquinho-linguagem.expandido {
-  width: 150px;
-  height: 150px;
-  background-color: #4caf50;
-  transition: all 0.4s ease;
-  transform: scale(1.15);
-  z-index: 10;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  position: absolute;
+/*
+#popup-info {
+  position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1.15);
-}
-/*---------------------------------*/
-
-/*------------LUIZ----------------*/
-.skills {
-  background-color: #00133048;
-  padding: 50px 0;
-  text-align: center;
-  height: 700px;
-  position: relative;
-}
-
-#titulo-skill {
-  font-size: 2.5rem;
-  color: #ffffff;
-}
-
-#titulo-skill .destaque {
-  color: #1a4c26;
-}
-
-.linha-abaixo-titulo {
-  width: 60px;
-  height: 2px;
-  background-color: #1a4c26;
-  margin: 10px auto;
-}
-
-#bloco-de-skills {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin: 30px auto;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 250px;
+  background-color: #38383880;
+  color: white;
+  border-radius: 20px;
   padding: 20px;
-  max-width: 1000px;
-  width: 90%;
-}
-
-.bloquinho-skills {
-  width: 100%;
-  height: 150px;
-  border-radius: 10px;
+  z-index: 999;
   display: flex;
-  background-color: #235b33;
-  border: 3px solid transparent;
-}
-
-.bloquinho-skills:hover {
-  cursor: pointer;
-  border-color: white;
-}
-
-.bloquinho-skills.expandido {
-  width: 80%;
-  height: 300px;
-  max-width: 400px;
-  background-color: #235b33;
-  transform: scale(1.15);
-  z-index: 10;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  transition: all 0.4s ease;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.15);
-}
-
-@media (max-width: 768px) {
-  #bloco-de-skills {
-    grid-template-columns: repeat(3, 1fr);
-    width: 100%;
-  }
-
-  .bloquinho-skills {
-    height: 80px;
-  }
-}
-
-#bloco-de-linguagens {
-  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 15px;
-  margin-top: 40px;
-  padding: 10px;
-  max-width: 1000px;
-  margin: 30px auto;
-  flex-wrap: wrap;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  animation: fadeIn 0.3s ease;
 }
 
-.bloquinho-linguagem {
-  width: 80px;
-  height: 80px;
-  border-radius: 8px;
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 998; 
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.conteudo-skill {
+  text-align: center;
+  color: white;
+  margin: auto;
   display: flex;
-  background-color: #4caf50;
-  border: 2px solid transparent;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
 }
-
-.bloquinho-linguagem:hover {
-  cursor: pointer;
-  border-color: white;
-}
-
-.bloquinho-linguagem.expandido {
-  width: 150px;
-  height: 150px;
-  background-color: #4caf50;
-  transition: all 0.4s ease;
-  transform: scale(1.15);
-  z-index: 10;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.15);
-}
+*/
 /*---------------------------------*/
-
 
 .contact-section {
   display: flex;
