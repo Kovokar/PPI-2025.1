@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog da Fazenda - PPI</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./footer/footer.css">
+</head>
+<body>
+  <header>
+    <img src="assets/stwv.png" alt="Imagem do Blog da Fazenda">
+  </header>
+  <main>
+    <section class="intro">
+      <img id="intro-msg" src="assets/intro.png" alt="Intro" class="intro-msg">
+    </section>
+    
+    <!-- Popup para a imagem de intro -->
+    <div id="intro-popup" class="popup-overlay">
+      <div class="popup-content">
+        <span class="popup-close">&times;</span>
+        <img src="assets/intro.png" alt="Intro Popup">
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="card">
+        <div class="image-row">
+          <div class="image-card" onclick="window.open('./aula-eli/index.html', '_blank')">
+            <img src="assets/carta-stardew-valley.png" alt="Aula 1">
+            <div class="text-overlay">
+              <p>🌱 Plantando com HTML</p>
+            </div>
+          </div>
+          <div class="image-card" onclick="window.open('./aula-eli/index.html', '_blank')">
+            <img src="assets/carta-stardew-valley.png" alt="Aula 2">
+            <div class="text-overlay">
+              <p>🧺 Colhendo Estilos com CSS</p>
+            </div>
+          </div>
+          <div class="image-card" onclick="window.open('./aula-eli/index.html', '_blank')">
+            <img src="assets/carta-stardew-valley.png" alt="Aula 3">
+            <div class="text-overlay">
+              <p>💡 Aumentando a Produção com JS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>    
+  </main>
+    <script src="./footer/footer.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

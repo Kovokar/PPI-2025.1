@@ -1,0 +1,644 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+    background: url('../assets/back-desk.png') center/cover no-repeat;
+    color: #4e2d18;
+}
+
+header {
+    background: url('imagens/stardew-header.jpg') center/cover no-repeat;
+    padding: 20px 20px;
+    text-align: center;
+    color: #fffbe6;
+    text-shadow: 1px 1px 2px #000;
+}
+
+header h1 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+nav {
+    background-color: #decba4;
+    padding: 20px;
+    min-width: 200px;
+}
+
+nav h3 {
+    color: #5c3d2e;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav li {
+    margin: 8px 0;
+}
+
+nav a {
+    color: #6a4e3a;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+#leiaute-flex {
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    justify-content: center;
+}
+
+main {
+    flex: 3;
+    padding: 20px;
+    background-color: #fffdf7;
+    border-radius: 10px;
+}
+
+aside {
+    flex: 1;
+    background-color: #f1e1b0;
+    padding: 20px;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+footer {
+    background-color: #8a6a47;
+    color: #fffdf7;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8rem;
+    border-top: 3px solid #decba4;
+    margin-top: 40px;
+}
+
+article {
+    background-color: #fff9e3;
+    border: 2px dashed #c98f60;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+}
+
+.data-autor {
+    font-size: 0.7rem;
+    color: #87694e;
+    text-align: right;
+}
+
+img {
+    max-width: 100%;
+    border: 3px solid #a6764c;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+input, select {
+    font-family: monospace;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.tabela1 {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.tabela1 th, .tabela1 td {
+    border: 1px solid #c98f60;
+    padding: 10px;
+    text-align: left;
+}
+
+.tabela1 thead {
+    background-color: #decba4;
+}
+
+.tabela1 .total {
+    font-weight: bold;
+    background-color: #f9f5e7;
+}
+
+/* Estilos para listas */
+.lista-tipos {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.lista-tipos h3 {
+    color: #6a4e3a;
+    border-bottom: 2px solid #c98f60;
+    padding-bottom: 10px;
+}
+
+.lista-tipos ul, 
+.lista-tipos ol, 
+.lista-tipos dl {
+    background-color: #f9f5e7;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+}
+
+.lista-tipos ul {
+    list-style-type: disc;
+}
+
+.lista-tipos ol {
+    list-style-type: decimal;
+}
+
+.lista-tipos dl dt {
+    font-weight: bold;
+    color: #6a4e3a;
+}
+
+.lista-tipos dl dd {
+    margin-left: 20px;
+    color: #4e2d18;
+    margin-bottom: 10px;
+}
+
+.lista-tipos li, 
+.lista-tipos dd {
+    margin-bottom: 10px;
+}
+
+/* Estilos específicos para as explicações */
+.explicacao {
+    background-color: #fff8dc;
+    border-left: 4px solid #deb887;
+    margin-top: 20px;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    color: #4e2d18;
+    border-radius: 8px;
+}
+
+.explicacao h4 {
+    margin-top: 0;
+    font-size: 1rem;
+}
+
+.explicacao p {
+    margin: 5px 0;
+}
+
+/* Estilo para os links */
+nav a {
+    color: #6a4e3a;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Melhorando a leitura de tabelas */
+.tabela1 th, .tabela1 td {
+    border: 1px solid #9c7650;
+    padding: 10px;
+    text-align: left;
+    background-color: #fff8dc;
+}
+
+.tabela1 th {
+    background-color: #deb887;
+}
+
+/* Ajustes no rodapé */
+footer {
+    background-color: #8a6a47;
+    color: #fffdf7;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8rem;
+    border-top: 3px solid #decba4;
+}
+
+/* Adicione estes estilos para as bordas */
+.bordas1 {
+    background: linear-gradient(to right, #ff6b6b, #4ecdc4); /* Adiciona um background gradiente */
+}
+
+.bordas2 {
+    border: 2px solid #333; /* Adiciona uma borda sólida de 2px */
+}
+
+.bordas3 {
+    border: 2px dashed #007bff; /* Adiciona uma borda tracejada */
+}
+
+.margens {
+    padding: 15px; /* Adiciona um padding de 15px */
+    background-color: #f0f0f0; /* Um fundo suave para visualizar melhor o padding */
+}
+
+.comprimento {
+    width: 50%; /* Define a largura como 50% do elemento pai */
+    background-color: #e0e0e0; /* Um fundo suave para destacar */
+    padding: 10px;
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Estilos para formulários modernos */
+form {
+    background-color: #f9f5e7;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #6a4e3a;
+}
+
+form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #c98f60;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+
+form input[type="submit"] {
+    background-color: #8a6a47;
+    color: #fffdf7;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form input[type="submit"]:hover {
+    background-color: #6a4e3a;
+}
+
+form input[type="color"] {
+    width: 100px;
+    height: 50px;
+    padding: 0;
+}
+
+form input[type="range"] {
+    width: 100%;
+}
+
+/* Estilos para formulários de busca */
+.busca {
+    background-color: #f9f5e7;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #c98f60;
+}
+
+.busca .filtros {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.busca .filtros label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #6a4e3a;
+}
+
+.busca input[type="search"],
+.busca select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c98f60;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+
+.busca input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.busca input[type="submit"] {
+    background-color: #8a6a47;
+    color: #fffdf7;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.busca input[type="submit"]:hover {
+    background-color: #6a4e3a;
+}
+
+/* Estilos para seção IFPI */
+.imagem-ifpi {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.informacoes-ifpi,
+.contato-ifpi {
+    background-color: #f9f5e7;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.informacoes-ifpi h3,
+.contato-ifpi h3 {
+    color: #6a4e3a;
+    border-bottom: 2px solid #c98f60;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.informacoes-ifpi ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.informacoes-ifpi li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.informacoes-ifpi li::before {
+    content: '🌱';
+    position: absolute;
+    left: 0;
+}
+
+.contato-ifpi p {
+    margin: 10px 0;
+    color: #4e2d18;
+}
+
+.contato-ifpi a {
+    color: #8a6a47;
+    text-decoration: none;
+}
+
+.contato-ifpi a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para header fixo */
+.header-fixo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: url('imagens/stardew-header.jpg') center/cover no-repeat;
+    padding: 20px;
+    text-align: center;
+    color: #fffbe6;
+    text-shadow: 1px 1px 2px #000;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-fixo h1 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.header-fixo p {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.secoes-header {
+    background-color: rgba(110, 70, 40, 0.8);
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.secoes-header ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    gap: 15px;
+}
+
+.secoes-header li a {
+    color: #fffbe6;
+    text-decoration: none;
+    font-size: 0.7rem;
+    transition: color 0.3s ease;
+}
+
+.secoes-header li a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    #leiaute-flex {
+        flex-direction: column;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    main {
+        width: 100%;
+        padding: 10px;
+    }
+
+    aside {
+        margin-left: 0;
+    }
+
+    .secoes-header ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .secoes-header li {
+        margin: 10px 0;
+    }
+
+    form div {
+        flex-direction: column;
+    }
+
+    form label, 
+    form input, 
+    form select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .lista-tipos {
+        display: flex;
+        flex-direction: column;
+    }
+
+    table {
+        width: 100%;
+        overflow-x: auto;
+        display: block;
+    }
+}
+
+/* Menu responsivo */
+.secoes-header {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.secoes-header ul {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    list-style: none;
+}
+
+.secoes-header li {
+    margin: 0 10px;
+}
+
+/* Removendo posição fixa */
+#topo {
+    position: static;
+    top: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+/* Estilos globais para links */
+a {
+    color: #8a6a47; /* Cor de madeira envelhecida */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #c98f60; /* Cor de destaque */
+    transition: width 0.3s ease;
+}
+
+a:hover {
+    color: #6a4e3a; /* Tom mais escuro ao passar o mouse */
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+/* Links específicos para navegação */
+.secoes-header a {
+    color: #fffbe6;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.secoes-header a:hover {
+    color: #ffd700;
+}
+
+.secoes-header a::after {
+    background-color: #ffd700;
+}
+
+/* Links úteis no aside */
+aside a {
+    color: #8a6a47;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+aside a:hover {
+    background-color: rgba(201, 143, 96, 0.2);
+    color: #6a4e3a;
+}
+
+/* Links dentro de explicações */
+.explicacao a {
+    color: #c98f60;
+    font-weight: bold;
+}
+
+.explicacao a:hover {
+    color: #8a6a47;
+}
+
+/* Links de contato */
+.contato-ifpi a {
+    color: #8a6a47;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.contato-ifpi a:hover {
+    color: #6a4e3a;
+    text-decoration: underline;
+}
+
+/* Adicione este bloco no final do arquivo */
+.links-uteis {
+    line-height: 2; /* Aumenta o espaçamento entre linhas */
+    padding: 10px 0; /* Adiciona um pouco de preenchimento vertical */
+    width: 100%; /* Ocupa toda a largura disponível */
+}
+
+.links-uteis li {
+    margin-bottom: 10px; /* Adiciona margem entre os itens da lista */
+    width: 100%; /* Ocupa toda a largura */
+    display: block; /* Garante que cada link ocupe uma linha inteira */
+}
+
+.links-uteis a {
+    display: block; /* Faz o link ocupar toda a largura do item */
+    padding: 8px 12px; /* Adiciona preenchimento para maior área de clique */
+    background-color: rgba(201, 143, 96, 0.1); /* Fundo suave */
+    border-radius: 5px; /* Cantos arredondados */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.links-uteis a:hover {
+    background-color: rgba(201, 143, 96, 0.2); /* Fundo mais escuro ao passar o mouse */
+}

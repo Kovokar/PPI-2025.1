@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Buscar Termo - Web Crawler</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body {
+      color: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: black;
+      min-height: 100vh;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      background-color: rgba(30, 30, 30, 0.95);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 188, 212, 0.2);
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #00bcd4;
+      margin-bottom: 1rem;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #00bcd4;
+      color: #121212;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0097a7;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 2rem;
+      border-collapse: collapse;
+      background-color: #2c2c2c;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid #444;
+    }
+
+    th {
+      background-color: #00bcd4;
+      color: #121212;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    #resultado {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="matrix"></canvas>
+
+  <div class="container">
+    <h1>Buscar Termo no Crawler</h1>
+    <input type="text" id="termo" placeholder="Digite o termo a buscar" />
+    <br />
+    <button onclick="buscarTermo()">Buscar</button>
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    async function buscarTermo() {
+      const termo = document.getElementById('termo').value.trim();
+      const resultadoDiv = document.getElementById('resultado');
+
+      if (!termo) {
+        alert('Digite um termo para buscar.');
+        return;
+      }
+
+      resultadoDiv.innerHTML = 'Buscando...';
+
+      try {
+        const res = await fetch(`http://localhost:3000/crawler/iniciar/buscar?termo=${encodeURIComponent(termo)}`);
+        if (!res.ok) throw new Error('Erro na resposta do servidor');
+
+        const data = await res.json();
+        const resultados = data.resultado;
+
+        if (resultados.length === 0) {
+          resultadoDiv.innerHTML = `Nenhuma ocorrência encontrada para "<strong>${data.termo}</strong>".`;
+          return;
+        }
+
+        const resultadosOrdenados = resultados.map(r => {
+          const ocorrencias = r.ocorrencias || 0;
+          const qtd_links = r.qtd_links || 0;
+          const links_repetidos = r.links_repetidos || 0;
+          const total = (ocorrencias * 5) + (qtd_links * 10) - (links_repetidos * 15);
+          return { ...r, total, ocorrencias, qtd_links, links_repetidos };
+        }).sort((a, b) => b.total - a.total);
+
+        const linhas = resultadosOrdenados.map((r, i) => `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${r.site}</td>
+            <td>${r.ocorrencias * 5}</td>
+            <td>${r.qtd_links * 10}</td>
+            <td>${r.links_repetidos * 15}</td>
+            <td>${r.total}</td>
+          </tr>
+        `).join('');
+
+        const tabela = `
+          <table>
+            <thead>
+              <tr>
+                <th>Posição</th>
+                <th>Página</th>
+                <th>Ocorrências</th>
+                <th>Qtd_links</th>
+                <th>Repetições</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${linhas}
+            </tbody>
+          </table>
+        `;
+
+        resultadoDiv.innerHTML = `<h2>Resultados para "<em>${data.termo}</em>":</h2>` + tabela;
+
+      } catch (err) {
+        console.error(err);
+        resultadoDiv.innerHTML = 'Erro ao buscar o termo.';
+      }
+    }
+  </script>
+
+  <script>
+    const c = document.getElementById("matrix");
+    const ctx = c.getContext("2d");
+
+    c.height = window.innerHeight;
+    c.width = window.innerWidth;
+
+    const letters = "日ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ:・.=*+-<>¦｜ﾘ".split("");
+    const fontSize = 18;
+    const columns = c.width / fontSize;
+    let drops = Array.from({ length: columns }, () => 1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, c.width, c.height);
+
+      ctx.fillStyle = "#0F0";
+      ctx.font = `${fontSize}px arial`;
+
+      drops.forEach((y, i) => {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, y * fontSize);
+
+        if (y * fontSize > c.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  </script>
+
+</body>
+</html>
