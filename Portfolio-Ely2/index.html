@@ -3,8 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- IMPORTAÇÕES DE STYLES -->
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="stars.css" />
+    <link rel="stylesheet" href="components/stars/stars.css">
+    <link rel="stylesheet" href="components/cards/card.css" />
+    <!-- IMPORTAÇÕES DE STYLES -->
+
+<!-- Scripts JS -->
+<script type="module" src="projects.js"></script>
+
     <title>Portfolio</title>
   </head>
   <body>
@@ -106,7 +113,29 @@
       
     </section>
 
-    <section class="project" id="project"></section>
+    <section class="project" id="project">
+      <div class="container-projects">
+        <div class="text-center">
+          <h1 id="titulo-projects">
+            All my <span class="destaque">Projects</span>
+          </h1>
+          <div class="linha-abaixo-titulo"></div>
+          <p class="textim">Explore my portfolio of cybersecurity and backend projects, tools, and solutions.</p>
+        </div>
+        <div class="filters">
+          <div class="filters-buttons">
+            <button class="btn active">All Projects</button>
+            <button class="btn">Security Tools</button>
+            <button class="btn">Monitoring</button>
+            <button class="btn">APIs</button>
+            <button class="btn">Web Applications</button>
+          </div>
+        </div>
+        <div class="grid-cards" id="grid-cards">
+
+        </div>
+      </div>
+    </section>
     <section class="contact" id="contact"></section>
 
     <!-- ... até antes da tag <footer> -->
@@ -143,6 +172,8 @@
 
 
     <script src="./header.js"></script>
-    <script src="stars.js"></script>
+    <script src="components/stars/stars.js"></script>
+    <script src="section-projects/buttons-change.js"> </script>
+    <script type="module" src="section-projects/create-cards.js"></script>  
   </body>
 </html>
