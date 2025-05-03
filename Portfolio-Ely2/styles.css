@@ -30,11 +30,26 @@ body {
 /* ----------- HEADER ------------------- */
 .header {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  background-image: linear-gradient(to right, #10002b, #10002b);
-  box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
+  padding: 20px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.header.sticky {
+  background-color: rgba(5, 5, 15, 0.9);
+  border-bottom: 2px solid #b14aed;
+  box-shadow: 0 0 15px rgba(177, 74, 237, 0.5);
+  z-index: 9999;
+  /* background-image: linear-gradient(to top, transparent, black);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+  box-shadow: 2px 2px 10px rgba(55, 55, 55, 0.5); */
+  /* background-color: black; */
 }
 
 .header-logo-title {
@@ -101,7 +116,7 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: calc(100vh - 80px);
+  height: 100vh;
   text-align: center;
 }
 
@@ -389,8 +404,7 @@ body {
   background-color: var(--bg-roxo);
   color: white;
 }
-
-
+/*---------------------------------*/
 
 .grid-cards {
   display: flex;
