@@ -50,3 +50,23 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+
+/*--------PAMELLA--------*/
+document.querySelectorAll('.dropdown-toggle').forEach(function(dropdownToggle) {
+  dropdownToggle.addEventListener('click', function(event) {
+    event.preventDefault(); 
+    event.stopPropagation(); 
+
+    const dropdown = this.closest('.dropdown');
+
+    document.querySelectorAll('.dropdown').forEach(d => {
+      if (d !== dropdown) d.classList.remove('show');
+    });
+
+    dropdown.classList.toggle('show');
+  });
+});
+
+window.addEventListener('click', function() {
+  document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+});
