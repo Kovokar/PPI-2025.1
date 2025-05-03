@@ -193,8 +193,8 @@ body {
   color: #7b1e7b;
 }
 .linha-abaixo-titulo {
-  width: 80px;
-  height: 4px;
+  width: 60px;
+  height: 2px;
   background-color: #7b1e7b;
   margin: 10px auto;
 }
@@ -325,7 +325,7 @@ body {
   color: #f8d3ffc6;
   text-align: center;
   width: 100%;
-  height: 100%;
+  height: 30px;
 }
 
 /*---------------------------------*/
@@ -403,16 +403,9 @@ body {
 
 /*------------FIM-PEDRO----------------*/
 
-
-.contact-section {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  padding: 40px;
-  background-color: #1c2633;
+.highlight {
+  color: #2da84e;
 }
-
 .contact-box {
   background-color: #9f86cc26;
   padding: 40px;
