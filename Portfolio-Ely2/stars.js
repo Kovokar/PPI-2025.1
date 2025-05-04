@@ -15,3 +15,5 @@ const addStarsBackground = () => {
 };
 
 addStarsBackground();
+
+// TextDecoderStream
