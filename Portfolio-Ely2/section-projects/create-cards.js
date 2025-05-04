@@ -4,9 +4,9 @@ import { createCard } from '../components/cards/card.js';
 const cards = [
   {
     photo: '../assets/explorer.png',
-    title: 'Projeto Alpha',
+    title: 'Cryptofile',
     topic: 'security',
-    subtitle: 'React App',
+    subtitle: 'A set of tools for file encryption, including a secure file explorer and an automatic encryptor.',
     categories: ['React', 'Frontend', 'API'],
     github: 'https://github.com/seuusuario/projeto-alpha',
     linkedin: 'https://linkedin.com/in/seuusuario'
