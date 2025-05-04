@@ -1,14 +1,29 @@
-.card-container {
-  background: white;
-  width: 300px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  font-family: Arial, sans-serif;
+
+/* Layout responsivo de cards */
+.cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
 
+/* Card geral */
+.card-container {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Imagem */
 .img-container {
   position: relative;
   width: 100%;
@@ -19,9 +34,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
+/* Tópico sobreposto */
 .topic-class {
   position: absolute;
   bottom: 8px;
@@ -34,6 +49,7 @@
   font-weight: bold;
 }
 
+/* Conteúdo */
 .card-content {
   padding: 15px;
 }
@@ -44,11 +60,12 @@
 }
 
 .card-content h4 {
-  margin: 6px 0 10px;
-  color: #777;
+  margin: 8px 0 12px;
+  color: #666;
   font-size: 0.95em;
 }
 
+/* Categorias */
 .categories {
   display: flex;
   flex-wrap: wrap;
@@ -62,6 +79,7 @@
   font-size: 0.8em;
 }
 
+/* Rodapé do card */
 .card-footer {
   display: flex;
   justify-content: space-between;
@@ -71,7 +89,7 @@
 }
 
 .details-button {
-  background: #007BFF;
+  background-color: #007BFF;
   color: white;
   border: none;
   padding: 6px 12px;
