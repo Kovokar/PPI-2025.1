@@ -6,9 +6,7 @@ export function createCard({ photo, title, topic, subtitle, categories, github, 
     <div class="card-container">
       <div class="img-container">
         <img src="${photo}" alt="${title}">
-        <div class="topic-class">
-          <span>${topic}</span>
-        </div>
+        <div class="topic-class"><span>${topic}</span></div>
       </div>
       <div class="card-content">
         <h2>${title}</h2>
@@ -18,7 +16,7 @@ export function createCard({ photo, title, topic, subtitle, categories, github, 
         </div>
       </div>
       <div class="card-footer">
-        <button class="details-button">Details</button>
+        <button class="details-button">Detalhes</button>
         <div class="social-buttons">
           <a href="${github}" target="_blank">GitHub</a>
           <a href="${linkedin}" target="_blank">LinkedIn</a>
@@ -27,5 +25,5 @@ export function createCard({ photo, title, topic, subtitle, categories, github, 
     </div>
   `;
 
-  return card;
+return card;
 }
