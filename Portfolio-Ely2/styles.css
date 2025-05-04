@@ -7,6 +7,7 @@
   --primary-color: #e0aaff;
   --roxo-text: #7b1e7b;
   --bg-roxo: #852383;
+  
 }
 
 html {
@@ -97,7 +98,7 @@ body {
   background-color: rgba(0, 0, 0, 0.608);
 
   &:hover {
-    border: 1px solid var(--primary-color);
+  border: 1px solid var(--primary-color);
   }
 }
 
@@ -276,6 +277,9 @@ body {
 
 /*---------------------------------*/
 
+
+
+
 /*------------PEDRO----------------*/
 
 #titulo-projects {
@@ -285,7 +289,7 @@ body {
   font-family: roboto;
 
   & .destaque {
-    color: var(--roxo-text);
+    color: var(--roxo-text)
   }
 }
 
