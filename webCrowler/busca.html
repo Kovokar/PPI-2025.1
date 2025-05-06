@@ -132,7 +132,7 @@
       resultadoDiv.innerHTML = 'Buscando...';
 
       try {
-        const res = await fetch(`http://localhost:3000/crawler/iniciar/buscar?termo=${encodeURIComponent(termo)}`);
+        const res = await fetch(`http://localhost:3000/iniciar/buscar?termo=${encodeURIComponent(termo)}`);
         if (!res.ok) throw new Error('Erro na resposta do servidor');
 
         const data = await res.json();
