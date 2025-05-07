@@ -23,8 +23,8 @@ app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`)
   console.log('Abrindo o buscador!');
 
-  setTimeout(() => {
-    executarComandoBash(comando)
-  }, 3000);
+  // setTimeout(() => {
+  //   executarComandoBash(comando)
+  // }, 3000);
 
 });

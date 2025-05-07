@@ -23,16 +23,16 @@ class WebCrawler {
       const $ = cheerio.load(data);
 
       const pageId = path.basename(page, '.html');
-      const texts = [];
       const links = [];
-      const textoCompleto = $('body').text().trim();
+      // const textoCompleto = $('head').text().trim();
+
+      const textoCompleto = $.html(); // Extrai todo o conteúdo da página
+
 
       $('a').each((_, el) => {
         const href = $(el).attr('href');
-        const text = $(el).text().trim();
 
         if (href && !href.startsWith('#')) {
-          texts.push(text);
           links.push(href);
           this.todosOsLinks.push(href);
         }
@@ -40,7 +40,6 @@ class WebCrawler {
 
       return {
         father: pageId,
-        conteudo: texts,
         links,
         textoCompleto
       };
@@ -56,12 +55,12 @@ class WebCrawler {
   }
 
   // Método de crawling recursivo
-  async crawlRecursive(page) {
-    if (this.visited.has(page)) return;
+  async crawlRecursive(link) {
+    if (this.visited.has(link)) return;
 
-    this.visited.add(page);
-    const result = await this.fetchPageContent(page);
-
+    this.visited.add(link);
+    const result = await this.fetchPageContent(link);
+    
     const resultKey = JSON.stringify(result);
     const alreadyExists = this.resultados.some(r => JSON.stringify(r) === resultKey);
 
@@ -96,37 +95,49 @@ class WebCrawler {
 
   // Método para buscar ocorrências de um termo
   buscarOcorrencias(termo) {
-    return this.resultados.map(item => ({
-      ocorrencias: this.contarOcorrencias(item.textoCompleto, termo),
-      qtd_links: item.links.length,
-      site: `${item.father}.html`,
-      links: item.links,
-      links_repetidos: this.contarRepeticoes(`${item.father}.html`, item.links)
-    }));
+    // console.log(this.todosOsLinks)
+    return this.resultados.map(item => {
+      const ocorrencias = this.contarOcorrencias(item.textoCompleto, termo);
+  
+      if (ocorrencias) { // se ocorrencias > 0
+        return {
+          ocorrencias,
+          site: `${item.father}.html`,
+          qtd_referencias: this.contarReferenciasDeLinks(this.todosOsLinks, `${item.father}.html`),
+          links: item.links,
+          links_repetidos: this.contarRepeticoes(`${item.father}.html`, item.links)
+        };
+      } 
+      return {}
+    });
   }
+  
 
   // Método para contar repetições de links
   contarRepeticoes(linkAlvo, listaLinks) {
     return listaLinks.filter(link => link === linkAlvo).length;
   }
 
+  contarReferenciasDeLinks(array, palavra) {
+    return array.reduce((contador, item) => {
+      return contador + (item === palavra ? 1 : 0);
+    }, 0);
+  }
+
   // Método principal para executar o crawler
-  async executarCrawler(paginasIniciais = [
-    'duna.html',
-    // 'blade_runner.html',
-    // 'interestelar.html',
-    // 'mochileiro.html',
-    // 'matrix.html'
-  ]) {
+  async executarCrawler(paginasIniciais = ['matrix.html']) {
     for (const pagina of paginasIniciais) {
       await this.crawlRecursive(pagina);
     }
 
-    return {
+    let resp = {
       resultados: this.resultados,
       todosOsLinks: this.todosOsLinks,
       buscarOcorrencias: this.buscarOcorrencias.bind(this)
     };
+
+
+    return resp
   }
 }
 
