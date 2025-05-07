@@ -120,6 +120,13 @@
   </div>
 
   <script>
+
+    document.getElementById('termo').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          buscarTermo();
+        }
+      });
+
     async function buscarTermo() {
       const termo = document.getElementById('termo').value.trim();
       const resultadoDiv = document.getElementById('resultado');
@@ -143,13 +150,25 @@
           return;
         }
 
-        const resultadosOrdenados = resultados.map(r => {
-          const ocorrencias = r.ocorrencias || 0;
-          const qtd_links = r.qtd_links || 0;
-          const links_repetidos = r.links_repetidos || 0;
-          const total = (ocorrencias * 5) + (qtd_links * 10) - (links_repetidos * 15);
-          return { ...r, total, ocorrencias, qtd_links, links_repetidos };
-        }).sort((a, b) => b.total - a.total);
+        const resultadosOrdenados = resultados
+          .filter(r => r.site !== undefined && r.site !== '')
+          .map(r => {
+            const ocorrencias = r.ocorrencias || 0;
+            const qtd_referencias = r.qtd_referencias || 0;
+            const links_repetidos = r.links_repetidos || 0;
+            const total = (ocorrencias * 5) + (qtd_referencias * 10) - (links_repetidos * 15);
+            return { ...r, total, ocorrencias, qtd_referencias, links_repetidos };
+          })
+          .sort((a, b) => b.total - a.total);
+
+        // Verifica se há resultados após filtragem
+        if (resultadosOrdenados.length === 0) {
+          resultadoDiv.innerHTML = `Nenhum resultado relevante encontrado para "<strong>${data.termo}</strong>".`;
+          return;
+        }
+
+
+
 
         const linhas = resultadosOrdenados.map((r, i) => `
           <tr>
@@ -157,7 +176,7 @@
             <td><a href="./paginas/${r.site}" target="_blank" style="color: aqua;">${r.site}</a></td>
             <td> 5 * ${r.ocorrencias} = ${r.ocorrencias * 5}</td>
             <td class="espaco">+</td>
-            <td> 10 * ${r.qtd_links} = ${r.qtd_links * 10}</td>
+            <td> 10 * ${r.qtd_referencias} = ${r.qtd_referencias * 10}</td>
             <td class="espaco">-</td>
             <td> 15 * ${r.links_repetidos} = ${r.links_repetidos * 15}</td>
             <td class="espaco">=</td>

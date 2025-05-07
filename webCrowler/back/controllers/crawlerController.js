@@ -34,6 +34,7 @@ const buscarTermo = async (req, res) => {
     if (!cacheCrawler) {
       console.log('Crawler ainda não executado. Executando agora...');
       cacheCrawler = await executarCrawler();
+      // console.log(cacheCrawler["todosOsLinks"])
     }
 
     const resultado = cacheCrawler.buscarOcorrencias(termo);
