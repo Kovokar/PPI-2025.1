@@ -24,6 +24,7 @@ const iniciarCrawling = async (req, res) => {
 
 // 🔍 Busca um termo nas páginas já rastreadas ou executa o crawler se necessário
 const buscarTermo = async (req, res) => {
+  console.log('TESTE')
   const termo = req.query.termo;
 
   if (!termo) {
