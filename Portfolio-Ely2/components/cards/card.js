@@ -32,13 +32,37 @@ export function createCard({ photo, title, topic, subtitle, categories, github, 
     <div class="modal-overlay">
       <div class="modal-content">
         <button class="close-modal">&times;</button>
-        <h2>${title}</h2>
+
+        <div class="top-container">
+          <div class="title-container">
+            <h2>${title}</h2>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="img-container">
+            <img src="${photo}" alt="${title}">
+          </div>
+          <div class="card-text">
+            <h4>${subtitle}</h4>
+          </div>
+        </div>
         <div class="modal-body">
           <p>${description || 'Sem descrição detalhada disponível.'}</p>
           <div class="categories">
             ${categories.map(cat => `<span class="category">${cat}</span>`).join('')}
           </div>
+          <p class="title-Info">Informações adicionais:</p>
+          <ul class="info-list">
+            <li>1</li>
+            <li>2</li> 
+            <li>3</li>
+            <li>4</li>
         </div>
+        <div class="modal-footer">
+          <button class="git-button">git</button>
+          <button class="visit-button">visit</button>
+        </div>
+
       </div>
     </div>
   `;
