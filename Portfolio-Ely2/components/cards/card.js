@@ -42,25 +42,25 @@ export function createCard({ photo, title, topic, subtitle, categories, github, 
           <div class="img-container">
             <img src="${photo}" alt="${title}">
           </div>
-          <div class="card-text">
-            <h4>${subtitle}</h4>
-          </div>
-        </div>
-        <div class="modal-body">
-          <p>${description || 'Sem descrição detalhada disponível.'}</p>
+          <p>${subtitle || 'Sem descrição detalhada disponível.'}</p>
           <div class="categories">
             ${categories.map(cat => `<span class="category">${cat}</span>`).join('')}
           </div>
-          <p class="title-Info">Informações adicionais:</p>
-          <ul class="info-list">
-            <li>1</li>
-            <li>2</li> 
-            <li>3</li>
-            <li>4</li>
+          <div id="project-info">
+            <p class="title-info">${description.title}</p>
+            <ul class="info-list">
+              ${description.items.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+
         </div>
         <div class="modal-footer">
-          <button class="git-button">git</button>
-          <button class="visit-button">visit</button>
+          <button class="git-button">
+            <i class="fab fa-github"></i> GitHub
+          </button>
+          <button class="visit-button">
+            <i class="fas fa-external-link-alt"></i> Visit
+          </button>
         </div>
 
       </div>
