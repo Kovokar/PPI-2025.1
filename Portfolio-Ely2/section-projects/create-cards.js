@@ -1,6 +1,7 @@
 import { createCard } from '../components/cards/card.js';
+import { initializeFilters } from './filters.js';
 
-const cards = [
+let cards = [
   {
     photo: '../assets/explorer.png',
     title: 'Cryptofile',
@@ -129,3 +130,6 @@ cards.forEach(data => {
   const card = createCard(data);
   container.appendChild(card);
 });
+
+cards = Array.from(document.querySelectorAll('.card'));
+initializeFilters(cards);
