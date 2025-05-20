@@ -24,13 +24,12 @@ const iniciarCrawling = async (req, res) => {
 
 // 🔍 Busca um termo nas páginas já rastreadas ou executa o crawler se necessário
 const buscarTermo = async (req, res) => {
-  console.log('TESTE')
   const termo = req.query.termo;
 
   if (!termo) {
     return res.status(400).json({ erro: 'Parâmetro "termo" é obrigatório.' });
   }
-
+  console.log('Buscando termo:', termo);
   try {
     if (!cacheCrawler) {
       console.log('Crawler ainda não executado. Executando agora...');

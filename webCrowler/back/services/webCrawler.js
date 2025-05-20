@@ -98,16 +98,16 @@ class WebCrawler {
     // console.log(this.todosOsLinks)
     return this.resultados.map(item => {
       const ocorrencias = this.contarOcorrencias(item.textoCompleto, termo);
-  
-      if (ocorrencias) { // se ocorrencias > 0
-        return {
-          ocorrencias,
-          site: `${item.father}.html`,
-          qtd_referencias: this.contarReferenciasDeLinks(this.todosOsLinks, `${item.father}.html`),
-          links: item.links,
-          links_repetidos: this.contarRepeticoes(`${item.father}.html`, item.links)
-        };
-      } 
+        if (ocorrencias) { 
+          let qtd_links_repetidos = this.contarRepeticoes(`${item.father}.html`, item.links)
+          return {
+            ocorrencias,
+            site: `${item.father}.html`,
+            qtd_referencias: this.contarReferenciasDeLinks(this.todosOsLinks, `${item.father}.html`) - qtd_links_repetidos,
+            links: item.links,
+            links_repetidos: qtd_links_repetidos
+          };
+        } 
       return {}
     });
   }
