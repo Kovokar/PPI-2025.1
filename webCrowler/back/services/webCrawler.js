@@ -17,7 +17,7 @@ class WebCrawler {
   // Método para buscar conteúdo de uma página
   async fetchPageContent(page) {
     const url = encodeURI(`${BASE_URL}${page}`);
-
+    console.log(`fazendo get em: ${url}`);
     try {
       const { data } = await axios.get(url);
       const $ = cheerio.load(data);
