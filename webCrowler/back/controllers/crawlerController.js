@@ -38,6 +38,7 @@ const buscarTermo = async (req, res) => {
     }
 
     const resultado = cacheCrawler.buscarOcorrencias(termo);
+    console.log('Resultado da busca:', resultado);
 
     res.json({ 
       termo,

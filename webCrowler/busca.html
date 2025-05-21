@@ -156,11 +156,10 @@
             const ocorrencias = r.ocorrencias || 0;
             const qtd_referencias = r.qtd_referencias || 0;
             const links_repetidos = r.links_repetidos || 0;
-            const total = (ocorrencias * 5) + (qtd_referencias * 10) - (links_repetidos * 15);
+            const total = r.total;
+            console.log(r.site, total);
             return { ...r, total, ocorrencias, qtd_referencias, links_repetidos };
           })
-          .sort((a, b) => b.total - a.total);
-
         // Verifica se há resultados após filtragem
         if (resultadosOrdenados.length === 0) {
           resultadoDiv.innerHTML = `Nenhum resultado relevante encontrado para "<strong>${data.termo}</strong>".`;
@@ -174,11 +173,11 @@
           <tr>
             <td>${i + 1}</td>
             <td><a href="./paginas/${r.site}" target="_blank" style="color: aqua;">${r.site}</a></td>
-            <td> 5 * ${r.ocorrencias} = ${r.ocorrencias * 5}</td>
+            <td> ${r.ocorrencias}</td>
             <td class="espaco">+</td>
-            <td> 10 * ${r.qtd_referencias} = ${r.qtd_referencias * 10}</td>
+            <td> ${r.qtd_referencias}</td>
             <td class="espaco">-</td>
-            <td> 15 * ${r.links_repetidos} = ${r.links_repetidos * 15}</td>
+            <td> ${r.links_repetidos}</td>
             <td class="espaco">=</td>
             <td>${r.total}</td>
           </tr>
@@ -190,11 +189,11 @@
               <tr>
                 <th>Posição</th>
                 <th>Página</th>
-                <th>Ocorrências</th>
+                <th>Ocorrências <br>5pt</th>
                 <th class="espaco"></th>
-                <th>Qtd_links</th>
+                <th>Qtd_links <br> 10pt</th>
                 <th class="espaco"></th>
-                <th>Repetições</th>
+                <th>Repetições <br> -15pt</th>
                 <th class="espaco"></th>
                 <th>Total</th>
               </tr>

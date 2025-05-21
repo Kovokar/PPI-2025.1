@@ -93,27 +93,33 @@ class WebCrawler {
     return ocorrencias;
   }
 
-  // Método para buscar ocorrências de um termo
   buscarOcorrencias(termo) {
-    // console.log(this.todosOsLinks)
-    return this.resultados.map(item => {
+    const resultadosComOcorrencias = this.resultados.map(item => {
       const ocorrencias = this.contarOcorrencias(item.textoCompleto, termo);
-        if (ocorrencias) { 
-          let qtd_links_repetidos = this.contarRepeticoes(`${item.father}.html`, item.links)
-          return {
-            ocorrencias,
-            site: `${item.father}.html`,
-            qtd_referencias: this.contarReferenciasDeLinks(this.todosOsLinks, `${item.father}.html`) - qtd_links_repetidos,
-            links: item.links,
-            links_repetidos: qtd_links_repetidos
-          };
-        } 
-      return {}
-    });
+      if (ocorrencias) {
+        let qtd_links_repetidos = this.contarRepeticoes(`${item.father}.html`, item.links);
+        let qtd_referencias = this.contarReferenciasDeLinks(this.todosOsLinks, `${item.father}.html`) - qtd_links_repetidos;
+        return {
+          ocorrencias: ocorrencias * 5,
+          site: `${item.father}.html`,
+          qtd_referencias: qtd_referencias*10,
+          links: item.links,
+          links_repetidos: qtd_links_repetidos * -15,
+          total: (ocorrencias * 5) + (qtd_referencias * 10) - (qtd_links_repetidos * 15),
+        };
+      }
+      return null;
+    })
+    .filter(item => item !== null)
+    .sort((a, b) => {
+      if (b.total !== a.total) return b.total - a.total;
+      if (b.qtd_referencias !== a.qtd_referencias) return b.qtd_referencias - a.qtd_referencias;
+      if (b.ocorrencias !== a.ocorrencias) return b.ocorrencias - a.ocorrencias;
+      return a.links_repetidos - b.links_repetidos;
+    })
+    return resultadosComOcorrencias;
   }
   
-
-  // Método para contar repetições de links
   contarRepeticoes(linkAlvo, listaLinks) {
     return listaLinks.filter(link => link === linkAlvo).length;
   }
