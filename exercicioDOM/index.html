@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercícios DOM</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section>
+      <h2>Questão 2</h2>
+      <p id="conteudoId">Texto com ID</p>
+      <p class="conteudoClasse">Texto com classe</p>
+      <button onclick="exibirTextoPorId()">Exibir texto por ID</button>
+      <button onclick="exibirTextoPorClasse()">Exibir texto por Classe</button>
+      <p id="resultadoId"></p>
+      <p id="resultadoClasse"></p>
+    </section>
+
+    <section>
+      <h2>Questão 3</h2>
+      <div id="conteudo">
+        <p>Parágrafo 1</p>
+        <p>Parágrafo 2</p>
+        <p>Parágrafo 3</p>
+      </div>
+      <button onclick="contarParagrafos()">Contar Parágrafos</button>
+      <div id="resultado"></div>
+    </section>
+
+    <section>
+      <h2>Questão 4</h2>
+      <p id="paragrafo">
+        Clique no botão abaixo para alterar o texto deste parágrafo:
+      </p>
+      <button id="botao">Clique aqui</button>
+      <button id="limpar">Limpar</button>
+    </section>
+
+    <section>
+      <h2>Questão 5</h2>
+      <div id="textTarget">
+        <p><strong>Lorem</strong></p>
+      </div>
+      <button onclick="mostrarTextos()">Mostrar Textos</button>
+      <pre id="saida"></pre>
+    </section>
+
+    <section>
+      <h2>Questão 6</h2>
+      <p id="css-texto">Texto com estilo alterável</p>
+      <button onclick="alterarEstilo('red')">Vermelho</button>
+      <button onclick="alterarEstilo('green')">Verde</button>
+      <button onclick="alterarEstilo('blue')">Azul</button>
+    </section>
+
+    <section>
+      <h2>Questão 7</h2>
+      <input id="origem" placeholder="Digite algo" />
+      <input id="destino" readonly />
+      <button onclick="copiarCaixaAlta()">Copiar em maiúsculas</button>
+    </section>
+
+    <section>
+      <h2>Questão 8</h2>
+      <button onclick="ativarContraste()">Ativar Alto Contraste</button>
+      <button onclick="resetarContraste()">Resetar Cores</button>
+    </section>
+
+    <section>
+      <h2>Questão 9</h2>
+      <button onclick="aumentarTexto()">Aumentar Texto</button>
+      <button onclick="diminuirTexto()">Diminuir Texto</button>
+    </section>
+
+    <section>
+      <h2>Questão 10</h2>
+      <input id="valor1" type="number" placeholder="Valor 1" />
+      <input id="valor2" type="number" placeholder="Valor 2" /><br />
+      <label><input type="radio" name="operacao" value="+" /> + </label><br />
+      <label><input type="radio" name="operacao" value="-" /> - </label><br />
+      <label><input type="radio" name="operacao" value="*" /> * </label><br />
+      <label><input type="radio" name="operacao" value="/" /> / </label><br />
+      <button onclick="calcular()">Calcular</button>
+      <div id="resultadoCalc"></div>
+    </section>
+
+    <section>
+      <h2>Questão 11</h2>
+      <input id="itemLista" placeholder="Novo item" />
+      <button onclick="adicionarItemLista()">Adicionar à Lista</button>
+      <ul id="lista"></ul>
+    </section>
+
+    <section>
+      <h2>Questão 12</h2>
+      <input id="itemSelect" placeholder="Novo item" style="width: 200px" />
+      <button onclick="adicionarItemSelect()">Adicionar ao Select</button><br />
+      <select id="selectLista"></select>
+    </section>
+  </body>
+</html>
