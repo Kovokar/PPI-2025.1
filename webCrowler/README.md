@@ -4,6 +4,13 @@
 
 Projeto de Web Crawler inteligente desenvolvido em **Node.js**, capaz de explorar e extrair informações de páginas HTML de forma recursiva e eficiente.
 
+👥 **Integrantes do Projeto**
+
+- Gisele Santos
+- Pamella
+- Luiz Felipe
+- Pedro Guilherme
+
 🎥 **Vídeo de Explicação**  
 Assista ao vídeo explicativo sobre o funcionamento e uso do Web Crawler:
 
