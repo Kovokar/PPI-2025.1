@@ -7,7 +7,6 @@
 /* Layout responsivo de cards */
 
 .card {
-  border: 1px rgba(133, 35, 131, 0.4) solid;
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -36,6 +35,8 @@
   width: 440px;
   height: 440px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px rgba(133, 35, 131, 0.4) solid;
+
 }
 
 /* Card image container */
@@ -321,6 +322,7 @@
       padding: 0.4rem 0;
       border-bottom: 1px solid rgba(133, 35, 131, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
       &:last-child {
         border-bottom: none;
@@ -332,5 +334,16 @@
         color: var(--bg-roxo);
       }
     }
+  }
+
+
+
+@media (max-width:425px){
+  .card-container{
+    width: 80vw;
+  }
+
+  .grid-cards{
+    margin: 0;
   }
 }
