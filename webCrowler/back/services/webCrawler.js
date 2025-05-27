@@ -5,7 +5,7 @@ const { url } = require('inspector');
 const path = require('path');
 
 // 🌐 Configurações
-var BASE_URL = 'http://127.0.0.1:5500/paginas/';
+var BASE_URL = 'http://127.0.0.1:5500/webCrowler/paginas/';
 var customUrl = '';
 // 🔍 Classe WebCrawler para encapsular a lógica de crawling
 class WebCrawler {
