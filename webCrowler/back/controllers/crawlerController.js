@@ -25,16 +25,15 @@ const iniciarCrawling = async (req, res) => {
 // 🔍 Busca um termo nas páginas já rastreadas ou executa o crawler se necessário
 const buscarTermo = async (req, res) => {
   const termo = req.query.termo;
-
+  const customUrl = req.query.url || '';
   if (!termo) {
     return res.status(400).json({ erro: 'Parâmetro "termo" é obrigatório.' });
   }
   console.log('Buscando termo:', termo);
   try {
-    if (!cacheCrawler) {
+    if (!cacheCrawler || (cacheCrawler.customUrl !== customUrl)) {
       console.log('Crawler ainda não executado. Executando agora...');
-      cacheCrawler = await executarCrawler();
-      // console.log(cacheCrawler["todosOsLinks"])
+      cacheCrawler = await executarCrawler(customUrl);
     }
 
     const resultado = cacheCrawler.buscarOcorrencias(termo);

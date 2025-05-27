@@ -1,11 +1,12 @@
 // 📦 Importações
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { url } = require('inspector');
 const path = require('path');
 
 // 🌐 Configurações
-const BASE_URL = 'http://127.0.0.1:5500/paginas/';
-
+var BASE_URL = 'http://127.0.0.1:5500/paginas/';
+var customUrl = '';
 // 🔍 Classe WebCrawler para encapsular a lógica de crawling
 class WebCrawler {
   constructor() {
@@ -16,13 +17,13 @@ class WebCrawler {
 
   // Método para buscar conteúdo de uma página
   async fetchPageContent(page) {
-    const url = encodeURI(`${BASE_URL}${page}`);
-    console.log(`fazendo get em: ${url}`);
+    const url = BASE_URL ? encodeURI(`${BASE_URL}${page}`) : customUrl;
     try {
       const { data } = await axios.get(url);
       const $ = cheerio.load(data);
 
-      const pageId = path.basename(page, '.html');
+
+      const pageId = BASE_URL ? path.basename(page, '.html') : customUrl;
       const links = [];
       // const textoCompleto = $('head').text().trim();
 
@@ -33,7 +34,7 @@ class WebCrawler {
         const href = $(el).attr('href');
 
         if (href && !href.startsWith('#')) {
-          links.push(href);
+          links.push(href); 
           this.todosOsLinks.push(href);
         }
       });
@@ -44,7 +45,7 @@ class WebCrawler {
         textoCompleto
       };
     } catch (error) {
-      console.error(`Erro ao acessar a página "${page}":`, error.message);
+      console.error(`Erro aso acessar a página "${BASE_URL ? page : customUrl}":`, error.message);
       return {
         father: '',
         conteudo: [],
@@ -63,11 +64,12 @@ class WebCrawler {
     
     const resultKey = JSON.stringify(result);
     const alreadyExists = this.resultados.some(r => JSON.stringify(r) === resultKey);
-
+    
     if (!alreadyExists) {
       this.resultados.push(result);
-
+      
       for (const link of result.links) {
+        customUrl = customUrl.replace(/\/[^\/]*$/, `/${link}`);
         await this.crawlRecursive(link);
       }
     }
@@ -131,10 +133,11 @@ class WebCrawler {
   }
 
   // Método principal para executar o crawler
-  async executarCrawler(paginasIniciais = ['matrix.html']) {
-    for (const pagina of paginasIniciais) {
-      await this.crawlRecursive(pagina);
-    }
+  async executarCrawler(url='') {
+    BASE_URL = url ? '' : 'http://127.0.0.1:5500/paginas/';
+    customUrl = url ? url : '';
+
+    await this.crawlRecursive(url ? url : 'matrix.html');
 
     let resp = {
       resultados: this.resultados,
@@ -150,8 +153,9 @@ class WebCrawler {
 // 🚀 Exportação
 module.exports = {
   WebCrawler,
-  executarCrawler: () => {
+  
+  executarCrawler: (url) => { 
     const crawler = new WebCrawler();
-    return crawler.executarCrawler();
+    return crawler.executarCrawler(url);
   }
 };
