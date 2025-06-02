@@ -124,20 +124,8 @@ body {
 /* -------------------------------------- */
 
 /*------------LUIZ----------------*/
-.skills {
-  padding: 50px 0;
-  text-align: center;
-  height: 700px;
-  position: relative;
-}
 
-#titulo-skill {
-  font-size: 2.5rem;
-  color: #ffffff;
-}
-#titulo-skill .destaque {
-  color: #7b1e7b;
-}
+
 .linha-abaixo-titulo {
   width: 60px;
   height: 2px;
@@ -145,101 +133,7 @@ body {
   margin: 10px auto;
 }
 
-#bloco-de-skills {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin: 30px auto;
-  padding: 20px;
-  max-width: 1000px;
-  width: 90%;
-}
 
-.bloquinho-skills {
-  width: 100%;
-  height: 130px;
-  border-radius: 10px;
-  background-color: #7b147b;
-  border: 3px solid transparent;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 15px;
-  padding-left: 20px;
-  transition: all 0.3s ease;
-}
-
-.bloquinho-skills h4 {
-  color: white;
-  font-size: 1.03rem;
-  text-align: left;
-}
-
-.icone-wrapper {
-  width: 45px;
-  height: 45px;
-  background-color: transparent;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.icone-wrapper img {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-  transition: all 0.3s ease;
-}
-
-.bloquinho-skills:hover {
-  cursor: pointer;
-  border-color: rgba(199, 85, 233, 0.5);
-  box-shadow: 0 0 10px rgba(198, 85, 233, 0.4);
-  transform: scale(1.02);
-}
-
-.bloquinho-skills:hover .icone-wrapper {
-  background-color: rgb(198, 85, 233, 0.5);
-}
-
-#bloco-de-linguagens {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  margin-top: 40px;
-  padding: 10px;
-  max-width: 1000px;
-  margin: 30px auto;
-  flex-wrap: wrap;
-}
-.bloquinho-linguagem {
-  width: 90px;
-  height: 80px;
-  border-radius: 8px;
-  background-color: #852383;
-  border: 2px solid transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  flex-direction: column;
-}
-.bloquinho-linguagem img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  transition: all 0.3s ease;
-}
-
-.bloquinho-linguagem:hover {
-  cursor: pointer;
-  border-color: rgb(198, 85, 233, 0.5);
-  transform: scale(1.05);
-  box-shadow: 0 0 8px rgba(198, 85, 233, 0.4);
-}
 
 /* ------------ CONTACT ------------------- */
 .contact-section {
@@ -341,7 +235,6 @@ body {
   gap: 1.5rem;
   align-items: center;
   justify-content: center;
-  margin: 0 13rem;
 }
 
 /*------------FIM-PEDRO----------------*/
