@@ -1,11 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Exemplo DOM - Questões 2, 3 e 4</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>TRABALHO SOBRE DOM</h1>
+
+  <!-- Questão 2a: getElementById -->
+  <div class="box">
+    <h2>Questão 2a - getElementById()</h2>
+    <p id="paragrafo-id">Texto original</p>
+    <button onclick="alterarTexto()">Alterar Texto</button>
+  </div>
+
+  <!-- Questão 2b: getElementsByTagName -->
+  <div class="box">
+    <h2>Questão 2b - getElementsByTagName()</h2>
+    <ul>
+      <li>Item A</li>
+      <li>Item B</li>
+      <li>Item C</li>
+    </ul>
+    <button onclick="listarItens()">Listar Itens no Console</button>
+  </div>
+
+  <!-- Questão 3: contar parágrafos -->
+  <div class="box">
+    <h2>Questão 3 - Contar Parágrafos</h2>
+    <div id="conteudo">
+      <p>Parágrafo 1</p>
+      <p>Parágrafo 2</p>
+      <p>Parágrafo 3</p>
+      <p>Parágrafo 4</p>
+    </div>
+    <button onclick="contarParagrafos()">Contar Parágrafos</button>
+    <div id="resultado" style="margin-top: 10px; font-weight: bold;"></div>
+  </div>
+
+  <!-- Questão 4: alterar e limpar parágrafo -->
+  <div class="box">
+    <h2>Questão 4 - Alterar e Limpar Parágrafo</h2>
+    <p id="paragrafo-q4">Clique no botão abaixo para alterar o texto deste parágrafo.</p>
+    <button id="botao-q4">Alterar Texto</button>
+    <button id="limpar-q4">Limpar</button>
+  </div>
+
+    <!-- Questão 5: textContent vs innerText vs innerHTML -->
+  <div class="box">
+    <h2>Questão 5 - Diferença entre textContent, innerText e innerHTML</h2>
+    <div id="exemplo5">
+      <p id="teste-html"><strong>Texto em negrito</strong> e texto normal</p>
+    </div>
+    <button onclick="mostrarDiferencas()">Mostrar Diferenças no Console</button>
+  </div>
+
+  <!-- Questão 6: Alterar CSS via DOM -->
+  <div class="box">
+    <h2>Questão 6 - Alterar CSS via DOM</h2>
+    <p id="paragrafo-estilo">Este parágrafo terá seu estilo alterado</p>
+    <button onclick="alterarEstilo()">Alterar Estilo</button>
+  </div>
+
+  <!-- Questão 7: Copiar texto em caixa alta -->
+  <div class="box">
+    <h2>Questão 7 - Copiar Texto em Caixa Alta</h2>
+    <input type="text" id="entrada" placeholder="Digite algo aqui">
+    <input type="text" id="saida" readonly placeholder="Texto em caixa alta">
+    <button onclick="copiarCaixaAlta()">Copiar</button>
+  </div>
+
+  <!-- Questão 8: Alto contraste e reset -->
+  <div class="box">
+    <h2>Questão 8 - Modo Alto Contraste</h2>
+    <button onclick="ativarAltoContraste()">Ativar Alto Contraste</button>
+    <button onclick="resetarCores()">Resetar Cores</button>
+  </div>
+
+  <!-- Questão 9: Aumentar / Reduzir tamanho do texto -->
+  <div class="box">
+    <h2>Questão 9 - Aumentar / Reduzir Tamanho do Texto</h2>
+    <button onclick="alterarFonte(1)">Aumentar Texto</button>
+    <button onclick="alterarFonte(-1)">Reduzir Texto</button>
+  </div>
+
+
+    <!-- Questão 10: Calculadora com radio buttons -->
+  <div class="box">
+    <h2>Questão 10 - Calculadora</h2>
+    <input type="number" id="calc1" placeholder="Número 1">
+    <input type="number" id="calc2" placeholder="Número 2">
+    <div style="display: flex;">
+      <label><input type="radio" name="operacao" value="soma" checked> Soma</label>
+      <label><input type="radio" name="operacao" value="subtracao"> Subtração</label>
+      <label><input type="radio" name="operacao" value="multiplicacao"> Multiplicação</label>
+      <label><input type="radio" name="operacao" value="divisao"> Divisão</label>
+    </div>
+    <button onclick="calcular()">Calcular</button>
+    <p id="resultado-calc"><strong>Resultado:</strong> </p>
+  </div>
+
+  <!-- Questão 11: Adicionar item a lista -->
+  <div class="box">
+    <h2>Questão 11 - Adicionar item a lista</h2>
+    <input type="text" id="texto-lista" placeholder="Digite algo">
+    <button onclick="adicionarNaLista()">Adicionar</button>
+    <ul id="lista-ul"></ul>
+  </div>
+
+  <!-- Questão 12: Adicionar item ao select -->
+  <div class="box">
+    <h2>Questão 12 - Adicionar item ao select</h2>
+    <input type="text" id="texto-select" placeholder="Digite uma opção">
+    <button onclick="adicionarNoSelect()">Adicionar</button>
+    <select id="select-opcoes">
+      <option value="">Selecione...</option>
+    </select>
+  </div>
+
+
+  <script src="script.js"></script>
+
 </body>
 </html>
