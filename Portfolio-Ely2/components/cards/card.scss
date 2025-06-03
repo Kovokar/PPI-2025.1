@@ -1,0 +1,333 @@
+:root {
+  --bg-color-card: #111826;
+  --bg-roxo: #852383;
+}
+
+.card {
+//   border: 1px rgba(133, 35, 131, 0.4) solid;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    // border: 0.5px #852383 solid;
+    transform: translateY(-5px);
+  }
+
+  .card-container {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 440px;
+    height: 440px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    .img-container {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .topic-class {
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+        background-color: rgba(0, 123, 255, 0.85);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.75em;
+        font-weight: bold;
+      }
+    }
+
+    .card-content {
+      padding: 1rem;
+      background-color: var(--bg-color-card);
+      height: 40%;
+
+      h2 {
+        font-size: 1.5rem;
+        color: white;
+        font-family: arial;
+      }
+
+      h4 {
+        margin: 8px 0 12px;
+        color: #666;
+        font-size: 0.95em;
+        font-family: arial;
+      }
+
+      .categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 0.5rem 0;
+
+        .category {
+          background: #e0aaff;
+          padding: 4px 10px;
+          border-radius: 25px;
+          font-size: 0.8em;
+          color: #7b2cbf;
+          font-family: arial;
+          font-weight: bolder;
+        }
+      }
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      border-top: 1px solid #1f2937;
+      background-color: var(--bg-color-card);
+      height: 20%;
+
+      .details-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: hsl(0 0% 3.9%);
+        color: var(--bg-roxo);
+        border: 1px solid var(--bg-roxo);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: var(--bg-roxo);
+          color: white;
+        }
+      }
+
+      .social-buttons {
+        a {
+          img {
+            background: none;
+            width: 30px;
+            height: 30px;
+
+            &.redirect {
+              border-radius: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Responsivo */
+.cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0; // Changed from 20vh to 0
+  left: 0;
+  width: 100%; // Changed from 100vw to 100%
+  height: 100%; // Changed from 80vh to 100%
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; // Increased z-index
+  backdrop-filter: blur(5px);
+  overflow-y: auto; // Allow scrolling if content is too tall
+  padding: 2rem 1rem; // Add padding for smaller screens
+
+  .modal-content {
+    background-color: var(--bg-color-card);
+    padding: 2rem;
+    border-radius: 12px;
+    width: min(90%, 800px); // Responsive width using min()
+    margin: auto; // Center vertically when content is taller than viewport
+    position: relative;
+    color: white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(133, 35, 131, 0.4);
+    animation: modalFadeIn 0.3s ease;
+    max-height: min(90vh, 800px); // Limit height on large screens
+    overflow-y: auto; // Enable scrolling for tall content
+
+    // Add smooth scrollbar for webkit browsers
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--bg-roxo);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .img-container {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      border-radius: 8px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .modal-body {
+      margin-top: 1.5rem;
+
+      p {
+        margin: 8px 0 12px;
+        color: #666;
+        font-size: 0.95em;
+        font-family: arial;
+        font-weight: bold;
+        padding: 1rem 0;
+      }
+
+      #project-info {
+        p {
+          margin: 0;
+          padding-bottom: 0;
+        }
+
+        .title-info {
+          font-size: 1.3rem;
+          color: white;
+          font-family: arial;
+          margin-bottom: 1rem;
+        }
+
+        .info-list {
+          padding: 0.5rem 0 0;
+
+          li {
+            color: #e5e7eb;
+            font-size: 1rem;
+            font-family: arial;
+            line-height: 1.6;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(133, 35, 131, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+              transform: scale(1.02);
+              color: var(--bg-roxo);
+            }
+
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+
+      button {
+        padding: 0.8rem 2rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: capitalize;
+
+        &.git-button {
+          background-color: #24292e;
+          color: white;
+          border: 1px solid #24292e;
+
+          &:hover {
+            background-color: #2f363d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          }
+        }
+
+        &.visit-button {
+          background-color: var(--bg-roxo);
+          color: white;
+          border: 1px solid var(--bg-roxo);
+
+          &:hover {
+            background-color: #9c2b99;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(133, 35, 131, 0.3);
+          }
+        }
+      }
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        color: var(--bg-roxo);
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+
+/* Animação */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .modal-overlay {
+    padding: 1rem;
+
+    .modal-content {
+      padding: 1.5rem;
+      width: 95%; // Wider on mobile
+    }
+  }
+}

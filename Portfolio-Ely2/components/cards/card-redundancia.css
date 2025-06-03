@@ -2,8 +2,6 @@
   --bg-color-card: #111826;
   --bg-roxo: #852383;
 }
-
-
 /* Layout responsivo de cards */
 
 .card {
@@ -12,11 +10,11 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* .card:hover {
+.card:hover {
   border: 0.5px #852383 solid;
   border-radius: 8px;
   transform: translateY(-5px);
-} */
+}
 
 
 .cards-wrapper {

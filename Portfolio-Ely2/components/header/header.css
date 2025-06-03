@@ -15,7 +15,7 @@
   background-color: rgba(5, 5, 15, 0.9);
   border-bottom: 2px solid #b14aed;
   box-shadow: 0 0 15px rgba(177, 74, 237, 0.5);
-  z-index: 9999;
+  z-index: 11;
 }
 
 .header-logo-title {

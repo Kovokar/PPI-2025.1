@@ -29,62 +29,79 @@ export function createCard({ photo, title, topic, subtitle, categories, github, 
         </div>
       </div>
     </div>
-    <div class="modal-overlay">
-      <div class="modal-content">
-        <button class="close-modal">&times;</button>
-
-        <div class="top-container">
-          <div class="title-container">
-            <h2>${title}</h2>
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="img-container">
-            <img src="${photo}" alt="${title}">
-          </div>
-          <p>${subtitle || 'Sem descrição detalhada disponível.'}</p>
-          <div class="categories">
-            ${categories.map(cat => `<span class="category">${cat}</span>`).join('')}
-          </div>
-          <div id="project-info">
-            <p class="title-info">${description.title}</p>
-            <ul class="info-list">
-              ${description.items.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button class="git-button">
-            <i class="fab fa-github"></i> GitHub
-          </button>
-          <button class="visit-button">
-            <i class="fas fa-external-link-alt"></i> Visit
-          </button>
-        </div>
-
-      </div>
-    </div>
   `;
 
-  // Adicionar event listeners para o modal
+  // Store card data as a dataset
+  card.dataset.modalData = JSON.stringify({
+    photo, title, topic, subtitle, categories, github, linkedin, description
+  });
+
   const detailsButton = card.querySelector('.details-button');
-  const modalOverlay = card.querySelector('.modal-overlay');
-  const closeButton = card.querySelector('.close-modal');
-
   detailsButton.addEventListener('click', () => {
-    modalOverlay.style.display = 'flex';
-  });
-
-  closeButton.addEventListener('click', () => {
-    modalOverlay.style.display = 'none';
-  });
-
-  modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) {
-      modalOverlay.style.display = 'none';
-    }
+    showModal(JSON.parse(card.dataset.modalData));
   });
 
   return card;
+}
+
+// Create a single modal for all cards
+const modalTemplate = `
+  <div class="modal-overlay" id="globalModal">
+    <div class="modal-content">
+      <button class="close-modal">&times;</button>
+      <div class="top-container">
+        <div class="title-container">
+          <h2></h2>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="img-container">
+          <img alt="">
+        </div>
+        <p class="subtitle"></p>
+        <div class="categories"></div>
+        <div id="project-info">
+          <p class="title-info"></p>
+          <ul class="info-list"></ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="git-button">
+          <i class="fab fa-github"></i> GitHub
+        </button>
+        <button class="visit-button">
+          <i class="fas fa-external-link-alt"></i> Visit
+        </button>
+      </div>
+    </div>
+  </div>
+`;
+
+// Add modal to body when the script loads
+document.body.insertAdjacentHTML('beforeend', modalTemplate);
+
+// Function to show and populate modal
+function showModal(data) {
+  const modal = document.getElementById('globalModal');
+  
+  // Populate modal content
+  modal.querySelector('.title-container h2').textContent = data.title;
+  modal.querySelector('.img-container img').src = data.photo;
+  modal.querySelector('.img-container img').alt = data.title;
+  modal.querySelector('.subtitle').textContent = data.subtitle;
+  modal.querySelector('.categories').innerHTML = 
+    data.categories.map(cat => `<span class="category">${cat}</span>`).join('');
+  modal.querySelector('.title-info').textContent = data.description.title;
+  modal.querySelector('.info-list').innerHTML = 
+    data.description.items.map(item => `<li>${item}</li>`).join('');
+
+  // Show modal
+  modal.style.display = 'flex';
+
+  // Add event listeners
+  const closeButton = modal.querySelector('.close-modal');
+  closeButton.onclick = () => modal.style.display = 'none';
+  modal.onclick = (e) => {
+    if (e.target === modal) modal.style.display = 'none';
+  };
 }
