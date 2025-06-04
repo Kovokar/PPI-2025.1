@@ -1,16 +1,19 @@
-export function createSkillCard({ logo, title, description, details }) {
+export function createSkillCard({ icon, title, description, details }) {
   const card = document.createElement('div');
   card.className = 'skill-card';
 
   card.innerHTML = `
     <div class="skill-card-content">
       <div class="skill-info">
+      <div class="title-container">
+        <span class="icon ${icon}"></span>
         <h3>${title}</h3>
-        <p class="skill-desc">${description}</p>
+        <button class="chevron-btn" title="Ver mais">
+          <span>&#x25BA;</span>
+        </button>
+      </div> 
+      <p class="skill-desc">${description}</p>
       </div>
-      <button class="chevron-btn" title="Ver mais">
-        <span>&#x25BC;</span>
-      </button>
     </div>
   `;
 
