@@ -1,9 +1,12 @@
 .skill-card {
   background: var(--bg-color-card);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .skill-card:hover {
   transform: translateY(-5px);
@@ -11,42 +14,52 @@
 }
 .skill-card .skill-card-content {
   display: flex;
+  align-items: center;
+  gap: 1.5rem;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-.skill-card .logo-container {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.skill-card .logo-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
 }
 .skill-card .skill-info {
   text-align: center;
+  width: 100%;
+}
+.skill-card .skill-info .title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+}
+.skill-card .skill-info .title-container .icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 20%;
+  background-color: rgba(123, 0, 171, 0.4235294118);
+  margin-right: 10px;
+  font-size: 22px;
+  transition: transform 0.1s ease-in-out;
+  margin-right: 0;
+}
+.skill-card .skill-info .title-container .icon:hover {
+  transform: scale(1.15);
 }
 .skill-card .skill-info h3 {
   color: white;
-  font-size: 1.2rem;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
   margin-bottom: 0.5rem;
 }
 .skill-card .skill-info .skill-desc {
   color: #a0a0a0;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  line-height: 1.5;
+  margin-top: 1rem;
 }
 .skill-card .chevron-btn {
   background: none;
   border: none;
   color: var(--bg-roxo);
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   transition: transform 0.3s ease;
+  margin-left: auto;
 }
 .skill-card .chevron-btn:hover {
   transform: translateY(3px);
@@ -54,20 +67,19 @@
 
 .grid-skills-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   padding: 2rem;
-  max-width: 1200px; /* ou outro valor desejado */
-  margin: 0 auto;    /* centraliza horizontalmente */
 }
 
-
 .modal-overlay#skillModal .modal-content {
-  max-width: 600px;
+  max-width: 90%;
+  margin: auto;
+  padding: 2rem;
 }
 .modal-overlay#skillModal .modal-content .modal-title {
   color: white;
-  font-size: 1.8rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
   margin-bottom: 1.5rem;
   text-align: center;
 }

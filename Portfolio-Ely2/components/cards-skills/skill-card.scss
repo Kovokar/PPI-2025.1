@@ -1,9 +1,12 @@
 .skill-card {
   background: var(--bg-color-card);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 
   &:hover {
     transform: translateY(-5px);
@@ -12,24 +15,50 @@
 
   .skill-card-content {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
+    flex-direction: column;
   }
 
   .skill-info {
     text-align: center;
+    width: 100%;
+
+    .title-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1.5rem;
+      // flex-wrap: wrap;
+
+
+      .icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 20%;
+        background-color: #7b00ab6c;
+        margin-right: 10px;
+        font-size: 22px;
+        transition: transform 0.1s ease-in-out;
+        margin-right: 0;
+      }
+
+      .icon:hover {
+        transform: scale(1.15);
+      }
+    }
 
     h3 {
       color: white;
-      font-size: 1.2rem;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
       margin-bottom: 0.5rem;
     }
 
     .skill-desc {
       color: #a0a0a0;
-      font-size: 0.9rem;
-      line-height: 1.4;
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+      line-height: 1.5;
+      margin-top: 1rem;
     }
   }
 
@@ -38,31 +67,35 @@
     border: none;
     color: var(--bg-roxo);
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     transition: transform 0.3s ease;
+    margin-left: auto; // 🔥 Isso fixa o botão à direita do flex container
 
     &:hover {
       transform: translateY(3px);
     }
   }
+
 }
 
-// Grid container styles
+// Responsivo grid
 .grid-skills-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   padding: 2rem;
 }
 
-// Modal styles
+// Modal responsivo
 .modal-overlay#skillModal {
   .modal-content {
-    max-width: 600px;
+    max-width: 90%;
+    margin: auto;
+    padding: 2rem;
 
     .modal-title {
       color: white;
-      font-size: 1.8rem;
+      font-size: clamp(1.5rem, 3vw, 2rem);
       margin-bottom: 1.5rem;
       text-align: center;
     }
@@ -75,7 +108,7 @@
         color: #e0e0e0;
         padding: 0.8rem 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        
+
         &:last-child {
           border-bottom: none;
         }
