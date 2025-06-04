@@ -2,7 +2,7 @@ import { createSkillCard } from '../components/cards-skills/skill-card.js';
 
 const skillsData = [
     {
-    logo: "path/to/react-logo.png",
+    icon: "fi fi-brands-css3",
     title: "React",
     description: "Building modern interfaces with React",
     details: [
@@ -14,7 +14,7 @@ const skillsData = [
         ]
     },
     {
-    logo: "path/to/html-logo.png",
+    icon: "fi fi-brands-css3",
     title: "HTML5",
     description: "Markup for structured web content",
     details: [
@@ -26,7 +26,7 @@ const skillsData = [
         ]
     },
     {
-    logo: "path/to/css-logo.png",
+    icon: "fi fi-brands-css3",
     title: "CSS3",
     description: "Styling responsive and modern UIs",
     details: [
@@ -38,7 +38,7 @@ const skillsData = [
         ]
     },
     {
-    logo: "path/to/git-logo.png",
+    icon: "fi fi-brands-css3",
     title: "Git & GitHub",
     description: "Version control and collaboration",
     details: [
@@ -50,7 +50,7 @@ const skillsData = [
         ]
     },
     {
-    logo: "path/to/typescript-logo.png",
+    icon: "fi fi-brands-css3",
     title: "TypeScript",
     description: "Typed superset of JavaScript",
     details: [
@@ -62,7 +62,7 @@ const skillsData = [
         ]
     },
     {
-    logo: "path/to/database-logo.png",
+    icon: "fi fi-brands-css3",
     title: "Databases",
     description: "Working with SQL and NoSQL databases",
     details: [
