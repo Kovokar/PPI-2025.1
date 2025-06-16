@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercício DOM 02</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="scripts.js"></script>
+  </head>
+  <body>
+    <h1>Exercício DOM 02</h1>
+
+    <section>
+      <h2>Questão 1: Exibir erro por 3 segundos</h2>
+      <button
+        onclick="mostrarErro('mensagemErro', 'O campo deve ser preenchido')"
+      >
+        Mostrar Erro
+      </button>
+      <div id="mensagemErro" class="oculto"></div>
+    </section>
+
+    <section>
+      <h2>Questão 2: Validação de texto</h2>
+      <label for="caixaDeTexto">Digite o texto:</label>
+      <input type="text" id="caixaDeTexto" />
+      <button id="botaoExibir">Exibir</button>
+      <div id="mensagemErroTexto" class="oculto"></div>
+      <div id="conteudo"></div>
+    </section>
+
+    <section>
+      <h2>Questão 3: Taxa de Engajamento</h2>
+      <label>Interações:</label>
+      <input type="text" id="interacoes" />
+      <label>Visualizações:</label>
+      <input type="text" id="visualizacoes" />
+      <button onclick="calcularEngajamento()">Calcular</button>
+      <div id="mensagemErroEngajamento" class="oculto"></div>
+      <div id="resultadoEngajamento"></div>
+    </section>
+
+    <section>
+      <h2>Questão 4: Upload de Imagem</h2>
+      <input type="file" id="uploadImagem" accept="image/*" />
+      <button onclick="carregarImagem()">Carregar Imagem</button>
+      <div id="resultado"></div>
+    </section>
+
+    <section>
+      <h2>Questão 5: Selecionar Imagem do Select</h2>
+      <select id="selectImagem">
+        <option
+          value="https://fastly.picsum.photos/id/29/4000/2670.jpg?hmac=rCbRAl24FzrSzwlR5tL-Aqzyu5tX_PA95VJtnUXegGU"
+        >
+          Imagem 1
+        </option>
+        <option
+          value="https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ"
+        >
+          Imagem 2
+        </option>
+        <option
+          value="https://fastly.picsum.photos/id/62/2000/1333.jpg?hmac=PbFIn8k0AndjiUwpOJcfHz2h-wPCQi_vJRTJZPdr6kQ"
+        >
+          Imagem 3
+        </option>
+      </select>
+      <div id="imagemSelecionada">
+        <img
+          id="imgDestino"
+          src="https://fastly.picsum.photos/id/29/4000/2670.jpg?hmac=rCbRAl24FzrSzwlR5tL-Aqzyu5tX_PA95VJtnUXegGU"
+        />
+      </div>
+    </section>
+
+    <section>
+      <h2>Questão 6: Redes Sociais</h2>
+      <div>
+        <input
+          type="checkbox"
+          id="facebook"
+          name="redesSociais"
+          value="Facebook"
+        /><label for="facebook">Facebook</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          id="twitter"
+          name="redesSociais"
+          value="Twitter"
+        /><label for="twitter">Twitter</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          id="instagram"
+          name="redesSociais"
+          value="Instagram"
+        /><label for="instagram">Instagram</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          id="linkedin"
+          name="redesSociais"
+          value="LinkedIn"
+        /><label for="linkedin">LinkedIn</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          id="tiktok"
+          name="redesSociais"
+          value="TikTok"
+        /><label for="tiktok">TikTok</label>
+      </div>
+      <div id="mensagemErroRedes" class="oculto"></div>
+      <div id="redesSelecionadas"></div>
+      <button type="button" id="enviarBtn">Enviar Seleção</button>
+    </section>
+
+    <section>
+      <h2>Questões 7-9: Hashtags Populares</h2>
+      <input type="text" id="novaHashtag" placeholder="#exemplo" />
+      <button onclick="adicionarHashtag()">Adicionar</button>
+      <button onclick="removerHashtag()">Remover Selecionada</button>
+      <select id="listaHashtags" size="5"></select>
+      <div id="mensagemErroHashtag" class="oculto"></div>
+    </section>
+
+    <section>
+      <h2>Questões 10-11: Mover Ativos entre Carteiras</h2>
+      <div class="container">
+        <div>
+          <label for="ativosDisponiveis">Ativos Disponíveis:</label>
+          <select id="ativosDisponiveis" size="10" multiple>
+            <option value="AAPL">Apple (AAPL)</option>
+            <option value="GOOGL">Google (GOOGL)</option>
+            <option value="AMZN">Amazon (AMZN)</option>
+            <option value="MSFT">Microsoft (MSFT)</option>
+            <option value="TSLA">Tesla (TSLA)</option>
+            <option value="BRK.B">Berkshire Hathaway (BRK.B)</option>
+            <option value="FB">Meta (FB)</option>
+            <option value="V">Visa (V)</option>
+            <option value="JNJ">Johnson & Johnson (JNJ)</option>
+            <option value="WMT">Walmart (WMT)</option>
+          </select>
+        </div>
+        <div class="buttons">
+          <button id="moverParaDireitaBtn">&gt;</button>
+          <button id="moverParaEsquerdaBtn">&lt;</button>
+        </div>
+        <div>
+          <label for="carteiraInvestimentos">Carteira de Investimentos:</label>
+          <select id="carteiraInvestimentos" size="10" multiple></select>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
