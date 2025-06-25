@@ -121,6 +121,39 @@ body {
   border: 1px solid var(--primary-color);
 }
 
+@media (max-width:425px){
+  .home-wrapper{
+    flex-direction: column;
+    justify-content:center;
+    gap: 30px;
+    align-items: start;
+    padding: 20px;
+  }
+
+  .home-image{
+    display: none;
+  }
+
+  .home-role{
+    font-size: .9rem;
+  }
+  .home-name{
+    font-size: 2.8rem;
+  }
+
+  .home-description{
+    font-size: 1rem;
+  }
+
+  .btn{
+    padding: 0px 0px;
+  }
+
+  #bloco-de-skills{
+    display: none;
+  }
+}
+
 /* -------------------------------------- */
 
 /*------------LUIZ----------------*/
