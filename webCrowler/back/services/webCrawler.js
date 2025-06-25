@@ -1,11 +1,12 @@
 // 📦 Importações
-const axios = require('axios');
-const cheerio = require('cheerio');
-const path = require('path');
+const axios = require("axios");
+const cheerio = require("cheerio");
+const { url } = require("inspector");
+const path = require("path");
 
 // 🌐 Configurações
-const BASE_URL = 'http://127.0.0.1:5500/paginas/';
-
+var BASE_URL = "http://127.0.0.1:5500/webCrowler/paginas/";
+var customUrl = "";
 // 🔍 Classe WebCrawler para encapsular a lógica de crawling
 class WebCrawler {
   constructor() {
@@ -16,23 +17,21 @@ class WebCrawler {
 
   // Método para buscar conteúdo de uma página
   async fetchPageContent(page) {
-    const url = encodeURI(`${BASE_URL}${page}`);
-
+    const url = BASE_URL ? encodeURI(`${BASE_URL}${page}`) : customUrl;
     try {
       const { data } = await axios.get(url);
       const $ = cheerio.load(data);
 
-      const pageId = path.basename(page, '.html');
+      const pageId = BASE_URL ? path.basename(page, ".html") : customUrl;
       const links = [];
       // const textoCompleto = $('head').text().trim();
 
       const textoCompleto = $.html(); // Extrai todo o conteúdo da página
 
+      $("a").each((_, el) => {
+        const href = $(el).attr("href");
 
-      $('a').each((_, el) => {
-        const href = $(el).attr('href');
-
-        if (href && !href.startsWith('#')) {
+        if (href && !href.startsWith("#")) {
           links.push(href);
           this.todosOsLinks.push(href);
         }
@@ -41,15 +40,18 @@ class WebCrawler {
       return {
         father: pageId,
         links,
-        textoCompleto
+        textoCompleto,
       };
     } catch (error) {
-      console.error(`Erro ao acessar a página "${page}":`, error.message);
+      console.error(
+        `Erro aso acessar a página "${BASE_URL ? page : customUrl}":`,
+        error.message
+      );
       return {
-        father: '',
+        father: "",
         conteudo: [],
         links: [],
-        textoCompleto: ''
+        textoCompleto: "",
       };
     }
   }
@@ -60,14 +62,17 @@ class WebCrawler {
 
     this.visited.add(link);
     const result = await this.fetchPageContent(link);
-    
+
     const resultKey = JSON.stringify(result);
-    const alreadyExists = this.resultados.some(r => JSON.stringify(r) === resultKey);
+    const alreadyExists = this.resultados.some(
+      (r) => JSON.stringify(r) === resultKey
+    );
 
     if (!alreadyExists) {
       this.resultados.push(result);
 
       for (const link of result.links) {
+        customUrl = customUrl.replace(/\/[^\/]*$/, `/${link}`);
         await this.crawlRecursive(link);
       }
     }
@@ -76,46 +81,65 @@ class WebCrawler {
   // Método para contar ocorrências de um termo
   contarOcorrencias(texto, termo) {
     // Normaliza o texto e o termo, removendo pontuações extras
-    const textoNormalizado = texto.toLowerCase()
-      .replace(/[.,;:!?]/g, ' ')  // Substitui pontuações por espaços
-      .replace(/\s+/g, ' ')       // Remove espaços extras
+    const textoNormalizado = texto
+      .toLowerCase()
+      .replace(/[.,;:!?]/g, " ") // Substitui pontuações por espaços
+      .replace(/\s+/g, " ") // Remove espaços extras
       .trim();
 
-    const termoNormalizado = termo.toLowerCase()
-      .replace(/[.,;:!?]/g, ' ')
-      .replace(/\s+/g, ' ')
+    const termoNormalizado = termo
+      .toLowerCase()
+      .replace(/[.,;:!?]/g, " ")
+      .replace(/\s+/g, " ")
       .trim();
 
     // Usa regex para encontrar ocorrências exatas
-    const regex = new RegExp(`\\b${termoNormalizado}\\b`, 'g');
+    const regex = new RegExp(`\\b${termoNormalizado}\\b`, "g");
     const ocorrencias = (textoNormalizado.match(regex) || []).length;
 
     return ocorrencias;
   }
 
-  // Método para buscar ocorrências de um termo
   buscarOcorrencias(termo) {
-    // console.log(this.todosOsLinks)
-    return this.resultados.map(item => {
-      const ocorrencias = this.contarOcorrencias(item.textoCompleto, termo);
-  
-      if (ocorrencias) { // se ocorrencias > 0
-        return {
-          ocorrencias,
-          site: `${item.father}.html`,
-          qtd_referencias: this.contarReferenciasDeLinks(this.todosOsLinks, `${item.father}.html`),
-          links: item.links,
-          links_repetidos: this.contarRepeticoes(`${item.father}.html`, item.links)
-        };
-      } 
-      return {}
-    });
+    const resultadosComOcorrencias = this.resultados
+      .map((item) => {
+        const ocorrencias = this.contarOcorrencias(item.textoCompleto, termo);
+        if (ocorrencias) {
+          let qtd_links_repetidos = this.contarRepeticoes(
+            `${item.father}.html`,
+            item.links
+          );
+          let qtd_referencias =
+            this.contarReferenciasDeLinks(
+              this.todosOsLinks,
+              `${item.father}.html`
+            ) - qtd_links_repetidos;
+          return {
+            ocorrencias: ocorrencias * 5,
+            site: `${item.father}.html`,
+            qtd_referencias: qtd_referencias * 10,
+            links: item.links,
+            links_repetidos: qtd_links_repetidos * -15,
+            total:
+              ocorrencias * 5 + qtd_referencias * 10 - qtd_links_repetidos * 15,
+          };
+        }
+        return null;
+      })
+      .filter((item) => item !== null)
+      .sort((a, b) => {
+        if (b.total !== a.total) return b.total - a.total;
+        if (b.qtd_referencias !== a.qtd_referencias)
+          return b.qtd_referencias - a.qtd_referencias;
+        if (b.ocorrencias !== a.ocorrencias)
+          return b.ocorrencias - a.ocorrencias;
+        return a.links_repetidos - b.links_repetidos;
+      });
+    return resultadosComOcorrencias;
   }
-  
 
-  // Método para contar repetições de links
   contarRepeticoes(linkAlvo, listaLinks) {
-    return listaLinks.filter(link => link === linkAlvo).length;
+    return listaLinks.filter((link) => link === linkAlvo).length;
   }
 
   contarReferenciasDeLinks(array, palavra) {
@@ -125,27 +149,28 @@ class WebCrawler {
   }
 
   // Método principal para executar o crawler
-  async executarCrawler(paginasIniciais = ['matrix.html']) {
-    for (const pagina of paginasIniciais) {
-      await this.crawlRecursive(pagina);
-    }
+  async executarCrawler(url = "") {
+    BASE_URL = url ? "" : "http://127.0.0.1:5500/paginas/";
+    customUrl = url ? url : "";
+
+    await this.crawlRecursive(url ? url : "matrix.html");
 
     let resp = {
       resultados: this.resultados,
       todosOsLinks: this.todosOsLinks,
-      buscarOcorrencias: this.buscarOcorrencias.bind(this)
+      buscarOcorrencias: this.buscarOcorrencias.bind(this),
     };
 
-
-    return resp
+    return resp;
   }
 }
 
 // 🚀 Exportação
 module.exports = {
   WebCrawler,
-  executarCrawler: () => {
+
+  executarCrawler: (url) => {
     const crawler = new WebCrawler();
-    return crawler.executarCrawler();
-  }
+    return crawler.executarCrawler(url);
+  },
 };
