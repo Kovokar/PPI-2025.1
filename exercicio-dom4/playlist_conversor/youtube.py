@@ -67,11 +67,11 @@ def main():
     api_key = load_api_key()
     yt = init_youtube_api(api_key)
 
-    playlist_id = "PLTyQAyrb57k-PQfjL1K_5nqL8I-q4JAq9"
+    playlist_id = "PL50zbRK-zJSzZDsfHJ7f0VdYPOPOAHZ-j"
     video_ids = get_video_ids_from_playlist(yt, playlist_id)
     video_data = get_video_metadata_list(yt, video_ids)
 
-    save_json(video_data, "video_info.json")
+    save_json(video_data, "pablo.json")
 
 if __name__ == "__main__":
     main()
