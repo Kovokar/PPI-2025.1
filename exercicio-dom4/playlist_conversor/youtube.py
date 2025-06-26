@@ -67,7 +67,7 @@ def main():
     api_key = load_api_key()
     yt = init_youtube_api(api_key)
 
-    playlist_id = "PL50zbRK-zJSzZDsfHJ7f0VdYPOPOAHZ-j"
+    playlist_id = "PL50zbRK-zJSzZDsfHJ7f0VdYPOPOAHZ-j" #conde e dracula
     video_ids = get_video_ids_from_playlist(yt, playlist_id)
     video_data = get_video_metadata_list(yt, video_ids)
 
