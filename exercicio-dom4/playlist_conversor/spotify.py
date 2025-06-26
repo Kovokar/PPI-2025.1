@@ -2,6 +2,8 @@ import os
 from dotenv import load_dotenv
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+from collections import Counter
+
 
 load_dotenv()
 
@@ -66,27 +68,76 @@ def buscar_musica(sp, nome_musica, limite=1):
     if not tracks:
         print("Nenhuma música encontrada.")
         return None
-    return tracks[0]['id']
+    return tracks[0]
 
 def adicionar_musica_na_playlist(sp, playlist_id, track_id):
     """Adiciona uma música à playlist."""
     sp.playlist_add_items(playlist_id, [track_id])
     print("🎵 Música adicionada à playlist!")
 
+def listar_musicas_na_playlist(sp, musicas, repetir=True):
+    track_ids = []
+    artistas = []
+    
+    for musica in musicas:
+        print("musica add:::::: ",musica)
+        track = buscar_musica(sp, musica)
+        track_id = track['id'] if track else None
+        
+        nome = track['name']
+        artista = track['artists'][0]['name']
+        
+        if track_id:
+            track_ids.append(track_id)
+            artistas.append(artista)
+            # print(f"Adicionando {nome} - {artista} à playlist...")
+        
+    if repetir:
+        banda = item_mais_frequente(artistas)
+        adicionar_banda(musicas, banda=banda)
+        print(musicas)
+        print("\n\n\n\n")
+        listar_musicas_na_playlist(sp, musicas, repetir=False)
+
+    print("BUCETA")
+    print("BUCETA")
+    print("BUCETA")
+    print("BUCETA")
+    print("BUCETA")
+    print("BUCETA")
+
+    return track_ids
+
+
+    """Lista as músicas de uma playlist."""
+
+def item_mais_frequente(lista):
+    """Retorna o item que mais se repete em uma lista e a quantidade."""
+    if not lista:
+        return None, 0
+
+    contador = Counter(lista)
+    item_mais_comum, _ = contador.most_common(1)[0]
+    return item_mais_comum
+
+def adicionar_banda(lista, banda):
+    """Adiciona ' joiao' ao final de cada item da lista."""
+    for i in range(len(lista)):
+        lista[i] += f" {banda}"
+
 if __name__ == "__main__":
     sp = configurar_spotify()
     
-    
-    
-    
-    
-    # nome_playlist = "Minha Playlist Legal"
+    nome_playlist = "teste pablo3"
     # playlist_id = criar_playlist(sp, nome_playlist, descricao="Playlist criada via Spotipy API")
+        
+    tracks_ids = listar_musicas_na_playlist(sp, musicas)
     
-    # nome_musica = input("\nDigite o nome da música para adicionar na playlist: ")
-    # track_id = buscar_musica(sp, nome_musica)
+    print(tracks_ids)
+    print("\n\n\n")
     
-    # if track_id:
-    #     adicionar_musica_na_playlist(sp, playlist_id, track_id)
-    # else:
-    #     print("Não foi possível adicionar a música porque não foi encontrada.")
+    # for id in tracks_ids:
+    #     adicionar_musica_na_playlist(sp, playlist_id, id)
+    
+    print("\n🎉 Todas as músicas foram adicionadas à playlist com sucesso!")
+    
