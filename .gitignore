@@ -3,3 +3,4 @@ teste.html
 node_modules/
 package-lock.json
 .env
+.cache
