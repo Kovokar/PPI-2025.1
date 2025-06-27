@@ -2,28 +2,8 @@ import os
 from dotenv import load_dotenv
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from collections import Counter
-
-
-load_dotenv()
-
-musicas = [
-    "Te Amo (Carrie)",
-    "Tudo de Novo",
-    "Te Amo Tanto",
-    "Refém",
-    "Mulheres Perdidas",
-    "Chorando Se Foi / Lambamor (Pout-Pourri)",
-    "Coração Bobo",
-    "Quero Ser Seu Namorado / Não Venha Mais Me Ver (Pout-Pourri)",
-    "Não Diga Não",
-    "Vendaval",
-    "Seu Amor É Bom / Um Novo Amor (Pout-Pourri)",
-    "Não Fique Longe de Mim (I Live My Life For Love)",
-    "Não Faz Sentido",
-    "O Gemidinho"
-]
-
+from youtube import main as main_youtube
+from utils import item_mais_frequente, adicionar_banda
 
 def configurar_spotify():
     """Configura autenticação com Authorization Code Flow e abre URL de login."""
@@ -108,36 +88,19 @@ def listar_musicas_na_playlist(sp, musicas, repetir=True):
 
     return track_ids
 
-
-    """Lista as músicas de uma playlist."""
-
-def item_mais_frequente(lista):
-    """Retorna o item que mais se repete em uma lista e a quantidade."""
-    if not lista:
-        return None, 0
-
-    contador = Counter(lista)
-    item_mais_comum, _ = contador.most_common(1)[0]
-    return item_mais_comum
-
-def adicionar_banda(lista, banda):
-    """Adiciona ' joiao' ao final de cada item da lista."""
-    for i in range(len(lista)):
-        lista[i] += f" {banda}"
-
-if __name__ == "__main__":
-    sp = configurar_spotify()
+def main(playlist_youtube_id: str , nome_playlist_spotify: str):
     
-    nome_playlist = "teste pablo3"
-    # playlist_id = criar_playlist(sp, nome_playlist, descricao="Playlist criada via Spotipy API")
-        
+    musicas = main_youtube(playlist_youtube_id)
+    load_dotenv()
+    sp = configurar_spotify()
+    playlist_spotify_id = criar_playlist(sp, nome_playlist_spotify, descricao="Playlist criada via Spotipy API")
     tracks_ids = listar_musicas_na_playlist(sp, musicas)
     
+    print("\n\n\n")
     print(tracks_ids)
     print("\n\n\n")
     
-    # for id in tracks_ids:
-    #     adicionar_musica_na_playlist(sp, playlist_id, id)
+    for id in tracks_ids:
+        adicionar_musica_na_playlist(sp, playlist_spotify_id, id)
     
     print("\n🎉 Todas as músicas foram adicionadas à playlist com sucesso!")
-    
