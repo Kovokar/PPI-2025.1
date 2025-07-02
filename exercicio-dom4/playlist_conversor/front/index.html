@@ -55,6 +55,27 @@
                     <span class="feedback-text"></span>
                 </div>
             </div>
+
+            <div id="musicList" class="music-list hidden">
+                <h2>Músicas Encontradas</h2>
+                <p class="list-subtitle">Selecione as músicas que deseja adicionar à sua playlist no Spotify</p>
+                
+                <div class="select-controls">
+                    <button type="button" id="selectAll" class="select-btn">Selecionar Todas</button>
+                    <button type="button" id="deselectAll" class="select-btn">Desmarcar Todas</button>
+                    <span id="selectedCount" class="selected-count">0 selecionadas</span>
+                </div>
+                
+                <div id="musicItems" class="music-items"></div>
+                
+                <button type="button" id="finalizeButton" class="finalize-btn" disabled>
+                    <span class="btn-text">Criar Playlist no Spotify</span>
+                    <span class="btn-icon">🎵</span>
+                </button>
+            </div>
+
+            <!-- Adicione isso onde deseja mostrar o link -->
+            <div id="playlist-link"></div>
         </main>
 
         <footer>
