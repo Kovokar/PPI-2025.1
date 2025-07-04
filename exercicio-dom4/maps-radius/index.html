@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interativo com Raio Personalizado</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗺️ Mapa Interativo</h1>
+            <p>Explore e personalize sua área de interesse</p>
+        </div>
+        
+        <div class="content">
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label for="raio">Tamanho do Raio:</label>
+                    <div class="slider-container">
+                        <input type="range" id="raio" min="100" max="10000" value="1000" step="50">
+                        <div class="value-display" id="valorRaio">1000 m</div>
+                    </div>
+                    <div class="unit-selector">
+                        <button class="unit-btn active" onclick="alterarUnidade('metros')">Metros</button>
+                        <button class="unit-btn" onclick="alterarUnidade('km')">Quilômetros</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="centralizarMapa()">📍 Centralizar</button>
+                        <button class="btn btn-secondary" id="btnLimpar" onclick="alternarLimpar()">🗑️ Limpar</button>
+                        <button class="btn btn-danger" id="btnCirculo" onclick="alternarCirculo()">❌ Remover Círculo</button>
+                        <button class="btn toggle-modal" onclick="abrirModal()">🔍 Visualização Expandida</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <div class="coordinates-display" id="coordenadas">
+                    Clique no mapa para ver as coordenadas
+                </div>
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para visualização expandida -->
+    <div id="modalMapa" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Visualização Expandida do Mapa</h3>
+                <span class="close" onclick="fecharModal()">&times;</span>
+            </div>
+            <div id="mapModal" class="modal-map"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
