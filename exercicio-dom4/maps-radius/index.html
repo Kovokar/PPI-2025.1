@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interativo com Raio Personalizado</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .controls-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .value-display {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .unit-selector {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .unit-btn {
+            padding: 8px 16px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .unit-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .unit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #333;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .map-container {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        #map {
+            width: 100%;
+            height: 60vh;
+            min-height: 400px;
+        }
+
+        .coordinates-display {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.95);
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 95%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            transform: scale(1.1);
+        }
+
+        .modal-map {
+            height: 70vh;
+            width: 100%;
+        }
+
+        .toggle-modal {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .slider-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗺️ Mapa Interativo</h1>
+            <p>Explore e personalize sua área de interesse</p>
+        </div>
+        
+        <div class="content">
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label for="raio">Tamanho do Raio:</label>
+                    <div class="slider-container">
+                        <input type="range" id="raio" min="100" max="10000" value="1000" step="50">
+                        <div class="value-display" id="valorRaio">1000 m</div>
+                    </div>
+                    <div class="unit-selector">
+                        <button class="unit-btn active" onclick="alterarUnidade('metros')">Metros</button>
+                        <button class="unit-btn" onclick="alterarUnidade('km')">Quilômetros</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="centralizarMapa()">📍 Centralizar</button>
+                        <button class="btn btn-secondary" id="btnLimpar" onclick="alternarLimpar()">🗑️ Limpar</button>
+                        <button class="btn btn-danger" id="btnCirculo" onclick="alternarCirculo()">❌ Remover Círculo</button>
+                        <button class="btn toggle-modal" onclick="abrirModal()">🔍 Visualização Expandida</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <div class="coordinates-display" id="coordenadas">
+                    Clique no mapa para ver as coordenadas
+                </div>
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para visualização expandida -->
+    <div id="modalMapa" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Visualização Expandida do Mapa</h3>
+                <span class="close" onclick="fecharModal()">&times;</span>
+            </div>
+            <div id="mapModal" class="modal-map"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Configurações iniciais
+        const localizacaoInicial = [-23.5859, -46.6566];
+        let localizacaoAtual = [...localizacaoInicial];
+        let unidadeAtual = 'metros';
+        let valorRaioAtual = 1000;
+        let circulo = null;
+        let marcador = null;
+        let circuloOculto = false;
+        let mapaLimpo = false;
+        let dadosBackup = {
+            circulo: null,
+            marcador: null,
+            localizacao: null
+        };
+        
+        // Inicializar mapa principal
+        const mapa = L.map('map').setView(localizacaoInicial, 15);
+        
+        // Adicionar tile layer padrão
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(mapa);
+        
+        // Criar marcador inicial
+        criarMarcador(localizacaoInicial);
+        
+        // Criar círculo inicial
+        criarCirculo(localizacaoInicial, valorRaioAtual);
+        
+        // Event listeners
+        document.getElementById('raio').addEventListener('input', function() {
+            valorRaioAtual = parseFloat(this.value);
+            atualizarRaio();
+        });
+        
+        mapa.on('click', function(e) {
+            const lat = e.latlng.lat;
+            const lng = e.latlng.lng;
+            
+            // Atualizar coordenadas
+            localizacaoAtual = [lat, lng];
+            
+            // Atualizar display de coordenadas
+            document.getElementById('coordenadas').innerHTML = `
+                Lat: ${lat.toFixed(6)}<br>
+                Lng: ${lng.toFixed(6)}
+            `;
+            
+            // Mover marcador
+            if (marcador) {
+                mapa.removeLayer(marcador);
+            }
+            criarMarcador([lat, lng]);
+            
+            // Mover círculo
+            if (circulo) {
+                mapa.removeLayer(circulo);
+                criarCirculo([lat, lng], valorRaioAtual);
+            }
+        });
+        
+        // Funções principais
+        function criarMarcador(posicao) {
+            marcador = L.marker(posicao).addTo(mapa)
+                .bindPopup(`
+                    <div style="text-align: center;">
+                        <strong>📍 Localização Selecionada</strong><br>
+                        Lat: ${posicao[0].toFixed(6)}<br>
+                        Lng: ${posicao[1].toFixed(6)}
+                    </div>
+                `)
+                .openPopup();
+        }
+        
+        function criarCirculo(posicao, raio) {
+            circulo = L.circle(posicao, {
+                color: '#ff6b6b',
+                fillColor: '#ff6b6b',
+                fillOpacity: 0.2,
+                radius: raio,
+                weight: 3
+            }).addTo(mapa);
+        }
+        
+        function atualizarRaio() {
+            const valorDisplay = document.getElementById('valorRaio');
+            let valorExibir = valorRaioAtual;
+            
+            if (unidadeAtual === 'km') {
+                valorExibir = (valorRaioAtual / 1000).toFixed(1);
+                valorDisplay.textContent = `${valorExibir} km`;
+            } else {
+                valorDisplay.textContent = `${valorExibir} m`;
+            }
+            
+            if (circulo) {
+                mapa.removeLayer(circulo);
+                criarCirculo(localizacaoAtual, valorRaioAtual);
+            }
+        }
+        
+        function alterarUnidade(novaUnidade) {
+            // Atualizar botões
+            document.querySelectorAll('.unit-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const slider = document.getElementById('raio');
+            
+            if (novaUnidade === 'km' && unidadeAtual === 'metros') {
+                // Converter para km
+                slider.min = 0.1;
+                slider.max = 10;
+                slider.step = 0.1;
+                slider.value = valorRaioAtual / 1000;
+                unidadeAtual = 'km';
+            } else if (novaUnidade === 'metros' && unidadeAtual === 'km') {
+                // Converter para metros
+                slider.min = 100;
+                slider.max = 10000;
+                slider.step = 50;
+                slider.value = valorRaioAtual;
+                unidadeAtual = 'metros';
+            }
+            
+            unidadeAtual = novaUnidade;
+            
+            if (novaUnidade === 'km') {
+                valorRaioAtual = parseFloat(slider.value) * 1000;
+            } else {
+                valorRaioAtual = parseFloat(slider.value);
+            }
+            
+            atualizarRaio();
+        }
+        
+        function centralizarMapa() {
+            mapa.setView(localizacaoInicial, 15);
+            localizacaoAtual = [...localizacaoInicial];
+            
+            if (marcador) {
+                mapa.removeLayer(marcador);
+            }
+            criarMarcador(localizacaoInicial);
+            
+            if (circulo) {
+                mapa.removeLayer(circulo);
+                criarCirculo(localizacaoInicial, valorRaioAtual);
+            }
+            
+            document.getElementById('coordenadas').innerHTML = `
+                Lat: ${localizacaoInicial[0].toFixed(6)}<br>
+                Lng: ${localizacaoInicial[1].toFixed(6)}
+            `;
+        }
+        
+        function removerCirculo() {
+            if (circulo) {
+                mapa.removeLayer(circulo);
+                circulo = null;
+            }
+        }
+        
+        function alternarCirculo() {
+            const btn = document.getElementById('btnCirculo');
+            
+            if (circuloOculto) {
+                // Mostrar círculo
+                criarCirculo(localizacaoAtual, valorRaioAtual);
+                btn.innerHTML = '❌ Remover Círculo';
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-danger');
+                circuloOculto = false;
+            } else {
+                // Ocultar círculo
+                if (circulo) {
+                    mapa.removeLayer(circulo);
+                    circulo = null;
+                }
+                btn.innerHTML = '✅ Mostrar Círculo';
+                btn.classList.remove('btn-danger');
+                btn.classList.add('btn-primary');
+                circuloOculto = true;
+            }
+        }
+        
+        function alternarLimpar() {
+            const btn = document.getElementById('btnLimpar');
+            
+            if (mapaLimpo) {
+                // Restaurar mapa
+                if (dadosBackup.marcador) {
+                    criarMarcador(dadosBackup.localizacao);
+                    localizacaoAtual = [...dadosBackup.localizacao];
+                    
+                    document.getElementById('coordenadas').innerHTML = `
+                        Lat: ${dadosBackup.localizacao[0].toFixed(6)}<br>
+                        Lng: ${dadosBackup.localizacao[1].toFixed(6)}
+                    `;
+                }
+                
+                if (dadosBackup.circulo && !circuloOculto) {
+                    criarCirculo(dadosBackup.localizacao, valorRaioAtual);
+                }
+                
+                btn.innerHTML = '🗑️ Limpar';
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-secondary');
+                mapaLimpo = false;
+            } else {
+                // Fazer backup e limpar
+                dadosBackup.marcador = marcador ? true : false;
+                dadosBackup.circulo = circulo ? true : false;
+                dadosBackup.localizacao = [...localizacaoAtual];
+                
+                if (marcador) {
+                    mapa.removeLayer(marcador);
+                    marcador = null;
+                }
+                if (circulo) {
+                    mapa.removeLayer(circulo);
+                    circulo = null;
+                }
+                
+                document.getElementById('coordenadas').textContent = 'Clique no mapa para ver as coordenadas';
+                
+                btn.innerHTML = '↩️ Restaurar';
+                btn.classList.remove('btn-secondary');
+                btn.classList.add('btn-primary');
+                mapaLimpo = true;
+            }
+        }
+        
+        // Funções do modal
+        let mapaModal = null;
+        
+        function abrirModal() {
+            document.getElementById('modalMapa').style.display = 'block';
+            
+            setTimeout(() => {
+                if (!mapaModal) {
+                    mapaModal = L.map('mapModal').setView(localizacaoAtual, 15);
+                    
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors',
+                        maxZoom: 19
+                    }).addTo(mapaModal);
+                }
+                
+                // Sincronizar com o mapa principal
+                mapaModal.setView(localizacaoAtual, mapa.getZoom());
+                
+                if (marcador) {
+                    L.marker(localizacaoAtual).addTo(mapaModal)
+                        .bindPopup('Localização Selecionada')
+                        .openPopup();
+                }
+                
+                if (circulo) {
+                    L.circle(localizacaoAtual, {
+                        color: '#ff6b6b',
+                        fillColor: '#ff6b6b',
+                        fillOpacity: 0.2,
+                        radius: valorRaioAtual,
+                        weight: 3
+                    }).addTo(mapaModal);
+                }
+                
+                mapaModal.invalidateSize();
+            }, 100);
+        }
+        
+        function fecharModal() {
+            document.getElementById('modalMapa').style.display = 'none';
+            if (mapaModal) {
+                mapaModal.eachLayer(function(layer) {
+                    if (layer !== mapaModal._layers[Object.keys(mapaModal._layers)[0]]) {
+                        mapaModal.removeLayer(layer);
+                    }
+                });
+            }
+        }
+        
+        // Fechar modal clicando fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalMapa');
+            if (event.target === modal) {
+                fecharModal();
+            }
+        }
+    </script>
+</body>
+</html>
