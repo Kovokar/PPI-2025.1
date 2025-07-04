@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Playlists - YouTube para Spotify</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 Conversor de Playlists</h1>
+            <p>Transforme suas playlists do YouTube em playlists do Spotify</p>
+        </header>
+
+        <main>
+            <form id="converterForm" class="converter-form">
+                <div class="input-group">
+                    <label for="youtubeLink">
+                        <span class="icon">🔗</span>
+                        Link da Playlist do YouTube
+                    </label>
+                    <input 
+                        type="url" 
+                        id="youtubeLink" 
+                        name="youtubeLink" 
+                        placeholder="https://www.youtube.com/playlist?list=..." 
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="spotifyName">
+                        <span class="icon">📝</span>
+                        Nome da Nova Playlist no Spotify
+                    </label>
+                    <input 
+                        type="text" 
+                        id="spotifyName" 
+                        name="spotifyName" 
+                        placeholder="Ex: Minha Playlist Convertida" 
+                        required
+                    >
+                </div>
+
+                <button type="submit" id="convertButton" class="convert-btn">
+                    <span class="btn-text">Converter Playlist</span>
+                    <span class="btn-icon">🚀</span>
+                </button>
+            </form>
+
+            <div id="feedback" class="feedback hidden">
+                <div class="feedback-content">
+                    <span class="feedback-icon"></span>
+                    <span class="feedback-text"></span>
+                </div>
+            </div>
+
+            <div id="musicList" class="music-list hidden">
+                <h2>Músicas Encontradas</h2>
+                <p class="list-subtitle">Selecione as músicas que deseja adicionar à sua playlist no Spotify</p>
+                
+                <div class="select-controls">
+                    <button type="button" id="selectAll" class="select-btn">Selecionar Todas</button>
+                    <button type="button" id="deselectAll" class="select-btn">Desmarcar Todas</button>
+                    <span id="selectedCount" class="selected-count">0 selecionadas</span>
+                </div>
+                
+                <div id="musicItems" class="music-items"></div>
+                
+                <button type="button" id="finalizeButton" class="finalize-btn" disabled>
+                    <span class="btn-text">Criar Playlist no Spotify</span>
+                    <span class="btn-icon">🎵</span>
+                </button>
+            </div>
+
+            <!-- Adicione isso onde deseja mostrar o link -->
+            <div id="playlist-link"></div>
+        </main>
+
+        <footer>
+            <p>Desenvolvido com ❤️ para facilitar sua experiência musical</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -6,29 +6,28 @@ from youtube import main as main_youtube
 from utils import item_mais_frequente, adicionar_banda
 
 def configurar_spotify():
-    """Configura autenticação com Authorization Code Flow e abre URL de login."""
+    """Configura autenticação automática com captura do callback."""
+    
     scope = "playlist-modify-public playlist-modify-private"
+    
     sp_oauth = SpotifyOAuth(
         client_id=os.getenv("SPOTIPY_CLIENT_ID"),
         client_secret=os.getenv("SPOTIPY_CLIENT_SECRET"),
         redirect_uri=os.getenv("SPOTIPY_REDIRECT_URI"),
         scope=scope,
-        cache_path=".cache"  # Salva o token para não pedir toda hora
+        cache_path=".cache",
+        open_browser=True  # Abre o navegador e captura o callback automaticamente
     )
     
-    # Obtém URL para autorização do usuário
-    auth_url = sp_oauth.get_authorize_url()
-    print("Por favor, abra essa URL no navegador para autorizar o app:")
-    print(auth_url)
+    token_info = sp_oauth.get_cached_token()
     
-    # Pede para o usuário colar a URL para onde foi redirecionado
-    redirected_response = input("\nCole a URL para onde você foi redirecionado:\n")
-    
-    # Pega o token a partir da URL de callback
-    code = sp_oauth.parse_response_code(redirected_response)
-    token_info = sp_oauth.get_access_token(code)
-    
-    # Cria o cliente autenticado
+    if not token_info:
+        auth_url = sp_oauth.get_authorize_url()
+        print(f"Abrindo o navegador para autorizar o app...")
+        
+        # Essa linha já abre o navegador e o server local cuida do callback
+        token_info = sp_oauth.get_access_token(as_dict=True)
+
     sp = spotipy.Spotify(auth=token_info['access_token'])
     return sp
 
@@ -39,7 +38,8 @@ def criar_playlist(sp, nome_playlist, descricao="", publica=True):
     print(f"\n✅ Playlist '{nome_playlist}' criada com sucesso!")
     print(f"🔗 Link da playlist: {playlist['external_urls']['spotify']}")
     print(f"ID da playlist: {playlist['id']}")
-    return playlist['id']
+    print(f"Descrição: {playlist}")
+    return playlist['id'], playlist['external_urls']['spotify']
 
 def buscar_musica(sp, nome_musica, limite=1):
     """Busca uma música pelo nome e retorna o ID da primeira encontrada."""
@@ -60,11 +60,16 @@ def listar_musicas_na_playlist(sp, musicas, repetir=True):
     artistas = []
     
     for musica in musicas:
-        print("musica add:::::: ",musica)
+        print("musica add: ",musica)
         track = buscar_musica(sp, musica)
-        track_id = track['id'] if track else None
-        
-        nome = track['name']
+        # track_id = track['id'] if track else None
+        track_id = {
+            'id': track['id'],
+            'name': track['name'],
+            'artists': track['artists'],
+            'images': track['album']['images'] if track['album']['images'] else None
+        }
+
         artista = track['artists'][0]['name']
         
         if track_id:
@@ -81,26 +86,20 @@ def listar_musicas_na_playlist(sp, musicas, repetir=True):
 
     print("BUCETA")
     print("BUCETA")
-    print("BUCETA")
-    print("BUCETA")
-    print("BUCETA")
-    print("BUCETA")
 
     return track_ids
 
 def main(playlist_youtube_id: str , nome_playlist_spotify: str):
-    
     musicas = main_youtube(playlist_youtube_id)
     load_dotenv()
     sp = configurar_spotify()
-    playlist_spotify_id = criar_playlist(sp, nome_playlist_spotify, descricao="Playlist criada via Spotipy API")
     tracks_ids = listar_musicas_na_playlist(sp, musicas)
-    
-    print("\n\n\n")
-    print(tracks_ids)
-    print("\n\n\n")
-    
+    return tracks_ids
+
+
+def converter(tracks_ids, sp, nome_playlist_spotify):
+    playlist_spotify_id, link = criar_playlist(sp, nome_playlist_spotify, descricao="Playlist criada via Spotipy API")
     for id in tracks_ids:
-        adicionar_musica_na_playlist(sp, playlist_spotify_id, id)
-    
+            adicionar_musica_na_playlist(sp, playlist_spotify_id, id)
     print("\n🎉 Todas as músicas foram adicionadas à playlist com sucesso!")
+    return link
