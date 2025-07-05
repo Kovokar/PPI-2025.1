@@ -298,6 +298,9 @@
 .border-gray-300 { border-color: #d1d5db; }
 .border-red-500 { border-color: #ef4444; }
 .border-blue-500 { border-color: #3b82f6; }
+.solid {border: #36bb24 2px solid;}
+.bd-red {border: red 2px solid;}
+
 
 .rounded { border-radius: 0.25rem; }
 .rounded-sm { border-radius: 0.125rem; }

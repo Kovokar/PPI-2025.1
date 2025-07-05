@@ -1,9 +1,7 @@
 body {
     border: 100px;
     background-color: #000000;
-    
 }
-
 
 main {
     .text {
@@ -11,13 +9,54 @@ main {
         font-size: 20px;
         text-align: center;
     }
-
-
 }
 
 header {
     height: 15vh;
     flex-direction: row-reverse;
+}
 
+span {
+    color: aliceblue;
+}
 
+.choices {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;   
+    align-content: center;
+    align-items: flex-end;       
+    gap: 5.2vw;
+    padding-bottom: 12.5vw;
+}
+
+@media (min-width: 1024px) {
+    .choices {
+        gap: 2.6vw;
+        padding-bottom: 0;
+    }
+}
+
+.box {
+    width: 20.8vw;
+    aspect-ratio: 1 / 1;       
+    padding-bottom: 0.5vw;
+    position: relative;
+    border-bottom: 0.1vw solid black; 
+    transition: border-color 150ms;
+    will-change: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+    .box {
+        width: 5.2vw;
+    }
+}
+
+.box:hover {
+    border-color: red;  /* Define uma cor padrão caso a variável não exista */
 }
