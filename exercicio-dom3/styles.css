@@ -362,13 +362,6 @@ button.excluirBtn:disabled {
   border: 2px dashed var(--light-gray);
 }
 
-.empty-state::before {
-  content: "🏔️";
-  display: block;
-  font-size: 48px;
-  margin-bottom: 15px;
-}
-
 @media (max-width: 1024px) {
   .container {
     margin: 15px;
