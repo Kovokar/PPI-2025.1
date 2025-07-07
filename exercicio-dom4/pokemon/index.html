@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pokémon Party Selector</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="tailwind.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <link href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css" rel="stylesheet">
+
+
 </head>
-<body class="p-vw m-0">
+<body >
     
     <header class="flex">
         <div class="gif flex">
-            <img src="assets/Rayquaza_BW.gif" alt="">
+            <img src="./assets/Rayquaza_BW.gif" alt="">
         </div>
     </header>
 
     <main>
-        <div class="text">
+        <div class="text" id="text-logo">
             <h2>
                 “Select 
                 <span class="underline">POKÉMON</span>
@@ -24,23 +29,25 @@
             </h2>
         </div>
 
-        <div class="choices">
-            <div class="box"><span>+</span></div>
-            <div class="box"><span>+</span></div>
-            <div class="box"><span>+</span></div>
-            <div class="box"><span>+</span></div>
-            <div class="box"><span>+</span></div>
-            <div class="box"><span>+</span></div>
-        </div>
+        <!-- Container que agrupa choices e btn-actions -->
+        <div class="controls-container">
+            <div class="choices">
+                <div class="box underline" id="pkm-1" onclick="escolhePkm(1)"><i class="fi fi-sr-plus"></i></div>
+                <div class="box underline" id="pkm-2" onclick="escolhePkm(2)"><i class="fi fi-sr-plus"></i></div>
+                <div class="box underline" id="pkm-3" onclick="escolhePkm(3)"><i class="fi fi-sr-plus"></i></div>
+                <div class="box underline" id="pkm-4" onclick="escolhePkm(4)"><i class="fi fi-sr-plus"></i></div>
+                <div class="box underline" id="pkm-5" onclick="escolhePkm(5)"><i class="fi fi-sr-plus"></i></div>
+                <div class="box underline" id="pkm-6" onclick="escolhePkm(6)"><i class="fi fi-sr-plus"></i></div>
+            </div>
 
-        <div class="btn-actions">
-            <button class="btn">Start</button>
-            <button class="btn">Cancel</button> 
-            <button class="btn">Reset</button>
+            <div class="btn-actions">
+                <button class="btn" onclick="preencherTodosPokemons()"><i class="fi fi-sr-refresh"></i></button>
+                <button class="btn" onclick="resetarPokemons()"><i class="fi fi-sr-trash-xmark"></i></button>
+            </div>
         </div>
     </main>
 
-    <link rel="stylesheet" href="script.js">
+    <script src="script.js"></script>
     
 </body>
 </html>
