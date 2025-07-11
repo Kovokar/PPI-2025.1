@@ -3,18 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Compras - IHealth</title>
+  <title>Estabelecimentos - IHealth</title>
   <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f8f9fa;
       color: #333;
     }
+
     .topbar {
       background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
       height: 60px;
@@ -26,57 +30,39 @@
       font-weight: 500;
       box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
     }
-    .topbar .greeting {
-      font-size: 16px;
-    }
-    .topbar .balance {
-      font-size: 16px;
-      font-weight: 600;
-    }
 
-    .purchases-container {
+    .establishments-container {
       padding: 24px 16px;
-      max-width: 600px;
-      margin: 0 auto;
     }
 
-    .purchase-card {
+    .establishment-card {
       background: #fff;
       border-radius: 12px;
       padding: 16px;
       margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       border: 1px solid #f0f0f0;
       animation: fadeInUp 0.5s ease forwards;
     }
 
-    .purchase-info {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .purchase-id {
-      font-weight: 700;
-      font-size: 14px;
-      color: #007BFF;
-      margin-bottom: 4px;
-    }
-
-    .purchase-name {
+    .establishment-name {
       font-size: 16px;
       font-weight: 600;
       color: #333;
+      margin-bottom: 6px;
     }
 
-    .purchase-value {
-      font-weight: 600;
+    .establishment-address {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    .establishment-price {
+      font-size: 14px;
       color: #28a745;
-      font-size: 16px;
-      min-width: 80px;
-      text-align: right;
+      font-weight: 500;
+      margin-bottom: 12px;
     }
 
     .add-btn {
@@ -89,8 +75,8 @@
       font-weight: 500;
       cursor: pointer;
       transition: background-color 0.2s ease;
-      margin-left: 16px;
     }
+
     .add-btn:hover {
       background-color: #0056b3;
     }
@@ -109,35 +95,41 @@
     /* Modal styles */
     .modal-overlay {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0, 0, 0, 0.4);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 1000;
     }
+
     .modal {
       background: white;
       padding: 24px;
       border-radius: 16px;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      max-width: 320px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      max-width: 300px;
       width: 90%;
       animation: fadeInUp 0.3s ease forwards;
     }
+
     .modal h3 {
       margin-bottom: 12px;
       font-size: 18px;
       color: #333;
     }
+
     .modal-buttons {
       display: flex;
       justify-content: center;
       gap: 12px;
       margin-top: 16px;
     }
+
     .btn-modal {
       padding: 10px 16px;
       border: none;
@@ -146,10 +138,12 @@
       cursor: pointer;
       font-size: 14px;
     }
+
     .btn-confirm {
       background-color: #007BFF;
       color: white;
     }
+
     .btn-cancel {
       background-color: #e0e0e0;
       color: #333;
@@ -157,14 +151,34 @@
   </style>
 </head>
 <body>
-
+  <!-- Topbar -->
   <div class="topbar">
-    <div class="greeting">Compras</div>
+    <div class="greeting">Estabelecimentos</div>
     <div class="balance">Saldo: R$ 250,00</div>
   </div>
 
-  <div class="purchases-container" id="purchasesContainer">
-    <!-- Cards de compra aqui -->
+  <!-- Estabelecimentos -->
+  <div class="establishments-container">
+    <div class="establishment-card">
+      <div class="establishment-name">Clínica Vida Saudável</div>
+      <div class="establishment-address">Rua das Palmeiras, 123 - São Paulo, SP</div>
+      <div class="establishment-price">A partir de R$ 150,00</div>
+      <button class="add-btn" onclick="openModal('Clínica Vida Saudável')">Adicionar</button>
+    </div>
+
+    <div class="establishment-card">
+      <div class="establishment-name">Hospital Central</div>
+      <div class="establishment-address">Av. Brasil, 456 - Rio de Janeiro, RJ</div>
+      <div class="establishment-price">A partir de R$ 220,00</div>
+      <button class="add-btn" onclick="openModal('Hospital Central')">Adicionar</button>
+    </div>
+
+    <div class="establishment-card">
+      <div class="establishment-name">Laboratório Diagnóstico</div>
+      <div class="establishment-address">Av. Dom Pedro, 789 - Campinas, SP</div>
+      <div class="establishment-price">A partir de R$ 95,00</div>
+      <button class="add-btn" onclick="openModal('Laboratório Diagnóstico')">Adicionar</button>
+    </div>
   </div>
 
   <!-- Modal Pop-up -->
@@ -178,47 +192,24 @@
     </div>
   </div>
 
+  <!-- Script -->
   <script>
-    const purchases = [
-      { id: '#001', nome: 'Item 001', valor: 150.00 },
-      { id: '#002', nome: 'Item 002', valor: 220.00 },
-      { id: '#003', nome: 'Item 003', valor: 95.00 },
-      { id: '#004', nome: 'Item 004', valor: 180.50 }
-    ];
-
-    const container = document.getElementById('purchasesContainer');
-    let selectedItemName = '';
-
-    function createPurchaseCard(p) {
-      const card = document.createElement('div');
-      card.className = 'purchase-card';
-      card.innerHTML = `
-        <div class="purchase-info">
-          <div class="purchase-id">${p.id}</div>
-          <div class="purchase-name">${p.nome}</div>
-        </div>
-        <div class="purchase-value">R$ ${p.valor.toFixed(2)}</div>
-      `;
-      return card;
-    }
-
-    purchases.forEach(p => {
-      container.appendChild(createPurchaseCard(p));
-    });
+    let selectedEstab = '';
 
     function openModal(name) {
-      selectedItemName = name;
-      document.getElementById('modalText').textContent = `Visualizar detalhes de ${name}?`;
+      selectedEstab = name;
+      document.getElementById('modalText').textContent = `Adicionar "${name}" ao carrinho?`;
       document.getElementById('modalOverlay').style.display = 'flex';
     }
+
     function closeModal() {
       document.getElementById('modalOverlay').style.display = 'none';
     }
+
     function confirmAdd() {
-      alert(`Detalhes de ${selectedItemName} exibidos!`);
+      alert(`${selectedEstab} adicionado ao carrinho!`);
       closeModal();
     }
   </script>
-
 </body>
 </html>

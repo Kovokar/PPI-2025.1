@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pagamento por PIX - IHealth</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .topbar {
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      color: white;
+      font-weight: 500;
+      font-size: 18px;
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+    }
+    main {
+      flex: 1;
+      padding: 24px 16px;
+      max-width: 400px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    h2 {
+      color: #007BFF;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+    .pix-qr {
+      margin-bottom: 24px;
+    }
+    .pix-qr img {
+      width: 200px;
+      height: 200px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .pix-info {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 24px;
+      word-break: break-all;
+    }
+    .btn-copy {
+      background-color: #007BFF;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 24px;
+    }
+    .btn-copy:hover {
+      background-color: #0056b3;
+    }
+    .btn-confirm {
+      background-color: #ff7f00; /* laranja vibrante */
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+    .btn-confirm:hover {
+      background-color: #cc6600;
+    }
+    .success-message {
+      color: green;
+      margin-top: 16px;
+      font-weight: 600;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">Pagamento por PIX</div>
+
+  <main>
+    <h2>Escaneie o QR Code para pagar</h2>
+    <div class="pix-qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=00020126580014BR.GOV.BCB.PIX0114+55119999999995204123456753039865802BR5909Fulano de Tal6009Sao Paulo62290525*PIX*25404pix.com62070503***63041D3D" alt="QR Code PIX" />
+    </div>
+    <div class="pix-info" id="pixKey">
+      Chave PIX: 123e4567-e89b-12d3-a456-426614174000
+    </div>
+    <button class="btn-copy" onclick="copyPixKey()">Copiar chave PIX</button>
+    <button class="btn-confirm" onclick="confirmPayment()">Concluir Pagamento</button>
+    <div class="success-message" id="successMessage">Pagamento confirmado! Obrigado.</div>
+  </main>
+
+  <script>
+    function copyPixKey() {
+      const pixKeyText = document.getElementById('pixKey').textContent;
+      navigator.clipboard.writeText(pixKeyText).then(() => {
+        alert('Chave PIX copiada para a área de transferência!');
+      });
+    }
+
+    function confirmPayment() {
+      // Aqui você pode implementar a verificação real do pagamento
+      const successMsg = document.getElementById('successMessage');
+      successMsg.style.display = 'block';
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+      }, 5000);
+    }
+  </script>
+
+</body>
+</html>

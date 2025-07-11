@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compras - IHealth</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      color: white;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+    }
+
+    .topbar .greeting {
+      font-size: 16px;
+    }
+    .topbar .balance {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    main {
+      flex: 1;
+      padding: 24px 16px;
+      padding-bottom: 100px; /* espaço para nav inferior se quiser */
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: 24px;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .purchase-list {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 16px;
+    }
+
+    .purchase-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .purchase-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-id {
+      color: #007BFF;
+      font-weight: 700;
+      min-width: 60px;
+    }
+
+    .item-name {
+      flex: 1;
+      margin-left: 16px;
+      color: #333;
+    }
+
+    .item-value {
+      color: #28a745;
+      min-width: 80px;
+      text-align: right;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="greeting">Olá, João</div>
+    <div class="balance">Saldo: R$ 250,00</div>
+  </div>
+
+  <main>
+    <h1>Histórico de Compras</h1>
+    <div class="purchase-list" id="purchaseList">
+      <!-- Itens de compra vão aqui -->
+    </div>
+  </main>
+
+  <script>
+    // Simulação de dados de compras
+    const purchases = [
+      { id: '#001', nome: 'Item 001', valor: 150.00 },
+      { id: '#002', nome: 'Item 002', valor: 220.00 },
+      { id: '#003', nome: 'Item 003', valor: 95.00 },
+      { id: '#004', nome: 'Item 004', valor: 180.50 },
+    ];
+
+    const container = document.getElementById('purchaseList');
+
+    purchases.forEach(p => {
+      const itemDiv = document.createElement('div');
+      itemDiv.classList.add('purchase-item');
+      
+      itemDiv.innerHTML = `
+        <div class="item-id">${p.id}</div>
+        <div class="item-name">${p.nome}</div>
+        <div class="item-value">R$ ${p.valor.toFixed(2)}</div>
+      `;
+
+      container.appendChild(itemDiv);
+    });
+  </script>
+</body>
+</html>
