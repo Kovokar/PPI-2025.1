@@ -7,9 +7,51 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css">
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons@3.3.1/license.min.js">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Estilo do modal -->
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        .modal-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .modal-buttons button {
+            padding: 10px 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-confirm {
+            background-color: #25D366;
+            color: white;
+        }
+        .btn-cancel {
+            background-color: #ccc;
+        }
+    </style>
 </head>
 <body>
     <!-- Topbar -->
@@ -52,12 +94,24 @@
                 <div class="card-title">Cirurgias</div>
             </div>
             
-            <div class="card">
+            <div class="card" onclick="openWhatsAppModal()">
                 <i class="fi fi-rr-headset card-icon"></i>
                 <div class="card-title">Fale Conosco</div>
             </div>
         </div>
     </main>
+
+    <!-- Modal WhatsApp -->
+    <div class="modal" id="whatsappModal">
+        <div class="modal-content">
+            <h3>Redirecionar para o WhatsApp?</h3>
+            <p>Você será atendido por nossa equipe pelo WhatsApp.</p>
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closeWhatsAppModal()">Cancelar</button>
+                <button class="btn-confirm" onclick="redirectToWhatsApp()">Confirmar</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Bottom Navigation -->
     <nav class="bottom-nav">
@@ -87,6 +141,23 @@
         </a>
     </nav>
 
-    <script src="script.js"></script>
+    <!-- Scripts -->
+    <script>
+        function openWhatsAppModal() {
+            document.getElementById("whatsappModal").style.display = "flex";
+        }
+
+        function closeWhatsAppModal() {
+            document.getElementById("whatsappModal").style.display = "none";
+        }
+
+        function redirectToWhatsApp() {
+            // Substitua pelo número da sua equipe, no formato internacional sem "+" e sem espaços
+            const phone = "5581999999999"; 
+            const message = encodeURIComponent("Olá! Preciso de ajuda com o IHealth.");
+            const url = `https://wa.me/${phone}?text=${message}`;
+            window.location.href = url;
+        }
+    </script>
 </body>
 </html>
