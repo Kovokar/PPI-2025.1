@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Estilo do modal -->
     <style>
         .modal {
             display: none;
@@ -54,54 +53,59 @@
     </style>
 </head>
 <body>
-    <!-- Topbar -->
     <div class="topbar">
         <div class="greeting">Olá, João</div>
         <div class="balance">Saldo: R$ 250,00</div>
     </div>
 
-    <!-- Main Content -->
     <main class="main-content">
         <div class="welcome-section">
             <h1 class="welcome-title">IHealth</h1>
             <p class="welcome-subtitle">Sua saúde digital em um só lugar</p>
         </div>
 
-        <!-- Cards Grid -->
         <div class="cards-grid">
-            <div class="card">
-                <i class="fi fi-rr-stethoscope card-icon"></i>
-                <div class="card-title">Consultas</div>
-            </div>
+            <a href="../consultaas/index.html" class="card-link">
+                <div class="card">
+                    <i class="fi fi-rr-stethoscope card-icon"></i>
+                    <div class="card-title">Consultas</div>
+                </div>
+            </a>
             
-            <div class="card">
-                <i class="fi fi-sr-heart-rate card-icon"></i>
-                <div class="card-title">Exames de Imagem</div>
-            </div>
+            <a href="../exame-img/index.html" class="card-link">
+                <div class="card">
+                    <i class="fi fi-sr-heart-rate card-icon"></i>
+                    <div class="card-title">Exames de Imagem</div>
+                </div>
+            </a>
             
-            <div class="card">
-                <i class="fi fi-rr-test-tube card-icon"></i>
-                <div class="card-title">Exames Laboratoriais</div>
-            </div>
+            <a href="../exame-lab/index.html" class="card-link">
+                <div class="card">
+                    <i class="fi fi-rr-test-tube card-icon"></i>
+                    <div class="card-title">Exames Laboratoriais</div>
+                </div>
+            </a>
             
-            <div class="card">
-                <i class="fi-rr-doctor card-icon"></i>
-                <div class="card-title">Procedimentos</div>
-            </div>
+            <a href="../procs/index.html" class="card-link">
+                <div class="card">
+                    <i class="fi-rr-doctor card-icon"></i>
+                    <div class="card-title">Procedimentos</div>
+                </div>
+            </a>
             
             <div class="card">
                 <i class="fi fi-rr-scalpel-path card-icon"></i>
                 <div class="card-title">Cirurgias</div>
             </div>
-            
+        
             <div class="card" onclick="openWhatsAppModal()">
                 <i class="fi fi-rr-headset card-icon"></i>
                 <div class="card-title">Fale Conosco</div>
             </div>
         </div>
+
     </main>
 
-    <!-- Modal WhatsApp -->
     <div class="modal" id="whatsappModal">
         <div class="modal-content">
             <h3>Redirecionar para o WhatsApp?</h3>
@@ -113,35 +117,33 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="#" class="nav-item active">
             <i class="fi fi-rr-home nav-icon"></i>
             <span class="nav-text">Home</span>
         </a>
         
-        <a href="#" class="nav-item">
+        <a href="../compras/compras.html" class="nav-item">
             <i class="fi fi-rr-shopping-bag nav-icon"></i>
             <span class="nav-text">Compras</span>
         </a>
         
-        <a href="#" class="nav-item">
+        <a href="../list-itens/index.html" class="nav-item">
             <i class="fi fi-rr-calendar nav-icon"></i>
             <span class="nav-text">Agenda</span>
         </a>
         
-        <a href="#" class="nav-item">
+        <a href="../carrinho/index.html" class="nav-item">
             <i class="fi fi-rr-shopping-cart nav-icon"></i>
             <span class="nav-text">Carrinho</span>
         </a>
         
-        <a href="#" class="nav-item">
+        <a href="../user/user.html" class="nav-item">
             <i class="fi fi-rr-user nav-icon"></i>
             <span class="nav-text">Usuário</span>
         </a>
     </nav>
 
-    <!-- Scripts -->
     <script>
         function openWhatsAppModal() {
             document.getElementById("whatsappModal").style.display = "flex";
