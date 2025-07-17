@@ -1,0 +1,171 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  padding: 2rem;
+  margin: 0;
+  color: white;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+header {
+  height: 15vh;
+  flex-direction: row-reverse;
+  display: flex;
+  align-items: center;
+}
+
+.gif img {
+  height: 100%;
+}
+
+main .text {
+  margin: 10vh 10vh;
+  text-align: center;
+}
+
+.text h2 {
+  color: #fff;
+  font-size: 3vw;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.underline {
+  position: relative;
+  color: white;
+}
+
+.underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: red;
+  box-shadow: 0 0 60px red, 0 0 20px red, 0 0 20px red;
+}
+
+span {
+  color: aliceblue;
+}
+
+.controls-container {
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo principal */
+  align-items: flex-end;
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  padding: 0 2rem;
+  z-index: 1000;
+  position: fixed;
+}
+
+.controls-container {
+  bottom: 5rem;
+}
+
+.choices {
+  display: flex;
+  gap: 50px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+/* Box de seleção */
+.box {
+  width: 180px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  font-size: 48px;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 150ms;
+  border-bottom: 0.1vw solid black;
+}
+
+.pkm-img {
+  width: 100%;
+  height: 100%;
+}
+
+.box span {
+  line-height: 1;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.box:hover {
+  border-color: red;
+}
+
+.btn-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  right: 10rem;
+  bottom: 0;
+}
+
+.btn {
+  width: 70px;
+  height: 70px;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  color: black;
+  text-transform: uppercase;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  transition: transform 0.5s ease;
+}
+.btn .fi-sr-refresh {
+  color: red;
+  font-size: 25px;
+}
+.btn .fi-sr-trash-xmark {
+  color: red;
+  font-size: 25px;
+}
+
+.btn:hover {
+  background-color: rgb(226, 225, 225);
+  transform: scale(1.1);
+}
+
+.container-pkball {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.animated-img {
+  width: 150px;
+  animation: girarEscalar 2s infinite ease-in-out;
+}
+
+@keyframes girarEscalar {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

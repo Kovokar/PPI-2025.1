@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrinho - HealthConnect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .topbar {
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      color: white;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+    }
+    .topbar .title {
+      font-size: 16px;
+    }
+    .topbar .balance {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .cart-container {
+      padding: 24px 16px;
+      margin: 0 auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-item {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid #f0f0f0;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .item-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-name {
+      font-weight: 600;
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .item-price {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .btn-remove {
+      background: transparent;
+      border: none;
+      color: #dc3545;
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .btn-remove:hover {
+      color: #a71d2a;
+    }
+
+    .cart-footer {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .total-label {
+      font-weight: 600;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .total-value {
+      font-weight: 700;
+      font-size: 20px;
+      color: #007BFF;
+    }
+
+    .btn-checkout {
+      background-color: #ff6f00;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: 24px;
+    }
+
+    .btn-checkout:hover {
+      background-color: #e65c00;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="title">Carrinho</div>
+    <div class="balance">Saldo: R$ 250,00</div>
+  </div>
+
+  <main class="cart-container" id="cartContainer">
+    <!-- Itens serão renderizados aqui -->
+  </main>
+
+  <div class="cart-footer">
+    <div>
+      <span class="total-label">Total:</span>
+      <span class="total-value" id="totalValue">R$ 0,00</span>
+    </div>
+    <button class="btn-checkout" onclick="checkout()">Concluir Compra</button>
+  </div>
+
+  <script>
+    let cartItems = [
+      { id: '001', nome: 'Consulta Cardiologia', valor: 120.00 },
+      { id: '002', nome: 'Exame de Sangue', valor: 80.00 },
+      { id: '003', nome: 'Fisioterapia', valor: 100.00 }
+    ];
+
+    const cartContainer = document.getElementById('cartContainer');
+    const totalValueElem = document.getElementById('totalValue');
+
+    function formatPrice(value) {
+      return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function renderCart() {
+      cartContainer.innerHTML = '';
+      cartItems.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <div class="item-info">
+            <div class="item-name">${item.nome}</div>
+            <div class="item-price">${formatPrice(item.valor)}</div>
+          </div>
+          <button class="btn-remove" title="Remover item" onclick="removeItem('${item.id}')">&times;</button>
+        `;
+        cartContainer.appendChild(div);
+      });
+
+      const total = cartItems.reduce((acc, item) => acc + item.valor, 0);
+      totalValueElem.textContent = formatPrice(total);
+
+      // Se carrinho vazio, mostrar mensagem
+      if(cartItems.length === 0) {
+        cartContainer.innerHTML = '<p style="text-align:center; color:#666; margin-top: 40px;">Seu carrinho está vazio.</p>';
+        totalValueElem.textContent = formatPrice(0);
+      }
+    }
+
+    function removeItem(id) {
+      cartItems = cartItems.filter(item => item.id !== id);
+      renderCart();
+    }
+
+    function checkout() {
+      if(cartItems.length === 0) {
+        alert('Seu carrinho está vazio!');
+        return;
+      }
+      alert('Compra concluída com sucesso! Total: ' + formatPrice(cartItems.reduce((acc, i) => acc + i.valor, 0)));
+      cartItems = [];
+      renderCart();
+    }
+
+    renderCart();
+  </script>
+
+</body>
+</html>

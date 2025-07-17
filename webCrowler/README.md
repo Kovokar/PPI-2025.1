@@ -16,7 +16,6 @@ Assista ao vídeo explicativo sobre o funcionamento e uso do Web Crawler:
 
 [Assista no YouTube](https://www.youtube.com/watch?v=4A6uHxRwgZU)
 
-
 ## 📋 Pré-requisitos
 
 - Node.js (versão 14 ou superior)
@@ -34,7 +33,7 @@ npm install
 
 # Inicie o servidor
 node app.js
-# ou 
+# ou
 npm start
 ```
 
@@ -42,7 +41,7 @@ npm start
 
 ### Parâmetros principais
 
-- `BASE_URL`: URL base para crawling (padrão: `http://127.0.0.1:5500/paginas/`)  
+- `BASE_URL`: URL base para crawling (padrão: `http://127.0.0.1:5500/paginas/`)
 - `paginasIniciais`: Lista de páginas iniciais para iniciar o processo de crawling
 
 ## 💻 Uso Básico
@@ -50,9 +49,11 @@ npm start
 Existem duas formas de utilizar este web crawler:
 
 ### 1. Interface Web
+
 Execute o arquivo `busca.html` em seu navegador
 
 ### 2. API REST
+
 Utilize os seguintes endpoints:
 
 #### Endpoints disponíveis:
@@ -89,15 +90,16 @@ GET http://localhost:3000/buscar?termo=PARAMETRO
   "termo": "ficção",
   "totalOcorrencias": 42,
   "ocorrenciasPorPagina": [
-    {"pagina": "duna", "quantidade": 15},
-    {"pagina": "blade_runner", "quantidade": 12},
-    {"pagina": "matrix", "quantidade": 10},
-    {"pagina": "interestelar", "quantidade": 5}
+    { "pagina": "duna", "quantidade": 15 },
+    { "pagina": "blade_runner", "quantidade": 12 },
+    { "pagina": "matrix", "quantidade": 10 },
+    { "pagina": "interestelar", "quantidade": 5 }
   ]
 }
 ```
 
 ## 📝 Notas
+
 - O crawler precisa ser executado antes de realizar buscas
 - A segunda rota inicia automaticamente o crawler se ainda não foi executado
 - As buscas são case-insensitive (não diferenciam maiúsculas de minúsculas)
