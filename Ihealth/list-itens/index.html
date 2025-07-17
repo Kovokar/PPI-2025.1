@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Escolha de Itens - HealthConnect</title>
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Topbar */
+    .topbar {
+      background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      color: white;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+    }
+
+    .greeting {
+      font-size: 16px;
+    }
+
+    .balance {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 24px 16px 100px;
+    }
+
+    .section-header {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    /* Item Card */
+    .item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .item-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid #f0f0f0;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .item-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .item-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #d99e00; /* amarelo queimado */
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .item-name {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .item-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: #28a745;
+      margin-top: 4px;
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 375px) {
+      .main-content {
+        padding: 20px 12px 100px;
+      }
+
+      .item-card {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="greeting">Olá, João</div>
+    <div class="balance">Saldo: R$ 250,00</div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="section-header">
+      <h1 class="section-title">Escolha um Item</h1>
+    </div>
+
+    <div class="item-list">
+      <div class="item-card">
+        <div class="item-label">Medicamento</div>
+        <div class="item-name">Dipirona 500mg</div>
+        <div class="item-price">R$ 12,50</div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-label">Serviço</div>
+        <div class="item-name">Aplicação de Injeção</div>
+        <div class="item-price">R$ 30,00</div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-label">Equipamento</div>
+        <div class="item-name">Termômetro Digital</div>
+        <div class="item-price">R$ 45,90</div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-label">Suplemento</div>
+        <div class="item-name">Vitamina D 1000UI</div>
+        <div class="item-price">R$ 22,00</div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-label">Curativo</div>
+        <div class="item-name">Kit de Primeiros Socorros</div>
+        <div class="item-price">R$ 55,00</div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

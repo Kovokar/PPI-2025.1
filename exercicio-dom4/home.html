@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIs - Demonstração</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #FFD700;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #FFD700;
+            margin-bottom: 30px;
+        }
+
+        .api-item {
+            background-color: #111;
+            border: 2px solid #FFD700;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .api-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .api-title {
+            color: #FFD700;
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .project-btn {
+            background-color: #FFD700;
+            color: #000;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .project-btn:hover {
+            background-color: #FFA500;
+        }
+
+        .description {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .auth-info {
+            background-color: #222;
+            padding: 10px;
+            border-left: 4px solid #FFD700;
+            margin-bottom: 15px;
+        }
+
+        .curl-example {
+            background-color: #000;
+            color: #00FF00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .note {
+            font-size: 0.9em;
+            color: #FFA500;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .api-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Demonstração de APIs</h1>
+
+        <!-- YouTube API -->
+        <div class="api-item">
+            <div class="api-header">
+                <h2 class="api-title">YouTube Data API v3</h2>
+                <a href="./playlist_conversor/front/index.html" target="_blank" class="project-btn">Ver Projeto</a>
+            </div>
+            
+            <div class="description">
+                API para acessar dados do YouTube como vídeos, canais e estatísticas.
+            </div>
+
+            <div class="auth-info">
+                <strong>Autenticação:</strong> Requer API Key do Google Cloud Console
+            </div>
+
+            <div class="curl-example">curl -X GET "https://www.googleapis.com/youtube/v3/search?part=snippet&q=javascript&type=video&key=YOUR_API_KEY"</div>
+            
+            <div class="note">Substitua YOUR_API_KEY pela sua chave da API</div>
+        </div>
+
+        <!-- Spotify API -->
+        <div class="api-item">
+            <div class="api-header">
+                <h2 class="api-title">Spotify Web API</h2>
+                <a href="./playlist_conversor/front/index.html" target="_blank" class="project-btn">Ver Projeto</a>
+            </div>
+            
+            <div class="description">
+                API para acessar dados musicais do Spotify: músicas, álbuns, artistas e playlists.
+            </div>
+
+            <div class="auth-info">
+                <strong>Autenticação:</strong> OAuth 2.0 com Client ID e Client Secret
+            </div>
+
+            <div class="curl-example">curl -X GET "https://api.spotify.com/v1/search?q=coldplay&type=artist" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"</div>
+            
+            <div class="note">Primeiro obtenha o token de acesso com suas credenciais</div>
+        </div>
+
+        <!-- Google Maps API -->
+        <div class="api-item">
+            <div class="api-header">
+                <h2 class="api-title">Google Maps Platform API</h2>
+                <a href="./maps-radius/index.html" target="_blank" class="project-btn">Ver Projeto</a>
+            </div>
+            
+            <div class="description">
+                APIs para mapas, geocodificação, roteamento e dados de localização.
+            </div>
+
+            <div class="auth-info">
+                <strong>Autenticação:</strong> Requer API Key do Google Cloud Console
+            </div>
+
+            <div class="curl-example">curl -X GET "https://maps.googleapis.com/maps/api/geocode/json?address=São+Paulo&key=YOUR_API_KEY"</div>
+            
+            <div class="note">Configure restrições de domínio para segurança</div>
+        </div>
+
+        <!-- Pokémon API -->
+        <div class="api-item">
+            <div class="api-header">
+                <h2 class="api-title">PokéAPI</h2>
+                <a href="./pokemon/index.html" target="_blank" class="project-btn">Ver Projeto</a>
+            </div>
+            
+            <div class="description">
+                API gratuita com dados completos sobre Pokémon, habilidades e tipos.
+            </div>
+
+            <div class="auth-info">
+                <strong>Autenticação:</strong> Não requer - API totalmente gratuita!
+            </div>
+
+            <div class="curl-example">curl -X GET "https://pokeapi.co/api/v2/pokemon/pikachu"</div>
+            
+            <div class="note">Sem necessidade de chaves de API ou tokens</div>
+        </div>
+    </div>
+</body>
+</html>

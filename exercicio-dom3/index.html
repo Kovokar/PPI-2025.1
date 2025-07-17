@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🏔️ Tasks</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Gerenciamento de Tarefas</h1>
+
+      <div class="success-message" id="successMessage"></div>
+
+      <div class="form-section">
+        <div class="form-group">
+          <label for="descricaoTarefa">Descrição da Tarefa:</label>
+          <input
+            type="text"
+            id="descricaoTarefa"
+            placeholder="Ex: Concluir relatório"
+          />
+          <div class="error-message" id="errorMessage">
+            Por favor, insira uma descrição para a tarefa.
+          </div>
+        </div>
+        <button id="adicionarBtn">Adicionar Tarefa</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number" id="totalTarefas">0</div>
+          <div class="stat-label">Total</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="tarefasPendentes">0</div>
+          <div class="stat-label">Pendentes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="tarefasConcluidas">0</div>
+          <div class="stat-label">Concluídas</div>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <button class="filter-btn active" data-filter="todas">Todas</button>
+        <button class="filter-btn" data-filter="pendentes">Pendentes</button>
+        <button class="filter-btn" data-filter="concluidas">Concluídas</button>
+      </div>
+
+      <div class="view-toggle" id="viewToggle" style="display: none">
+        <button class="show-cards-btn" id="toggleViewBtn">
+          📊 Ver como Tabela
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table id="tabelaTarefas">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Descrição</th>
+              <th>Data de Início</th>
+              <th>Data de Conclusão</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="corpoTabela"></tbody>
+        </table>
+      </div>
+
+      <div class="empty-state" id="emptyState">
+        Nenhuma tarefa encontrada. Adicione uma nova tarefa para começar!
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 id="modalTitle">Confirmação</h3>
+        </div>
+        <div class="modal-body">
+          <p id="modalMessage">Tem certeza que deseja realizar esta ação?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn cancel-btn" id="modalCancelBtn">
+            Cancelar
+          </button>
+          <button class="modal-btn confirm-btn" id="modalConfirmBtn">
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
