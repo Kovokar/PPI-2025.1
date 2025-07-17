@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3000/socialifpi", 
+        url: "http://localhost:3000/socialifpi",
         description: "Servidor de Desenvolvimento Local",
       },
     ],
@@ -106,7 +106,7 @@ const options = {
       },
     },
   },
-  apis: ["./routes/*.ts"], 
+  apis: ["./routes/*.ts"],
 };
 
 const specs = swaggerJsdoc(options);
