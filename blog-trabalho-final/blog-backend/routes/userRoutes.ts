@@ -128,6 +128,30 @@ router.post(BASE_PATH, async (req: Request, res: Response) => {
   }
 });
 
+
+/**
+ * Endpoint de login integrado ao banco de dados
+ * POST /login
+ * Body: { email, senha }
+ * Retorna sucesso se email e senha estiverem corretos, senão erro 401
+ */
+router.post(`${BASE_PATH}/login`, async (req: Request, res: Response) => {
+  const { email, senha } = req.body;
+  if (!email || !senha) {
+    return res.status(400).json({ message: 'Email e senha são obrigatórios' });
+  }
+  try {
+    const usuario = await userRepository.consultarPorEmail(email);
+    if (usuario && usuario.getSenha() === senha) {
+      res.json({ message: 'Login realizado com sucesso', usuario: { id: usuario.getId(), nome: usuario.getNome(), email: usuario.getEmail() } });
+    } else {
+      res.status(401).json({ message: 'Email ou senha inválidos' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Erro interno do servidor' });
+  }
+});
+
 router.put(ID_PATH, async (req: Request, res: Response) => {
   try {
     const id = Number.parseInt(req.params.id);
@@ -165,5 +189,7 @@ router.delete(ID_PATH, async (req: Request, res: Response) => {
     res.status(500).json({ message: "Erro interno do servidor" });
   }
 });
+
+
 
 export default router;
