@@ -320,12 +320,21 @@ footer p {
 }
 
 .header-bar {
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* Alinha o botão à direita */
     align-items: center;
+    height: 60px;
     padding: 0 10px;
 }
 
+.header-bar h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 1.8rem;
+}
 .btn-criar-publicacao {
     background: #2c5aa0;
     color: #fff;
