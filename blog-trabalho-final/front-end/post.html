@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post - Social IFPI</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="estilos-post.css">
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>Social IFPI</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Sobre</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="post-detalhe">
+                <div class="post-detalhe-card">
+                    <div class="post-image" style="font-size:3.5rem;">📝</div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-category"></span>
+                            <span class="post-date"></span>
+                        </div>
+                        <h2 class="post-title"></h2>
+                        <div class="post-body"></div>
+                        <div class="post-extra">
+                            <span id="curtidasSpan">👍 Curtidas: <span id="curtidasCount"></span></span> |
+                            <span id="sharesSpan">🔁 Compartilhamentos: <span id="sharesCount"></span></span>
+                        </div>
+                        <div class="post-actions">
+                            <button id="btnCurtir" class="btn-curtir">Curtir</button>
+                            <button id="btnCompartilhar" class="btn-compartilhar">Compartilhar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="comentarios-section">
+                <!-- Comentários e formulário serão inseridos via JS -->
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 Social IFPI. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+    <script src="post.js"></script>
+</body>
+</html> 
