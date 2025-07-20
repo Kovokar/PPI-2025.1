@@ -31,20 +31,48 @@ function renderPosts(postsToRender = filteredPosts) {
         const resumo = post.conteudo.length > 120 ? post.conteudo.substring(0, 120) + '...' : post.conteudo;
         const categoria = (post.categorias && post.categorias.length > 0) ? post.categorias[0] : '';
         return `
-            <a class="post-card" href="post.html?id=${post.id}">
-                <div class="post-image">📝</div>
-                <div class="post-content">
-                    <div class="post-meta">
-                        <span class="post-category">${categoria}</span>
-                        <span class="post-date">${new Date(post.data).toLocaleDateString()}</span>
+            <div class="post-card" style="position: relative;">
+                <a href="post.html?id=${post.id}" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="post-image">📝</div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-category">${categoria}</span>
+                            <span class="post-date">${new Date(post.data).toLocaleDateString()}</span>
+                        </div>
+                        <h3 class="post-title">${post.titulo}</h3>
+                        <p class="post-excerpt">${resumo}</p>
+                        <span class="read-more">Ler mais →</span>
                     </div>
-                    <h3 class="post-title">${post.titulo}</h3>
-                    <p class="post-excerpt">${resumo}</p>
-                    <span class="read-more">Ler mais →</span>
-                </div>
-            </a>
+                </a>
+                <button class="btn-excluir-postagem" data-id="${post.id}" title="Excluir postagem">Excluir</button>
+            </div>
         `;
     }).join('');
+    // Adiciona eventos aos botões de exclusão
+    document.querySelectorAll('.btn-excluir-postagem').forEach(btn => {
+        btn.addEventListener('click', async function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            const id = this.getAttribute('data-id');
+            if (confirm('Tem certeza que deseja excluir esta postagem?')) {
+                try {
+                    const resp = await fetch(`http://localhost:3000/socialifpi/postagem/${id}`, {
+                        method: 'DELETE'
+                    });
+                    if (resp.ok) {
+                        // Remove do array local e re-renderiza
+                        posts = posts.filter(p => p.id != id);
+                        filteredPosts = filteredPosts.filter(p => p.id != id);
+                        renderPosts(filteredPosts);
+                    } else {
+                        alert('Erro ao excluir postagem.');
+                    }
+                } catch (err) {
+                    alert('Erro ao excluir postagem.');
+                }
+            }
+        });
+    });
 }
 
 function searchPosts(query) {

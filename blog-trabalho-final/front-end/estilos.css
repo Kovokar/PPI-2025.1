@@ -518,6 +518,31 @@ footer p {
     font-size: 15px;
 }
 
+/* Botão de exclusão de postagem no card */
+.btn-excluir-postagem {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    background-color: #d32f2f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 7px 16px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background-color 0.2s, box-shadow 0.2s;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.btn-excluir-postagem:hover {
+    background-color: #a31515;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+}
+
 
 /* Responsividade */
 @media (max-width: 768px) {
