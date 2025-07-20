@@ -3,12 +3,15 @@ const apiUrl = 'http://localhost:3000/socialifpi/postagem';
 let posts = [];
 let filteredPosts = [];
 
-async function fetchPosts(query = '') {
-    let url = apiUrl;
-    if (query) {
-        url += `?search=${encodeURIComponent(query)}`;
+function atualizarContador(qtd) {
+    const contador = document.getElementById('contadorPostagens');
+    if (contador) {
+        contador.textContent = `${qtd} postagem${qtd === 1 ? '' : 's'}`;
     }
-    const response = await fetch(url);
+}
+
+async function fetchPosts() {
+    const response = await fetch(apiUrl);
     posts = await response.json();
     filteredPosts = [...posts];
     renderPosts(filteredPosts);
@@ -17,6 +20,7 @@ async function fetchPosts(query = '') {
 function renderPosts(postsToRender = filteredPosts) {
     const container = document.getElementById('postsContainer');
     const noPosts = document.getElementById('noPosts');
+    atualizarContador(postsToRender.length);
     if (postsToRender.length === 0) {
         container.innerHTML = '';
         noPosts.style.display = 'block';
@@ -44,7 +48,13 @@ function renderPosts(postsToRender = filteredPosts) {
 }
 
 function searchPosts(query) {
-    fetchPosts(query);
+    if (!query) {
+        filteredPosts = [...posts];
+    } else {
+        const q = query.toLowerCase();
+        filteredPosts = posts.filter(post => post.titulo.toLowerCase().includes(q));
+    }
+    renderPosts(filteredPosts);
 }
 
 // Modal Nova Postagem
@@ -108,7 +118,13 @@ if (formNovaPostagem) {
 document.addEventListener('DOMContentLoaded', function() {
     fetchPosts();
     const searchInput = document.getElementById('searchInput');
+    const btnPesquisar = document.getElementById('btnPesquisar');
     searchInput.addEventListener('input', (e) => {
         searchPosts(e.target.value);
     });
+    if (btnPesquisar) {
+        btnPesquisar.addEventListener('click', () => {
+            searchPosts(searchInput.value);
+        });
+    }
 }); 

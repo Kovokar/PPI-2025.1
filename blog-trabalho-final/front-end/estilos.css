@@ -467,6 +467,57 @@ footer p {
     color: #2c5aa0;
 }
 
+.search-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+/* Estilo do input */
+.search-container .search-box {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.2s ease;
+}
+
+.search-container .search-box:focus {
+    outline: none;
+    border-color: #0066cc;
+}
+
+/* Estilo do botão */
+.search-container button {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.search-container button:hover {
+    background-color: #004999;
+}
+
+/* Estilo do contador */
+.search-container #contadorPostagens {
+    margin-left: auto;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 15px;
+}
+
 
 /* Responsividade */
 @media (max-width: 768px) {
