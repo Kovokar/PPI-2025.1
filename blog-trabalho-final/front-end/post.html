@@ -43,8 +43,26 @@
             </section>
             <section id="comentarios-section">
                 <!-- Comentários e formulário serão inseridos via JS -->
+                <button id="btnAbrirModalComentario" class="btn-comentar" style="margin: 20px 0 0 0;">Comentar</button>
             </section>
         </main>
+        <!-- Modal de Comentário -->
+        <div id="modalComentario" class="modal-comentario" style="display:none;">
+            <div class="modal-comentario-content">
+                <span id="fecharModalComentario" class="modal-close">&times;</span>
+                <h2>Novo Comentário</h2>
+                <form id="formModalComentario">
+                    <label for="autorComentario">Seu nome</label>
+                    <input type="text" id="autorComentario" name="autor" required>
+                    <label for="conteudoComentario">Comentário</label>
+                    <textarea id="conteudoComentario" name="conteudo" rows="4" required></textarea>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn-publicar">Publicar</button>
+                        <button type="button" id="btnCancelarModalComentario" class="btn-cancelar">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <footer>
             <p>&copy; 2024 Social IFPI. Todos os direitos reservados.</p>
         </footer>

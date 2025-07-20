@@ -92,7 +92,7 @@ function listarComentarios(postId, container) {
                     comentariosDiv_1 = document.createElement('div');
                     comentariosDiv_1.className = 'comentarios';
                     tituloComentarios = document.createElement('h3');
-                    tituloComentarios.textContent = 'Comentários';
+                    tituloComentarios.textContent = '🗨️ Comentários';
                     comentariosDiv_1.appendChild(tituloComentarios);
                     if (comentarios.length === 0) {
                         semComentarios = document.createElement('p');
@@ -103,16 +103,17 @@ function listarComentarios(postId, container) {
                         comentarios.forEach(function (comentario) {
                             var comentarioDiv = document.createElement('div');
                             comentarioDiv.className = 'comentario';
-                            var autor = document.createElement('strong');
-                            autor.textContent = comentario.autor + ': ';
-                            comentarioDiv.appendChild(autor);
-                            var conteudo = document.createElement('span');
+                            // Corpo do comentário
+                            var corpoComentario = document.createElement('div');
+                            corpoComentario.className = 'corpo-comentario';
+                            var autorLinha = document.createElement('div');
+                            autorLinha.className = 'autor-linha';
+                            autorLinha.innerHTML = "<strong>".concat(comentario.autor, "</strong> <span class=\"data-comentario\">").concat(new Date(comentario.data).toLocaleString(), "</span>");
+                            var conteudo = document.createElement('p');
                             conteudo.textContent = comentario.conteudo;
-                            comentarioDiv.appendChild(conteudo);
-                            var data = document.createElement('span');
-                            data.className = 'data-comentario';
-                            data.textContent = ' (' + new Date(comentario.data).toLocaleString() + ')';
-                            comentarioDiv.appendChild(data);
+                            corpoComentario.appendChild(autorLinha);
+                            corpoComentario.appendChild(conteudo);
+                            comentarioDiv.appendChild(corpoComentario);
                             comentariosDiv_1.appendChild(comentarioDiv);
                         });
                     }
@@ -297,54 +298,136 @@ function configurarBotoesInteracao(postId) {
 }
 document.addEventListener('DOMContentLoaded', function () {
     return __awaiter(this, void 0, void 0, function () {
-        var postId, post_1, comentariosSection, comentariosContainer_1, atualizarComentarios_1, error_7;
-        var _this = this;
+        function renderizarSecaoComentarios() {
+            return __awaiter(this, void 0, void 0, function () {
+                var comentariosSection, btn;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            comentariosSection = document.getElementById('comentarios-section');
+                            if (!(comentariosSection && postId_1 !== null)) return [3 /*break*/, 2];
+                            comentariosSection.innerHTML = '<button id="btnAbrirModalComentario" class="btn-comentar" style="margin: 20px 0 0 0;">Comentar</button>';
+                            return [4 /*yield*/, listarComentarios(postId_1, comentariosSection)];
+                        case 1:
+                            _a.sent();
+                            btn = document.getElementById('btnAbrirModalComentario');
+                            if (btn)
+                                btn.onclick = abrirModalComentario;
+                            _a.label = 2;
+                        case 2: return [2 /*return*/];
+                    }
+                });
+            });
+        }
+        function abrirModalComentario() {
+            if (!modalComentario_1)
+                return;
+            modalComentario_1.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            if (autorComentario_1)
+                autorComentario_1.value = '';
+            if (conteudoComentario_1)
+                conteudoComentario_1.value = '';
+            if (autorComentario_1)
+                autorComentario_1.focus();
+        }
+        function fecharModal() {
+            if (!modalComentario_1)
+                return;
+            modalComentario_1.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            if (formModalComentario_1)
+                formModalComentario_1.reset();
+        }
+        var postId_1, post, btnAbrirModalComentario, modalComentario_1, fecharModalComentario, btnCancelarModalComentario, formModalComentario_1, autorComentario_1, conteudoComentario_1, error_7;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 4, , 5]);
-                    postId = getPostIdFromUrl();
-                    if (!postId) {
+                    _a.trys.push([0, 2, , 3]);
+                    postId_1 = getPostIdFromUrl();
+                    if (!postId_1) {
                         console.error('ID do post não encontrado na URL');
                         return [2 /*return*/];
                     }
-                    return [4 /*yield*/, fetchPost(postId)];
+                    return [4 /*yield*/, fetchPost(postId_1)];
                 case 1:
-                    post_1 = _a.sent();
-                    if (!post_1) {
+                    post = _a.sent();
+                    if (!post) {
                         console.error('Post não encontrado');
                         return [2 /*return*/];
                     }
-                    renderPost(post_1);
-                    configurarBotoesInteracao(postId);
-                    comentariosSection = document.getElementById('comentarios-section');
-                    if (!comentariosSection) return [3 /*break*/, 3];
-                    comentariosContainer_1 = document.createElement('div');
-                    comentariosContainer_1.className = 'container-comentarios';
-                    atualizarComentarios_1 = function () { return __awaiter(_this, void 0, void 0, function () {
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    comentariosContainer_1.innerHTML = '';
-                                    return [4 /*yield*/, listarComentarios(post_1.id, comentariosContainer_1)];
-                                case 1:
-                                    _a.sent();
-                                    comentariosContainer_1.appendChild(criarFormularioComentario(post_1.id, atualizarComentarios_1));
-                                    return [2 /*return*/];
-                            }
+                    renderPost(post);
+                    configurarBotoesInteracao(postId_1);
+                    btnAbrirModalComentario = document.getElementById('btnAbrirModalComentario');
+                    modalComentario_1 = document.getElementById('modalComentario');
+                    fecharModalComentario = document.getElementById('fecharModalComentario');
+                    btnCancelarModalComentario = document.getElementById('btnCancelarModalComentario');
+                    formModalComentario_1 = document.getElementById('formModalComentario');
+                    autorComentario_1 = document.getElementById('autorComentario');
+                    conteudoComentario_1 = document.getElementById('conteudoComentario');
+                    if (btnAbrirModalComentario)
+                        btnAbrirModalComentario.onclick = abrirModalComentario;
+                    if (fecharModalComentario)
+                        fecharModalComentario.onclick = fecharModal;
+                    if (btnCancelarModalComentario)
+                        btnCancelarModalComentario.onclick = fecharModal;
+                    window.addEventListener('keydown', function (e) {
+                        if (e.key === 'Escape')
+                            fecharModal();
+                    });
+                    if (modalComentario_1) {
+                        modalComentario_1.addEventListener('click', function (e) {
+                            if (e.target === modalComentario_1)
+                                fecharModal();
                         });
-                    }); };
-                    return [4 /*yield*/, atualizarComentarios_1()];
+                    }
+                    if (formModalComentario_1) {
+                        formModalComentario_1.onsubmit = function (e) {
+                            return __awaiter(this, void 0, void 0, function () {
+                                var err_1;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            e.preventDefault();
+                                            if (!autorComentario_1.value.trim() || !conteudoComentario_1.value.trim())
+                                                return [2 /*return*/];
+                                            _a.label = 1;
+                                        case 1:
+                                            _a.trys.push([1, 4, , 5]);
+                                            return [4 /*yield*/, fetch("".concat(apiUrl2, "/").concat(postId_1, "/comentarios"), {
+                                                    method: 'POST',
+                                                    headers: { 'Content-Type': 'application/json' },
+                                                    body: JSON.stringify({
+                                                        autor: autorComentario_1.value.trim(),
+                                                        conteudo: conteudoComentario_1.value.trim(),
+                                                        likes: 0
+                                                    })
+                                                })];
+                                        case 2:
+                                            _a.sent();
+                                            fecharModal();
+                                            return [4 /*yield*/, renderizarSecaoComentarios()];
+                                        case 3:
+                                            _a.sent();
+                                            return [3 /*break*/, 5];
+                                        case 4:
+                                            err_1 = _a.sent();
+                                            alert('Erro ao enviar comentário.');
+                                            return [3 /*break*/, 5];
+                                        case 5: return [2 /*return*/];
+                                    }
+                                });
+                            });
+                        };
+                    }
+                    // Renderiza comentários ao carregar a página
+                    renderizarSecaoComentarios();
+                    return [3 /*break*/, 3];
                 case 2:
-                    _a.sent();
-                    comentariosSection.appendChild(comentariosContainer_1);
-                    _a.label = 3;
-                case 3: return [3 /*break*/, 5];
-                case 4:
                     error_7 = _a.sent();
                     console.error('Erro ao carregar a página:', error_7);
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });

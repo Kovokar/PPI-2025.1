@@ -71,7 +71,7 @@ function renderPost(post: Post): void {
 
 async function listarComentarios(postId: number, container: HTMLElement): Promise<void> {
     try {
-        const response = await fetch(`${apiUrl}/${postId}/comentarios`);
+        const response = await fetch(`${apiUrl2}/${postId}/comentarios`);
         const comentarios: Comentario[] = await response.json();
 
         const comentariosDiv = document.createElement('div');
@@ -90,10 +90,6 @@ async function listarComentarios(postId: number, container: HTMLElement): Promis
                 const comentarioDiv = document.createElement('div');
                 comentarioDiv.className = 'comentario';
 
-                // Avatar circular com a primeira letra do autor
-                const avatar = document.createElement('div');
-                avatar.className = 'avatar';
-                avatar.textContent = comentario.autor.charAt(0).toUpperCase();
 
                 // Corpo do comentário
                 const corpoComentario = document.createElement('div');
@@ -109,7 +105,6 @@ async function listarComentarios(postId: number, container: HTMLElement): Promis
                 corpoComentario.appendChild(autorLinha);
                 corpoComentario.appendChild(conteudo);
 
-                comentarioDiv.appendChild(avatar);
                 comentarioDiv.appendChild(corpoComentario);
 
                 comentariosDiv.appendChild(comentarioDiv);
@@ -259,36 +254,86 @@ function configurarBotoesInteracao(postId: number): void {
 document.addEventListener('DOMContentLoaded', async function () {
     try {
         const postId = getPostIdFromUrl();
-
         if (!postId) {
             console.error('ID do post não encontrado na URL');
             return;
         }
-
         const post = await fetchPost(postId);
-
         if (!post) {
             console.error('Post não encontrado');
             return;
         }
-
         renderPost(post);
         configurarBotoesInteracao(postId);
 
-        const comentariosSection = document.getElementById('comentarios-section');
-        if (comentariosSection) {
-            const comentariosContainer = document.createElement('div');
-            comentariosContainer.className = 'container-comentarios';
+        // Modal de comentário
+        const btnAbrirModalComentario = document.getElementById('btnAbrirModalComentario');
+        const modalComentario = document.getElementById('modalComentario');
+        const fecharModalComentario = document.getElementById('fecharModalComentario');
+        const btnCancelarModalComentario = document.getElementById('btnCancelarModalComentario');
+        const formModalComentario = document.getElementById('formModalComentario') as HTMLFormElement;
+        const autorComentario = document.getElementById('autorComentario') as HTMLInputElement;
+        const conteudoComentario = document.getElementById('conteudoComentario') as HTMLTextAreaElement;
 
-            const atualizarComentarios = async () => {
-                comentariosContainer.innerHTML = '';
-                await listarComentarios(post.id, comentariosContainer);
-                comentariosContainer.appendChild(criarFormularioComentario(post.id, atualizarComentarios));
-            };
-
-            await atualizarComentarios();
-            comentariosSection.appendChild(comentariosContainer);
+        async function renderizarSecaoComentarios() {
+            const comentariosSection = document.getElementById('comentarios-section');
+            if (comentariosSection && postId !== null) {
+                comentariosSection.innerHTML = '<button id="btnAbrirModalComentario" class="btn-comentar" style="margin: 20px 0 0 0;">Comentar</button>';
+                await listarComentarios(postId, comentariosSection);
+                // Reatribui evento ao botão comentar
+                const btn = document.getElementById('btnAbrirModalComentario');
+                if (btn) btn.onclick = abrirModalComentario;
+            }
         }
+
+        function abrirModalComentario() {
+            if (!modalComentario) return;
+            modalComentario.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            if (autorComentario) autorComentario.value = '';
+            if (conteudoComentario) conteudoComentario.value = '';
+            if (autorComentario) autorComentario.focus();
+        }
+        function fecharModal() {
+            if (!modalComentario) return;
+            modalComentario.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            if (formModalComentario) formModalComentario.reset();
+        }
+        if (btnAbrirModalComentario) btnAbrirModalComentario.onclick = abrirModalComentario;
+        if (fecharModalComentario) fecharModalComentario.onclick = fecharModal;
+        if (btnCancelarModalComentario) btnCancelarModalComentario.onclick = fecharModal;
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') fecharModal();
+        });
+        if (modalComentario) {
+            modalComentario.addEventListener('click', (e) => {
+                if (e.target === modalComentario) fecharModal();
+            });
+        }
+        if (formModalComentario) {
+            formModalComentario.onsubmit = async function(e) {
+                e.preventDefault();
+                if (!autorComentario.value.trim() || !conteudoComentario.value.trim()) return;
+                try {
+                    await fetch(`${apiUrl2}/${postId}/comentarios`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            autor: autorComentario.value.trim(),
+                            conteudo: conteudoComentario.value.trim(),
+                            likes: 0
+                        })
+                    });
+                    fecharModal();
+                    await renderizarSecaoComentarios();
+                } catch (err) {
+                    alert('Erro ao enviar comentário.');
+                }
+            };
+        }
+        // Renderiza comentários ao carregar a página
+        renderizarSecaoComentarios();
     } catch (error) {
         console.error('Erro ao carregar a página:', error);
     }
